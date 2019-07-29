@@ -17,7 +17,7 @@ import './index.css';
 //         element,
 //         document.getElementById('root')
 //       );
-    
+
 // }
 // setInterval(tick, 1000)
 
@@ -32,7 +32,7 @@ import './index.css';
 //             element,
 //             document.getElementById('root')
 //           );
- 
+
 // function UserInfo(props){
 //     return(
 //         <div className="MarlonBlz!">
@@ -92,7 +92,7 @@ import './index.css';
 //             date: new Date()
 //         });
 //     }
-    
+
 //     render(){
 //     return(
 //         <div>
@@ -109,7 +109,7 @@ import './index.css';
 //         document.getElementById('root')
 //     );
 
-    
+
 // // setInterval(tick, 1000);
 
 {/* <button onClick={activateLasers}>
@@ -227,7 +227,7 @@ import './index.css';
 
 
 // function Greeting(props){
-    
+
 //     const isLoggedIn = props.isLoggedIn;
 //     if(isLoggedIn){
 //         return <UserGreeting/>;
@@ -236,7 +236,7 @@ import './index.css';
 // }
 
 // ReactDOM.render(
-    
+
 //     <LoginControl/>,
 //     document.getElementById('root')
 // )
@@ -251,7 +251,7 @@ import './index.css';
 //             <h2>
 //                 You have {unreadMessages.length} unread messages.
 //             </h2>
-            
+
 //             }
 //         </div>
 //     );
@@ -273,7 +273,7 @@ import './index.css';
 //       <ul>{listItems}</ul>
 //     );
 //   }
-  
+
 //   const numbers = [1, 2, 3, 4, 5];
 //   ReactDOM.render(
 //     <NumberList numbers={numbers} />,
@@ -296,3 +296,94 @@ import './index.css';
 //     <NumberList numbers={numbers} />,
 //     document.getElementById('root')
 //   );
+
+
+///////////      ARROW FUNCTION!!!!!!!!!! //////////////////
+////////////////////////////////////////////////////////////
+// const mexico = ['Leon', 'Guanajuato', 'Queretaro']
+
+// const loveArrowSingle = mexico.map(name => {
+//     return `I love ${name}!`;
+// }
+// )
+
+// const loveClean = mexico.map(name => `I love ${name}!`);
+
+
+// const loveF = mexico.filter(name => name === 'Guanajuato')
+//               .map(name => `I love ${name}!`)
+
+// alert(loveF)
+
+////////////////////// TEMPLATE LITERALS
+// const mexico = {
+//     live: 'Leon',
+//     love: 'Guanajuato'
+// };
+
+// const newTemplate = `Eu moro em ${mexico.live} e amo ${mexico.love}!`;
+
+// const newFruits = `Banana
+// orange
+// apple`
+
+// alert(newFruits)
+
+
+// const article = {
+//     title: 'Desktop ou notebook',
+//     intro: 'Muitas pessoas me perguntam, mas não sei, espero ter ajudado!!!',
+//     body: 'Pensa em um texto grande...',
+//     tag: ['Desktop', 'notebook', 'smartphones'],
+//     author: 'Marlon'
+// };
+
+// function renderAuthor(name){
+//     return (name) ? name : 'unknown';
+// }
+
+// const markup = `
+//    <article>
+//    <header><h1>${article.title}
+//    </h1>
+//    </header>
+//    <section><p>${article.intro}</p></section>
+//    <footer><ul>${article.tag.map((tag) => `<li>${tag}</li>`).join('')}
+//    </ul>
+//    <p>Author: ${renderAuthor(article.author)}</p>
+//    </footer>
+
+//    </article>
+
+// `;
+
+// document.body.innerHTML = markup;
+
+// class Animal{
+//     constructor(kind, sound){
+//         this.kind = kind;
+//         this.sound = sound;
+
+//     }
+
+//     hello(){
+//         console.log(`${this.sound} I am a ${this.kind}`);
+//     }
+
+//     static info(){
+//         console.log('This class create animals!');
+//     }
+
+//     get name(){
+//         console.log(`${this.sound} My name is Marlon!`);
+    
+//     }
+// }
+
+// const dog = new Animal('dog', 'auau');
+// const cat = new Animal('cat', 'miau');
+
+
+// Animal.info()
+
+  
