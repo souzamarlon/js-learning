@@ -3,8 +3,15 @@ import * as Yup from 'yup';
 import User from '../models/User';
 
 class UserController {
+  async index(req, res) {
+    const name = await User.findAll({
+      where: { id: 1 },
+    });
+    return res.json(name);
+  }
+
   async store(req, res) {
-    const schema = Yup.object().share({
+    const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string()
         .email()

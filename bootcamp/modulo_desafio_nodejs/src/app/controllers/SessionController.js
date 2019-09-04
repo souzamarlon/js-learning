@@ -3,11 +3,10 @@ import * as Yup from 'yup';
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import authConfig from '../../config/auth';
-import auth from '../../config/auth';
 
 class SessionController {
   async store(req, res) {
-    const schema = yup.object().shape({
+    const schema = Yup.object().shape({
       email: Yup.string()
         .email()
         .required(),
