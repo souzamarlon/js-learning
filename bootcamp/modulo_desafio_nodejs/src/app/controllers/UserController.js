@@ -4,9 +4,7 @@ import User from '../models/User';
 
 class UserController {
   async index(req, res) {
-    const name = await User.findAll({
-      where: { id: 1 },
-    });
+    const name = await User.findAll();
     return res.json(name);
   }
 
