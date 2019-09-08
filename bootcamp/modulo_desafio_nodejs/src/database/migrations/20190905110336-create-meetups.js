@@ -8,6 +8,13 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'users', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: false,
+      },
       title: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -18,13 +25,18 @@ module.exports = {
       },
       location: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
-      user_id: {
+      date: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      image: {
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
+        references: { model: 'files', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: false,
+        allowNull: true,
       },
       canceled_at: {
         type: Sequelize.DATE,
