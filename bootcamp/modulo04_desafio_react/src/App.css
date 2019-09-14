@@ -17,11 +17,13 @@ h1{
     font-family: Arial, Helvetica, sans-serif
 
 }
-h2{
-
-    text-align: right ;
-    color: #F2F2F2;
-    font-family: Arial, Helvetica, sans-serif
+div{
+   
+   height: 700px;
+   width: 150px;
+   background: #F2F2F2;
+   justify-content: space-between;
+   display: flex;
 
 }
 
