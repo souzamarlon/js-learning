@@ -7,7 +7,7 @@ export default function cart(state = [], action) {
                 const productIndex = draft.findIndex(
                     p => p.id === action.product.id
                 );
-                if (productIndex > 0) {
+                if (productIndex >= 0) {
                     draft[productIndex].amount += 1;
                 } else {
                     draft.push({
