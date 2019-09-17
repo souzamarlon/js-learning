@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
-import { Loading, Owner, IssueList } from './styles';
+import { Loading, Owner, IssueList, IssueFilter, PageActions } from './styles';
 import Container from '../../components/Container/index';
 
 export default class Repository extends Component {
@@ -19,10 +19,18 @@ export default class Repository extends Component {
         repository: {},
         issues: [],
         loading: true,
+        filters: [
+            { state: 'all', label: 'Todas', active: true },
+            { state: 'open', label: 'Abertos', active: true },
+            { state: 'closed', label: 'Fechados', active: true },
+        ],
+        filterIndex: 0,
+        page: 1,
     };
 
     async componentDidMount() {
         const { match } = this.props;
+        const { filters } = this.state;
 
         const repoName = decodeURIComponent(match.params.repository);
 
@@ -30,7 +38,7 @@ export default class Repository extends Component {
             api.get(`/repos/${repoName}`),
             api.get(`/repos/${repoName}/issues`, {
                 params: {
-                    state: 'open',
+                    state: filters.find(f => f.active).state,
                     per_page: 5,
                 },
             }),
@@ -42,8 +50,46 @@ export default class Repository extends Component {
         });
     }
 
+    loadIssues = async () => {
+        const { match } = this.props;
+        const { filters, filterIndex, page } = this.state;
+
+        const repoName = decodeURIComponent(match.params.repository);
+
+        const response = await api.get(`/repos/${repoName}/issues`, {
+            params: {
+                state: filters[filterIndex].state,
+                per_page: 5,
+                page,
+            },
+        });
+
+        this.setState({ issues: response.data });
+    };
+
+    handleFilterClick = async filterIndex => {
+        await this.setState({ filterIndex });
+        console.log(filterIndex);
+        this.loadIssues();
+    };
+
+    handlePage = async action => {
+        const { page } = this.state;
+        await this.setState({
+            page: action === 'back' ? page - 1 : page + 1,
+        });
+        this.loadIssues();
+    };
+
     render() {
-        const { repository, issues, loading } = this.state;
+        const {
+            repository,
+            issues,
+            loading,
+            filters,
+            filtersIndex,
+            page,
+        } = this.state;
 
         if (loading) {
             return <Loading>Carregando</Loading>;
@@ -60,6 +106,18 @@ export default class Repository extends Component {
                     <p>{repository.description}</p>
                 </Owner>
                 <IssueList>
+                    <IssueFilter active={filtersIndex}>
+                        {filters.map((filter, index) => (
+                            <button
+                                type="button"
+                                key={filter.label}
+                                onClick={() => this.handleFilterClick(index)}
+                            >
+                                {filter.label}
+                            </button>
+                        ))}
+                    </IssueFilter>
+
                     {issues.map(issue => (
                         <li key={String(issue.id)}>
                             <img
@@ -80,6 +138,22 @@ export default class Repository extends Component {
                         </li>
                     ))}
                 </IssueList>
+                <PageActions>
+                    <button
+                        type="button"
+                        disabled={page < 2}
+                        onClick={() => this.handlePage('back')}
+                    >
+                        Anterior
+                    </button>
+                    <span>Página {page}</span>
+                    <button
+                        type="button"
+                        onClick={() => this.handlePage('next')}
+                    >
+                        Próximo
+                    </button>
+                </PageActions>
             </Container>
         );
     }
