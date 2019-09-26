@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import logo from '~/assets/logo_dash.svg';
 
+import Notifications from '~/components/Notifications';
+
 import { Container, Content, Profile } from './styles';
 
 export default function Header() {
@@ -14,6 +16,7 @@ export default function Header() {
                     <Link to="/dashboard">DASHBOARD</Link>
                 </nav>
                 <aside>
+                    <Notifications />
                     <Profile>
                         <div>
                             <strong>Marlon Souza</strong>
