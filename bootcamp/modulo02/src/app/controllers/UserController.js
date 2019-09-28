@@ -48,8 +48,11 @@ class UserController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
+
     const { email, oldPassword } = req.body;
+
     const user = await User.findByPk(req.userId);
+
     if (email !== user.email) {
       const userExists = await User.findOne({
         where: { email },
@@ -68,7 +71,7 @@ class UserController {
     const { id, name, avatar } = await User.findByPk(req.userId, {
       include: [
         {
-          model: 'File',
+          model: File,
           as: 'avatar',
           attributes: ['id', 'path', 'url'],
         },
