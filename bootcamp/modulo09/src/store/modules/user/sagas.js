@@ -6,7 +6,7 @@ import { updateProfileSuccess, updateProfileFailure } from './actions';
 
 export function* updateProfile({ payload }) {
     try {
-        const { name, email, ...rest } = payload.data;
+        const { name, email, avatar_id, ...rest } = payload.data;
 
         // Correção do eslint não deu também!
         // const profile = {
@@ -17,7 +17,7 @@ export function* updateProfile({ payload }) {
 
         // eslint-disable-next-line prefer-object-spread
         const profile = Object.assign(
-            { name, email },
+            { name, email, avatar_id },
             rest.oldPassword ? rest : {}
         );
         console.tron.log(profile);
