@@ -13,7 +13,7 @@ export default function Profile() {
 
     function handleSubmit(data) {
         dispatch(updateProfileRequest(data));
-        console.tron.log(data);
+        // console.tron.log(data);
     }
     return (
         <Container>
@@ -22,7 +22,7 @@ export default function Profile() {
                 <Input
                     name="email"
                     type="email"
-                    placeholder="Seu endereço de email"
+                    placeholder="Seu endereço de e-mail"
                 />
                 <hr />
                 <Input
