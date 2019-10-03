@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 
 // import { signInRequest } from '~/store/modules/auth/actions';
 
-// import logo from '~/assets/logo.svg';
+import logo from '~/assets/logo.svg';
 
 // import { Container } from './styles';
 
@@ -25,7 +25,7 @@ export default function SignIn() {
     // function handleSubmit({ email, password }) {}
     return (
         <>
-            {/* <img src={logo} alt="GoBarber" /> */}
+            <img src={logo} alt="Meetup" />
             <Form schema={schema}>
                 <Input name="email" type="email" placeholder="Seu e-mail" />
                 <Input
