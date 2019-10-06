@@ -34,9 +34,10 @@ export default function SignIn() {
                     placeholder="Sua senha super secreta"
                 />
 
-                {/* <button type="submit">
-                    {loading ? 'Carregando... ' : 'Acessar'}
-                </button> */}
+                <button type="submit">
+                    {/* {loading ? 'Carregando... ' : 'Acessar'} */}
+                    Entrar
+                </button>
                 <Link to="/register">Criar conta gratuita</Link>
             </Form>
         </>
