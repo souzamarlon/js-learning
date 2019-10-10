@@ -3,10 +3,16 @@ import { Image } from 'react-native';
 
 import logo from '~/assets/logo.png';
 
-import Button from '~/components/Button';
 import Background from '~/components/Background';
 
-import { Container, Form, FormInput, SubmitButton } from './styles';
+import {
+  Container,
+  Form,
+  FormInput,
+  SubmitButton,
+  SignLink,
+  SignLinkText,
+} from './styles';
 
 export default function SignIn() {
   return (
@@ -16,7 +22,7 @@ export default function SignIn() {
 
         <Form>
           <FormInput
-            icon="main-outline"
+            icon="mail-outline"
             keyboardType="email-address"
             autoCorrect={false}
             autoCapitalize="none"
@@ -29,8 +35,11 @@ export default function SignIn() {
             placeholder="Sua senha secreta"
           />
 
-          <SubmitButton
+          <SubmitButton onPress={() => {}}>Acessar</SubmitButton>
         </Form>
+        <SignLink onPress={() => {}}>
+          <SignLinkText>Criar conta gratuita</SignLinkText>
+        </SignLink>
       </Container>
     </Background>
   );
