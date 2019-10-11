@@ -21,7 +21,7 @@ const schema = Yup.object().shape({
         .required('A senha é obrigatoria'),
 });
 
-export default function SignIn() {
+export default function SignUp() {
     const dispatch = useDispatch();
 
     function handleSubmit({ name, email, password }) {
