@@ -19,6 +19,7 @@ export function* signIn({ payload }) {
 
         if (!user.provider) {
             toast.error('Usuário não é prestador');
+            yield put(signFailure());
             return;
         }
 
@@ -28,8 +29,8 @@ export function* signIn({ payload }) {
 
         history.push('/dashboard');
     } catch (err) {
-        toast.error('Authentication failure!');
         yield put(signFailure());
+        toast.error('Authentication failure!');
     }
 }
 
