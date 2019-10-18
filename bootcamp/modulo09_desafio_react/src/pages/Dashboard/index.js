@@ -8,7 +8,8 @@ export default function Dashboard() {
         <Container>
             <h1>Meus meetups</h1>
             <button type="button" onClick={() => {}}>
-                <IoIosAddCircleOutline size={14} /> Novo meetup
+                <IoIosAddCircleOutline size={17} />
+                <strong>Novo meetup</strong>
             </button>
         </Container>
     );

@@ -12,20 +12,26 @@ export const Container = styled.div`
 
     button {
         margin: 5px 0 0;
-        height: 30px;
-        width: 120px;
+        height: 42px;
+        width: 172px;
         background: #f94d6a;
         font-weight: bold;
         color: #fff;
         border: 0;
         border-radius: 4px;
-        font-size: 13px;
+        display: flex;
+        justify-content: center;
 
         transition: background 0.3s;
         &:hover {
             background: ${darken(0.03, '#f94d6a')};
         }
     }
+    strong {
+        margin: 0 4px;
+        font-size: 15px;
+    }
+
     h1 {
     }
 `;
