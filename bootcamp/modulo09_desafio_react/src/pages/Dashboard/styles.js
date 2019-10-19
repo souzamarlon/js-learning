@@ -3,35 +3,71 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-    align-items: center;
-    max-width: 600px;
+    max-width: 800px;
     margin: 50px auto;
     display: flex;
-    justify-content: space-between;
+
+    flex-direction: column;
+
     color: #fff;
-
-    button {
-        margin: 5px 0 0;
-        height: 42px;
-        width: 172px;
-        background: #f94d6a;
-        font-weight: bold;
-        color: #fff;
-        border: 0;
-        border-radius: 4px;
+    header {
         display: flex;
-        justify-content: center;
+        align-self: center;
+        align-items: center;
+        /* justify-content: space-between; */
 
-        transition: background 0.3s;
-        &:hover {
-            background: ${darken(0.03, '#f94d6a')};
+        /* margin: 80px auto; */
+        button {
+            height: 42px;
+            margin: 0px 0px 0px 180px;
+            width: 172px;
+            background: #f94d6a;
+            font-weight: bold;
+            color: #fff;
+            border: 0;
+            border-radius: 4px;
+            box-shadow: 0 0 12px;
+            display: flex;
+            justify-content: center;
+
+            transition: background 0.3s;
+            &:hover {
+                background: ${darken(0.03, '#f94d6a')};
+            }
+            strong {
+                margin: 0 15px;
+            }
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0px 200px 0px 0px;
         }
     }
+
+    ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 15px;
+        margin-top: 30px;
+    }
+`;
+
+export const List = styled.li`
+    padding: 20px;
+    border-radius: 4px;
+    /* background: #fff; */
+
     strong {
-        margin: 0 4px;
-        font-size: 15px;
+        display: block;
+        color: #7159c1;
+        font-size: 20px;
+        font-weight: normal;
     }
 
-    h1 {
+    span {
+        display: block;
+        color: #666;
     }
 `;
