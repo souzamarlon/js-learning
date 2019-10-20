@@ -19,7 +19,7 @@ export const Container = styled.div`
         /* margin: 80px auto; */
         button {
             height: 42px;
-            margin: 0px 0px 0px 192px;
+            margin: 2px 0px 0px 192px;
             width: 172px;
             background: #f94d6a;
             font-weight: bold;
@@ -28,13 +28,15 @@ export const Container = styled.div`
             border-radius: 4px;
             box-shadow: 0 0 12px;
             justify-content: center;
+            display: flex;
 
             transition: background 0.3s;
             &:hover {
                 background: ${darken(0.03, '#f94d6a')};
             }
             > strong {
-                margin: 0 15px;
+                /* margin: 0 4px; */
+                margin: 2px 0px 0px 5px;
             }
         }
 
@@ -69,11 +71,23 @@ export const List = styled.li`
 
     > h1 {
         font-size: 21px;
-        margin: 0px 630px 0 15px;
+        margin: 0px 510px 0 15px;
     }
     > span {
-        font-size: 21px;
-        margin: 0px 0px 0 0px;
+        font-size: 13px;
+        /* margin-top: auto; */
+        /* overflow: hidden; */
+        align-items: center;
         /* margin: 0px 15px 0 0%; */
+    }
+
+    > button {
+        margin-top: 5px;
+        margin-left: auto;
+        padding: 15px;
+        /* margin-right: 15px; */
+        align-items: center;
+        background: none;
+        border: 0;
     }
 `;
