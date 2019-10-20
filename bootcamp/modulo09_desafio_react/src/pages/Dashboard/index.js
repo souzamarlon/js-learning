@@ -13,16 +13,19 @@ export default function Dashboard() {
                     <strong>Novo meetup</strong>
                 </button>
             </header>
+
             <ul>
                 <List>
-                    <li>
-                        <strong>21:00</strong>
-                        <span>Marlon</span>
-                    </li>
-                    <li>
-                        <strong>21:00</strong>
-                        <span>Marlon</span>
-                    </li>
+                    <h1>Marlon</h1>
+                    <span>21:00</span>
+                </List>
+                <List>
+                    <h1>Marlon</h1>
+                    <span>21:00</span>
+                </List>
+                <List>
+                    <h1>Marlon</h1>
+                    <span>21:00</span>
                 </List>
             </ul>
         </Container>
