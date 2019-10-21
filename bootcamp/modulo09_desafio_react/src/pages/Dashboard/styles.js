@@ -76,9 +76,9 @@ export const List = styled.li`
     > span {
         font-size: 13px;
         /* margin-top: auto; */
-        /* overflow: hidden; */
         align-items: center;
         /* margin: 0px 15px 0 0%; */
+        opacity: 0.5;
     }
 
     > button {

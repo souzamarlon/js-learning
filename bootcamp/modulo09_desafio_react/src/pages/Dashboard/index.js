@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { MdChevronRight } from 'react-icons/md';
 import { Container, List } from './styles';
 
+import api from '~/services/api';
+
 export default function Dashboard() {
+    const [date, setDate] = useState(new Date());
+
+    const response = api.get('meetups', { params: { date } });
+
+    console.tron.log(date);
+
     return (
         <Container>
             <header>
