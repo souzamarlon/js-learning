@@ -7,11 +7,11 @@ import { Container, List } from './styles';
 import api from '~/services/api';
 
 export default function Dashboard() {
-    const [date, setDate] = useState(new Date());
+    // const [userId, setDate] = useState(new Date());
 
-    const response = api.get('meetups', { params: { date } });
+    const response = api.get('meetups');
 
-    console.tron.log(date);
+    console.tron.log(response.data);
 
     return (
         <Container>
