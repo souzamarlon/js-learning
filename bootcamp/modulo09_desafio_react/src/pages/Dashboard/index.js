@@ -1,5 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { MdChevronRight } from 'react-icons/md';
 import { Container, List } from './styles';
@@ -9,9 +11,16 @@ import api from '~/services/api';
 export default function Dashboard() {
     // const [userId, setDate] = useState(new Date());
 
-    const response = api.get('meetups');
+    const { id, name, email, provider } = useSelector(
+        state => state.user.profile
+    );
 
-    console.tron.log(response.data);
+    async function loadMeetup() {
+        const response = await api.get('meetups');
+        console.tron.log(response);
+    }
+
+    loadMeetup();
 
     return (
         <Container>
