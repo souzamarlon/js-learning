@@ -62,6 +62,7 @@ export const Container = styled.div`
 `;
 
 export const List = styled.li`
+    /* flex-direction: row; */
     list-style: none;
     height: 50px;
     display: flex;

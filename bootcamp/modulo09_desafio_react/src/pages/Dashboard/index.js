@@ -9,7 +9,7 @@ import { Container, List } from './styles';
 import api from '~/services/api';
 
 export default function Dashboard() {
-    // const [userId, setDate] = useState(new Date());
+    const [meetups, setMeetups] = useState([]);
 
     const { id, name, email, provider } = useSelector(
         state => state.user.profile
@@ -18,7 +18,13 @@ export default function Dashboard() {
     async function loadMeetup() {
         const response = await api.get('meetups');
         console.tron.log(response);
+
+        setMeetups(response.data);
     }
+
+    useEffect(() => {
+        loadMeetup();
+    }, []);
 
     loadMeetup();
 
