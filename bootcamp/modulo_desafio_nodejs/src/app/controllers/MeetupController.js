@@ -10,7 +10,7 @@ class MeetupController {
       where: {
         user_id: req.userId,
       },
-      attributes: ['id', 'title', 'description', 'location', 'date'],
+      attributes: ['id', 'user_id', 'title', 'description', 'location', 'date'],
     });
 
     return res.json(meetups);
