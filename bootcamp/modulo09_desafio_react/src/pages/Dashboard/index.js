@@ -11,13 +11,13 @@ import api from '~/services/api';
 export default function Dashboard() {
     const [meetups, setMeetups] = useState([]);
 
-    const { id, name, email, provider } = useSelector(
-        state => state.user.profile
-    );
+    // const { id, name, email, provider } = useSelector(
+    //     state => state.user.profile
+    // );
 
     async function loadMeetup() {
         const response = await api.get('meetups');
-        console.tron.log(response);
+        // console.tron.log(response.data);
 
         setMeetups(response.data);
     }
@@ -39,24 +39,23 @@ export default function Dashboard() {
             </header>
 
             <ul>
-                <List>
+                {meetups.map(item => (
+                    <List>
+                        <h1>{item.title}</h1>
+                        <span>20 de outubro, às 11h</span>
+                        <button type="button" onClick={() => {}}>
+                            <MdChevronRight size={25} color="#FFF" />
+                        </button>
+                    </List>
+                ))}
+
+                {/* <List>
                     <h1>Marlon</h1>
                     <span>20 de outubro, às 11h</span>
                     <button type="button" onClick={() => {}}>
                         <MdChevronRight size={25} color="#FFF" />
                     </button>
-                </List>
-                <List>
-                    <h1>Marlon</h1>
-                    <span>20 de maio, às 11h</span>
-                    <button type="button" onClick={() => {}}>
-                        <MdChevronRight size={25} color="#FFF" />
-                    </button>
-                </List>
-                <List>
-                    <h1>Marlon</h1>
-                    <span>21:00</span>
-                </List>
+                </List> */}
             </ul>
         </Container>
     );
