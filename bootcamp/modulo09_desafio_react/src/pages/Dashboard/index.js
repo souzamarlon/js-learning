@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
+import { format, parseISO } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
+import pt from 'date-fns/locale/pt';
 
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { MdChevronRight } from 'react-icons/md';
@@ -9,17 +11,13 @@ import { Container, List } from './styles';
 import api from '~/services/api';
 
 export default function Dashboard() {
-    const [meetups, setMeetups] = useState([]);
-
-    // const { id, name, email, provider } = useSelector(
-    //     state => state.user.profile
-    // );
+    const [meetup, setMeetup] = useState([]);
+    const [date, setDate] = useState([]);
 
     async function loadMeetup() {
         const response = await api.get('meetups');
-        // console.tron.log(response.data);
 
-        setMeetups(response.data);
+        setMeetup(response.data);
     }
 
     useEffect(() => {
@@ -39,7 +37,7 @@ export default function Dashboard() {
             </header>
 
             <ul>
-                {meetups.map(item => (
+                {meetup.map(item => (
                     <List>
                         <h1>{item.title}</h1>
                         <span>20 de outubro, às 11h</span>
