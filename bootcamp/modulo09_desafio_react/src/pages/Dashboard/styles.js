@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-    max-width: 780px;
+    max-width: 940px;
     margin: 50px auto;
     display: flex;
 
@@ -19,7 +19,9 @@ export const Container = styled.div`
         /* margin: 80px auto; */
         button {
             height: 42px;
-            margin: 2px 0px 0px 192px;
+            margin-left: 300px;
+
+            /* margin: 2px 0px 0px 192px; */
             width: 172px;
             background: #f94d6a;
             font-weight: bold;
@@ -42,42 +44,54 @@ export const Container = styled.div`
 
         > h1 {
             font-size: 32px;
+            line-height: 37px;
             font-weight: bold;
-            margin: 0px 200px 0px 0px;
+            width: 223px;
+            height: 38px;
+            margin-right: 250px;
+            top: 144px;
+            /* margin: 0px 200px 0px 0px; */
         }
     }
 
     > ul {
-        display: block;
         align-items: center;
-        max-width: 780px;
+        max-width: 940px;
+        height: 62px;
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 10px;
-        margin-top: 30px;
+        margin-top: 50px;
 
         /* margin: 50px auto; */
-        margin: 50px 0px 0 0px;
+        /* margin: 50px 0px 0 0px; */
     }
 `;
 
 export const List = styled.li`
     /* flex-direction: row; */
+
     list-style: none;
     height: 50px;
     display: flex;
     align-items: center;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 4px;
 
     > h1 {
-        font-size: 21px;
-        margin: 0px 510px 0 15px;
+        /* text-align: center; */
+        /* align-items: center; */
+        display: flex;
+        font-size: 18px;
+        line-height: 21px;
+        margin: 0px 150px 0px 15px;
+        flex: 1;
     }
+
     > span {
-        font-size: 13px;
-        /* margin-top: auto; */
-        align-items: center;
+        font-size: 16px;
+        line-height: 19px;
+        margin-top: 5px;
         /* margin: 0px 15px 0 0%; */
         opacity: 0.5;
     }
@@ -86,7 +100,6 @@ export const List = styled.li`
         margin-top: 5px;
         margin-left: auto;
         padding: 15px;
-        /* margin-right: 15px; */
         align-items: center;
         background: none;
         border: 0;
