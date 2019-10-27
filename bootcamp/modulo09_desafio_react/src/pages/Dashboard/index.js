@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import { format, parseISO } from 'date-fns';
-// import { utcToZonedTime } from 'date-fns-tz';
+
 import pt from 'date-fns/locale/pt';
 
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { MdChevronRight } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { Container, List } from './styles';
 
 import api from '~/services/api';
@@ -40,10 +41,12 @@ export default function Dashboard() {
         <Container>
             <header>
                 <h1>Meus meetups</h1>
-                <button type="button" onClick={() => {}}>
-                    <IoIosAddCircleOutline size={19} />
-                    <strong>Novo meetup</strong>
-                </button>
+                <Link to="/newmeetup">
+                    <button type="button" onClick={() => {}}>
+                        <IoIosAddCircleOutline size={19} color="#FFF" />
+                        <strong>Novo meetup</strong>
+                    </button>
+                </Link>
             </header>
 
             <ul>
@@ -52,7 +55,9 @@ export default function Dashboard() {
                         <h1>{item.title}</h1>
                         <span>{item.date}</span>
                         <button type="button" onClick={() => {}}>
-                            <MdChevronRight size={25} color="#FFF" />
+                            <Link to="/detail">
+                                <MdChevronRight size={25} color="#FFF" />
+                            </Link>
                         </button>
                     </List>
                 ))}
