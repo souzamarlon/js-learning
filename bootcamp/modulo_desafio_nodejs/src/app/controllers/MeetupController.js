@@ -1,7 +1,8 @@
 import * as Yup from 'yup';
 import { startOfHour, parseISO, isBefore } from 'date-fns';
 import Meetup from '../models/Meetup';
-// import File from '../models/File';
+
+import File from '../models/File';
 
 class MeetupController {
   async index(req, res) {
@@ -11,6 +12,13 @@ class MeetupController {
         user_id: req.userId,
       },
       attributes: ['id', 'user_id', 'title', 'description', 'location', 'date'],
+      include: [
+        {
+          model: File,
+          as: 'banner',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
     });
 
     return res.json(meetups);
