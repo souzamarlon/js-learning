@@ -38,10 +38,18 @@ export default function AvatarInput() {
     return (
         <Container>
             <label htmlFor="banner">
-                <Banner >
-                    <img src={preview} alt="" />
-                    <MdCameraAlt size={54} />
-                    <h1>Selecionar imagem</h1>
+                <Banner preview={preview}>
+                    {preview ? (
+                        <h1>Selecionar imagem</h1>
+                    ) : (
+                        <MdCameraAlt size={54} />
+                    )}
+
+                    {/* {loading ? (
+                        <FaSpinner color="#FFF" size={14} />
+                    ) : (
+                        <FaPlus color="#FFF" size={14} />
+                    )} */}
                 </Banner>
 
                 <input
