@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-    max-width: 600px;
+    max-width: 940px;
+    width: 940px;
     margin: 50px auto;
+
     form {
         display: flex;
         flex-direction: column;
         margin-top: 30px;
+
         input {
             background: rgba(0, 0, 0, 0.2);
             border: 0;
@@ -21,52 +24,44 @@ export const Container = styled.div`
                 color: rgba(255, 255, 255, 0.7);
             }
         }
-        span {
-            color: #fbfbfb;
-            align-self: flex-start;
+
+        .description {
+            background: rgba(0, 0, 0, 0.2);
+            border: 0;
+            border-radius: 4px;
+            height: 200px;
+            padding: 15px;
+            color: #fff;
             margin: 0 0 10px;
-            font-weight: bold;
+            font-size: 14px;
+
+            &::placeholder {
+                font-size: 14px;
+
+                color: rgba(255, 255, 255, 0.7);
+            }
         }
 
         > button {
-            margin-left: 450px;
-            width: 150px;
-            height: 35px;
+            margin-left: 760px;
+            width: 180px;
+            height: 42px;
             background: #f94d6a;
             /* font-weight: bold; */
             color: #fff;
             border: 0;
             border-radius: 4px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
             font-size: 12px;
             transition: background 0.2s;
             &:hover {
                 background: ${darken(0.03, '#f94d6a')};
             }
-        }
-        a {
-            color: #fff;
-            margin-top: 15px;
-            font-size: 16px;
-            opacity: 0.8;
-            &:hover {
-                opacity: 1;
+            > strong {
+                margin: 2px 0px 0px 5px;
             }
-        }
-    }
-    button {
-        margin-left: 450px;
-        margin-top: 5px;
-        width: 150px;
-        height: 35px;
-        background: #f94d6a;
-        font-weight: bold;
-        color: #fff;
-        border: 0;
-        border-radius: 4px;
-        font-size: 16px;
-        transition: background 0.2s;
-        &:hover {
-            background: ${darken(0.03, '#f94d6a')};
         }
     }
 `;

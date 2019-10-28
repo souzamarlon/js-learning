@@ -21,7 +21,6 @@ export const Banner = styled.div`
     left: 250px;
     height: 300px;
     width: 940px;
-    /* border-radius: 50px; */
     border: 0px;
     justify-content: center;
     align-items: center;
