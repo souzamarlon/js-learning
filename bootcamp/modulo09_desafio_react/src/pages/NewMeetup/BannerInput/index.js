@@ -38,10 +38,10 @@ export default function AvatarInput() {
     return (
         <Container>
             <label htmlFor="banner">
-                <Banner>
-                    `<img src={preview} alt="" /> ||
+                <Banner >
+                    <img src={preview} alt="" />
                     <MdCameraAlt size={54} />
-                    <h1>Selecionar imagem</h1>`
+                    <h1>Selecionar imagem</h1>
                 </Banner>
 
                 <input
