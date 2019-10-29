@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Form, Input } from '@rocketseat/unform';
 import { IoIosAddCircleOutline } from 'react-icons/io';
@@ -7,10 +7,22 @@ import BannerInput from './BannerInput';
 
 import { Container } from './styles';
 
-export default function Profile({ name }) {
-    function handleSubmit(data) {}
+import api from '~/services/api';
 
-    function handleSignOut() {}
+export default function Profile() {
+    const [newMeetup, setNewMeetup] = useState();
+    async function handleSubmit() {
+        const { title, description, location, image, date } = newMeetup;
+        const response = await api.post('meetups', {
+            title,
+            description,
+            location,
+            image,
+            date,
+        });
+
+        setNewMeetup(response);
+    }
 
     return (
         <Container>
