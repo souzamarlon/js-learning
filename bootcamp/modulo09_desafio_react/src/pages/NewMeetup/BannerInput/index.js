@@ -35,20 +35,26 @@ export default function AvatarInput() {
         setFile(id);
         setPreview(url);
     }
+
+    const showBanner = !!preview ? true : false ;// eslint-disable-line
+
+
+
     return (
         <Container>
             <label htmlFor="banner">
-                <Banner preview={preview}>
-                    {preview ? (
-                        <h1>Selecionar imagem</h1>
+                <Banner preview={showBanner}>
+                    {showBanner ? (
+                        <img src={preview} alt="" /> // eslint-disable-line
                     ) : (
                         <MdCameraAlt size={54} />
                     )}
+                    {showBanner ? null : <h1>Selecionar imagem</h1>}
 
-                    {/* {loading ? (
-                        <FaSpinner color="#FFF" size={14} />
+                    {/* {preview ? (
+                        <h1>Selecionar imagem</h1>
                     ) : (
-                        <FaPlus color="#FFF" size={14} />
+                        <MdCameraAlt size={54} />
                     )} */}
                 </Banner>
 
