@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Form, Input } from '@rocketseat/unform';
 import { IoIosAddCircleOutline } from 'react-icons/io';
@@ -9,19 +9,14 @@ import { Container } from './styles';
 
 import api from '~/services/api';
 
-export default function Profile() {
-    const [newMeetup, setNewMeetup] = useState();
-    async function handleSubmit() {
-        const { title, description, location, image, date } = newMeetup;
-        const response = await api.post('meetups', {
-            title,
-            description,
-            location,
-            image,
-            date,
+export default function NewMeetup() {
+    async function handleSubmit(title, description, location, image, date) {
+        const newMeetup = { title, description, location, image, date };
+        await api.post('meetups', {
+            newMeetup,
         });
 
-        setNewMeetup(response);
+        console.tron.log(newMeetup);
     }
 
     return (
@@ -38,12 +33,8 @@ export default function Profile() {
                     // value="description"
                 />
 
-                <Input type="date" name="date" placeholder="Data do meetup" />
-                <Input
-                    type="location"
-                    name="location"
-                    placeholder="Localização"
-                />
+                <Input name="date" placeholder="Data do meetup" />
+                <Input name="location" placeholder="Localização" />
 
                 <button type="submit">
                     <IoIosAddCircleOutline size={19} color="#FFF" />
