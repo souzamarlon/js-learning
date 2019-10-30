@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Form, Input } from '@rocketseat/unform';
 import { IoIosAddCircleOutline } from 'react-icons/io';
@@ -11,13 +11,10 @@ import api from '~/services/api';
 
 export default function NewMeetup() {
     async function handleSubmit(title, description, location, image, date) {
-        const newMeetup = { title, description, location, image, date };
-        await api.post('meetups', {
-            newMeetup,
-        });
-
-        console.tron.log(newMeetup);
+        await api.post('meetups', title, description, location, image, date);
     }
+
+    console.tron.log();
 
     return (
         <Container>
