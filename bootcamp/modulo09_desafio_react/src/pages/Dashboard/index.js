@@ -37,6 +37,7 @@ export default function Dashboard() {
         loadMeetup();
     }, []);
 
+    // {{ pathname: `/detail/${item.id}` }}
     return (
         <Container>
             <header>
@@ -55,7 +56,7 @@ export default function Dashboard() {
                         <h1>{item.title}</h1>
                         <span>{item.date}</span>
                         <button type="button" onClick={() => {}}>
-                            <Link to="/detail">
+                            <Link to={`/detail/${item.id}`}>
                                 <MdChevronRight size={25} color="#FFF" />
                             </Link>
                         </button>
