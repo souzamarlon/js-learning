@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 // import { useField } from '@rocketseat/unform';
 
-import { Container, List } from './styles';
+import { Link } from 'react-router-dom';
+
+import { IoIosAddCircleOutline } from 'react-icons/io';
+
+import { Container, Banner } from './styles';
+
 import api from '~/services/api';
 
 export default function Detail({ match }) {
@@ -26,23 +31,22 @@ export default function Detail({ match }) {
 
     console.tron.log(meetupDetails);
     return (
-        <Container>
+        <>
             {meetupDetails.map(item => (
-                <li>
-                    <h1>{item.title}</h1>
-                    <h2>{item.description}</h2>
-                </li>
-            ))}
-        </Container>
+                <Container>
+                    <header>
+                        <h1>{item.title}</h1>
+                        <button type="button" onClick={() => {}}>
+                            <IoIosAddCircleOutline size={19} color="#FFF" />
+                            <strong>Novo meetup</strong>
+                        </button>
+                    </header>
 
-        // <Container>
-        //     {/* <ul>
-        //         {meetupDetails.map(item => (
-        //             <List key={item.id}>
-        //                 <h1>{item.title}</h1>
-        //             </List>
-        //         ))}
-        //     </ul> */}
-        // </Container>
+                    <Banner>
+                        <img src={item.banner.url} alt="" />
+                    </Banner>
+                </Container>
+            ))}
+        </>
     );
 }
