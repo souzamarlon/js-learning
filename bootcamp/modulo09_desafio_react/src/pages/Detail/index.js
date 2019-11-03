@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 // import { useField } from '@rocketseat/unform';
+import { format, parseISO } from 'date-fns';
 
+import pt from 'date-fns/locale/pt';
 import { Link } from 'react-router-dom';
 
 import { IoIosAddCircleOutline } from 'react-icons/io';
@@ -11,25 +13,25 @@ import api from '~/services/api';
 
 export default function Detail({ match }) {
     const [meetupDetails, setMeetupDetails] = useState([]);
-    const [meetup, setMeetup] = useState([]);
 
-    const [meetupID] = useState(match.params.id);
+    const [id] = useState(match.params.id);
 
     useEffect(() => {
         async function loadMeetup() {
             const response = await api.get('meetups');
-
+            console.tron.log(response.data);
             const dataDetails = response.data.filter(item => {
-                return item.id == meetupID;
+                // eslint-disable-next-line eqeqeq
+                return item.id == id;
             });
 
             setMeetupDetails(dataDetails);
         }
 
         loadMeetup();
-    }, [meetupID]);
+    }, [id, meetupDetails.id]);
 
-    console.tron.log(meetupDetails);
+    // console.tron.log(meetupDetails);
     return (
         <>
             {meetupDetails.map(item => (
@@ -45,6 +47,8 @@ export default function Detail({ match }) {
                     <Banner>
                         <img src={item.banner.url} alt="" />
                     </Banner>
+
+                    <p>{item.description}</p>
                 </Container>
             ))}
         </>

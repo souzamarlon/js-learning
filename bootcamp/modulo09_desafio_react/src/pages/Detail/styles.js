@@ -57,7 +57,7 @@ export const Container = styled.div`
 `;
 
 export const Banner = styled.div`
-    top: 142px;
+    margin-top: 42px;
     left: 250px;
     height: 300px;
     max-width: 940px;
@@ -81,6 +81,7 @@ export const Banner = styled.div`
     img {
         /* max-width: 100%; */
         max-height: 300px;
+        width: 940px;
         border: 0px;
         border-radius: 8px;
         justify-content: center;
