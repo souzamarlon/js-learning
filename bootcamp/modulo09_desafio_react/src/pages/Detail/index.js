@@ -6,6 +6,10 @@ import pt from 'date-fns/locale/pt';
 import { Link } from 'react-router-dom';
 
 import { IoIosAddCircleOutline } from 'react-icons/io';
+import EventIcon from '@material-ui/icons/Event';
+import PlaceIcon from '@material-ui/icons/Place';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 import { Container, Banner } from './styles';
 
@@ -46,9 +50,21 @@ export default function Detail({ match }) {
                 <Container>
                     <header>
                         <h1>{item.title}</h1>
-                        <button type="button" onClick={() => {}}>
-                            <IoIosAddCircleOutline size={19} color="#FFF" />
-                            <strong>Novo meetup</strong>
+                        <button
+                            type="button"
+                            className="Editar"
+                            onClick={() => {}}
+                        >
+                            <EditIcon size={20} color="#FFF" />
+                            <strong>Editar</strong>
+                        </button>
+                        <button
+                            type="button"
+                            className="Cancelar"
+                            onClick={() => {}}
+                        >
+                            <DeleteForeverIcon size={20} color="#FFF" />
+                            <strong>Cancelar</strong>
                         </button>
                     </header>
 
@@ -57,6 +73,13 @@ export default function Detail({ match }) {
                     </Banner>
 
                     <p>{item.description}</p>
+
+                    <h2>
+                        <EventIcon className="EventIcon" /> {item.date}
+                        <span>
+                            <PlaceIcon className="PlaceIcon" /> {item.location}
+                        </span>
+                    </h2>
                 </Container>
             ))}
         </>
