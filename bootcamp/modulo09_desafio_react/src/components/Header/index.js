@@ -1,11 +1,17 @@
 import React from 'react';
 
-import { Container } from './styles.js';
+import { Link } from 'react-router-dom';
+import { Container } from './styles';
+import logo from '~/assets/logo.svg';
 
 export default function Header() {
     return (
         <Container>
-            <h1>Header</h1>
+            <nav>
+                <Link to="/dashboard">
+                    <img src={logo} alt="Meetup" />
+                </Link>
+            </nav>
         </Container>
     );
 }

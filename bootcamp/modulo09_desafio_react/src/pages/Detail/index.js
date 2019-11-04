@@ -5,7 +5,6 @@ import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { Link } from 'react-router-dom';
 
-import { IoIosAddCircleOutline } from 'react-icons/io';
 import EventIcon from '@material-ui/icons/Event';
 import PlaceIcon from '@material-ui/icons/Place';
 import EditIcon from '@material-ui/icons/Edit';
@@ -14,6 +13,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { Container, Banner } from './styles';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function Detail({ match }) {
     const [meetupDetails, setMeetupDetails] = useState([]);
@@ -43,6 +43,11 @@ export default function Detail({ match }) {
         loadMeetup();
     }, [meetupId]);
 
+    function handleGetOut() {
+        api.delete(`meetups/${meetupId}`);
+        history.push('/dashboard');
+    }
+
     // console.tron.log(meetupDetails);
     return (
         <>
@@ -61,7 +66,7 @@ export default function Detail({ match }) {
                         <button
                             type="button"
                             className="Cancelar"
-                            onClick={() => {}}
+                            onClick={() => handleGetOut()}
                         >
                             <DeleteForeverIcon size={20} color="#FFF" />
                             <strong>Cancelar</strong>

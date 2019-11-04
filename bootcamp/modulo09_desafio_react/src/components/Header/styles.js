@@ -10,7 +10,17 @@ export const Container = styled.div`
     /* mix-blend-mode: normal; */
     opacity: 0.3;
 
-    h1 {
-        color: #fff;
+    nav {
+        display: flex;
+        align-items: center;
+        img {
+            margin-right: 20px;
+            padding-right: 20px;
+            border-right: 1px solid #eee;
+        }
+        a {
+            font-weight: bold;
+            color: #7159c1;
+        }
     }
 `;
