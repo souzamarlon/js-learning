@@ -60,8 +60,10 @@ export default function Detail({ match }) {
                             className="Editar"
                             onClick={() => {}}
                         >
-                            <EditIcon size={20} color="#FFF" />
-                            <strong>Editar</strong>
+                            <Link to={`/newmeetup/${item.id}`}>
+                                <EditIcon size={20} color="#FFF" />
+                                <strong>Editar</strong>
+                            </Link>
                         </button>
                         <button
                             type="button"

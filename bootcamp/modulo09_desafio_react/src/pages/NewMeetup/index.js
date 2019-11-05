@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Form, Input } from '@rocketseat/unform';
 import { IoIosAddCircleOutline } from 'react-icons/io';
@@ -11,11 +11,13 @@ import { Container } from './styles';
 
 import api from '~/services/api';
 
-export default function NewMeetup() {
+export default function NewMeetup({ match }) {
+    const [detailId] = useState(match.params.id);
+
     async function handleSubmit(title, description, location, image, date) {
         await api.post('meetups', title, description, location, image, date);
 
-        history.push('/dashboard');
+        history.push('/');
     }
 
     console.tron.log();
@@ -34,7 +36,7 @@ export default function NewMeetup() {
                     // value="description"
                 />
 
-                <Input name="date" placeholder="Data do meetup" />
+                <Input name="date" type="date" placeholder="Data do meetup" />
                 <Input name="location" placeholder="Localização" />
 
                 <button type="submit">

@@ -18,8 +18,16 @@ export const Container = styled.div`
         align-items: center;
 
         /* margin: 80px auto; */
-
-        button.Editar {
+        a {
+            border: 0;
+            justify-content: center;
+            display: flex;
+            color: #fff;
+            width: 150px;
+            height: 42px;
+            align-items: center;
+        }
+        > button {
             height: 42px;
             margin-right: 10px;
 
@@ -44,6 +52,7 @@ export const Container = styled.div`
                 margin: 2px 0px 0px 5px;
             }
         }
+
         button.Cancelar {
             height: 42px;
             /* margin-left: 10px; */
