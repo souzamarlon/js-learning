@@ -40,7 +40,7 @@ export default function NewMeetup({ match }) {
 
     return (
         <Container>
-            <Form onSubmit={handleSubmit}>
+            <Form initialData={} onSubmit={handleSubmit}>
                 <BannerInput name="image" />
                 <Input name="title" placeholder="Titulo do Meetup" />
                 <Input

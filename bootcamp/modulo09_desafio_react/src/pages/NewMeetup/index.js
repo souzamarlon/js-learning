@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Form, Input } from '@rocketseat/unform';
 import { IoIosAddCircleOutline } from 'react-icons/io';
@@ -12,8 +12,6 @@ import { Container } from './styles';
 import api from '~/services/api';
 
 export default function NewMeetup() {
-    // const [meetupDetails, setMeetupDetails] = useState([]);
-
     async function handleSubmit(title, description, location, image, date) {
         await api.post('meetups', title, description, location, image, date);
 

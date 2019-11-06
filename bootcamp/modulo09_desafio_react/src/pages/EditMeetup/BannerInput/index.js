@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import { useField } from '@rocketseat/unform';
-import { MdCameraAlt } from 'react-icons/md';
 import api from '~/services/api';
 
 import { Container, Banner } from './styles';
@@ -44,18 +43,7 @@ export default function AvatarInput() {
         <Container>
             <label htmlFor="banner">
                 <Banner preview={showBanner}>
-                    {showBanner ? (
-                        <img src={preview} alt="" /> // eslint-disable-line
-                    ) : (
-                        <MdCameraAlt size={54} />
-                    )}
-                    {showBanner ? null : <h1>Selecionar imagem</h1>}
-
-                    {/* {preview ? (
-                        <h1>Selecionar imagem</h1>
-                    ) : (
-                        <MdCameraAlt size={54} />
-                    )} */}
+                    <img src={preview} alt="" />
                 </Banner>
 
                 <input
