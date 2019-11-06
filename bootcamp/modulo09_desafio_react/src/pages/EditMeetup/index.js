@@ -11,14 +11,32 @@ import { Container } from './styles';
 
 import api from '~/services/api';
 
-export default function NewMeetup() {
-    // const [meetupDetails, setMeetupDetails] = useState([]);
+export default function NewMeetup({ match }) {
+    const [meetupDetails, setMeetupDetails] = useState([]);
+
+    const [detailId] = useState(match.params.id);
+    console.tron.log(detailId);
 
     async function handleSubmit(title, description, location, image, date) {
         await api.post('meetups', title, description, location, image, date);
 
         history.push('/');
     }
+
+    useEffect(() => {
+        async function loadMeetup() {
+            const response = await api.get('meetups');
+
+            const dataDetails = response.data.filter(item => {
+                // eslint-disable-next-line
+                return item.id == detailId;
+            });
+
+            setMeetupDetails(dataDetails);
+        }
+
+        loadMeetup();
+    }, [detailId]);
 
     return (
         <Container>

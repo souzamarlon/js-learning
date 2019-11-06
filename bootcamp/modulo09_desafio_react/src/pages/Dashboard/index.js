@@ -14,6 +14,8 @@ import api from '~/services/api';
 export default function Dashboard() {
     const [meetup, setMeetup] = useState([]);
 
+    console.tron.log(meetup);
+
     useEffect(() => {
         async function loadMeetup() {
             const response = await api.get('meetups');
@@ -35,7 +37,7 @@ export default function Dashboard() {
             setMeetup(data);
         }
         loadMeetup();
-    }, []);
+    }, [meetup]);
 
     // {{ pathname: `/detail/${item.id}` }}
     return (
@@ -62,14 +64,6 @@ export default function Dashboard() {
                         </button>
                     </List>
                 ))}
-
-                {/* <List>
-                    <h1>Marlon</h1>
-                    <span>20 de outubro, às 11h</span>
-                    <button type="button" onClick={() => {}}>
-                        <MdChevronRight size={25} color="#FFF" />
-                    </button>
-                </List> */}
             </ul>
         </Container>
     );

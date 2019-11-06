@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 // import { useField } from '@rocketseat/unform';
 import { format, parseISO } from 'date-fns';
 
@@ -20,6 +20,11 @@ export default function Detail({ match }) {
 
     const [meetupId] = useState(match.params.id);
 
+    const handleDelete = useCallback(() => {
+        api.delete(`meetups/${meetupId}`);
+        history.push('/dashboard');
+    }, [meetupId]);
+
     useEffect(() => {
         async function loadMeetup() {
             const response = await api.get('meetups');
@@ -35,18 +40,11 @@ export default function Detail({ match }) {
                 // eslint-disable-next-line
                 return item.id == meetupId;
             });
-            console.tron.log(dataDetails);
 
             setMeetupDetails(dataDetails);
         }
-
         loadMeetup();
     }, [meetupId]);
-
-    function handleGetOut() {
-        api.delete(`meetups/${meetupId}`);
-        history.push('/dashboard');
-    }
 
     // console.tron.log(meetupDetails);
     return (
@@ -60,7 +58,7 @@ export default function Detail({ match }) {
                             className="Editar"
                             onClick={() => {}}
                         >
-                            <Link to={`/newmeetup/${item.id}`}>
+                            <Link to={`/editmeetup/${item.id}`}>
                                 <EditIcon size={20} color="#FFF" />
                                 <strong>Editar</strong>
                             </Link>
@@ -68,7 +66,7 @@ export default function Detail({ match }) {
                         <button
                             type="button"
                             className="Cancelar"
-                            onClick={() => handleGetOut()}
+                            onClick={handleDelete}
                         >
                             <DeleteForeverIcon size={20} color="#FFF" />
                             <strong>Cancelar</strong>
