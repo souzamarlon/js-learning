@@ -14,8 +14,6 @@ import api from '~/services/api';
 export default function Dashboard() {
     const [meetup, setMeetup] = useState([]);
 
-    console.tron.log(meetup);
-
     useEffect(() => {
         async function loadMeetup() {
             const response = await api.get('meetups');
