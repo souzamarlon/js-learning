@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { format, parseISO } from 'date-fns';
 
+import pt from 'date-fns/locale/pt';
 import { Form, Input } from '@rocketseat/unform';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 
@@ -11,36 +13,29 @@ import { Container } from './styles';
 
 import api from '~/services/api';
 
-export default function NewMeetup({ match }) {
+function NewMeetup({ match }) {
     const [meetupDetails, setMeetupDetails] = useState([]);
 
     const [detailId] = useState(match.params.id);
-    console.tron.log(detailId);
 
     async function handleSubmit(title, description, location, image, date) {
-        await api.post('meetups', title, description, location, image, date);
+        await api.put('meetups', title, description, location, image, date);
 
         history.push('/');
     }
 
-    useEffect(() => {
-        async function loadMeetup() {
-            const response = await api.get('meetups');
+    const response = api.get('meetups');
 
-            const dataDetails = response.data.filter(item => {
-                // eslint-disable-next-line
-                return item.id == detailId;
-            });
+    const dataDetails = response.data.filter(item => {
+        return item.id == detailId;
+    });
 
-            setMeetupDetails(dataDetails);
-        }
-
-        loadMeetup();
-    }, [detailId]);
+    setMeetupDetails(dataDetails);
+    console.tron.log(dataDetails);
 
     return (
         <Container>
-            <Form initialData={} onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} initialData={dataDetails}>
                 <BannerInput name="image" />
                 <Input name="title" placeholder="Titulo do Meetup" />
                 <Input
@@ -63,3 +58,5 @@ export default function NewMeetup({ match }) {
         </Container>
     );
 }
+
+export default new NewMeetup();

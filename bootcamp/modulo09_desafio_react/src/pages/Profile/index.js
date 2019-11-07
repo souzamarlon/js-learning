@@ -24,7 +24,7 @@ export default function Profile() {
 
     return (
         <Container>
-            <Form onSubmit={handleSubmit}>
+            <Form initialData={profile} onSubmit={handleSubmit}>
                 <Input name="name" placeholder="Nome completo" />
                 <Input
                     name="email"
