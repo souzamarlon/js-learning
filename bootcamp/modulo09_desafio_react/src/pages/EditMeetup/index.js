@@ -13,7 +13,7 @@ import { Container } from './styles';
 
 import api from '~/services/api';
 
-function NewMeetup({ match }) {
+export default function NewMeetup({ match }) {
     const [meetupDetails, setMeetupDetails] = useState([]);
 
     const [detailId] = useState(match.params.id);
@@ -24,18 +24,21 @@ function NewMeetup({ match }) {
         history.push('/');
     }
 
-    const response = api.get('meetups');
+    async function loadDetails() {
+        const response = await api.get('meetups');
 
-    const dataDetails = response.data.filter(item => {
-        return item.id == detailId;
-    });
+        const dataDetails = response.data.map(item => ({
+            id: detailId,
+        }));
 
-    setMeetupDetails(dataDetails);
-    console.tron.log(dataDetails);
+        setMeetupDetails(dataDetails);
+        console.tron.log(dataDetails);
+    }
+    loadDetails();
 
     return (
         <Container>
-            <Form onSubmit={handleSubmit} initialData={dataDetails}>
+            <Form onSubmit={handleSubmit}>
                 <BannerInput name="image" />
                 <Input name="title" placeholder="Titulo do Meetup" />
                 <Input
@@ -58,5 +61,3 @@ function NewMeetup({ match }) {
         </Container>
     );
 }
-
-export default new NewMeetup();
