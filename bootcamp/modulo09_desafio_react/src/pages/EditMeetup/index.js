@@ -29,35 +29,51 @@ export default function NewMeetup({ match }) {
 
         const dataDetails = response.data.map(item => ({
             id: detailId,
+            title: item.title,
+            description: item.description,
         }));
 
         setMeetupDetails(dataDetails);
-        console.tron.log(dataDetails);
     }
+    // console.tron.log(meetupDetails);
     loadDetails();
 
     return (
-        <Container>
-            <Form onSubmit={handleSubmit}>
-                <BannerInput name="image" />
-                <Input name="title" placeholder="Titulo do Meetup" />
-                <Input
-                    multiline
-                    name="description"
-                    class="description"
-                    rows={10}
-                    placeholder="Descrição completa"
-                    // value="description"
-                />
+        <>
+            {meetupDetails.map(item => (
+                <Container>
+                    <Form onSubmit={handleSubmit} initialData={meetupDetails}>
+                        <BannerInput name="image" />
 
-                <Input name="date" type="date" placeholder="Data do meetup" />
-                <Input name="location" placeholder="Localização" />
+                        <Input
+                            name="title"
+                            value={meetupDetails}
+                            onChange={e => setMeetupDetails(e.target.value)}
+                        />
 
-                <button type="submit">
-                    <IoIosAddCircleOutline size={19} color="#FFF" />
-                    <strong>Salvar o meetup</strong>
-                </button>
-            </Form>
-        </Container>
+                        <Input
+                            multiline
+                            name="description"
+                            class="description"
+                            rows={10}
+                            placeholder="Descrição completa"
+                            // value="description"
+                        />
+
+                        <Input
+                            name="date"
+                            type="date"
+                            placeholder="Data do meetup"
+                        />
+                        <Input name="location" placeholder="Localização" />
+
+                        <button type="submit">
+                            <IoIosAddCircleOutline size={19} color="#FFF" />
+                            <strong>Salvar o meetup</strong>
+                        </button>
+                    </Form>
+                </Container>
+            ))}
+        </>
     );
 }
