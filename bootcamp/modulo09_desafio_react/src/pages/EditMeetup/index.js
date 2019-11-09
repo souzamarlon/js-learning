@@ -14,7 +14,7 @@ import { Container } from './styles';
 import api from '~/services/api';
 
 export default function NewMeetup({ match }) {
-    const [meetupDetails, setMeetupDetails] = useState([]);
+    const [meetupEdit, setMeetupEdit] = useState([]);
 
     const [detailId] = useState(match.params.id);
 
@@ -24,56 +24,58 @@ export default function NewMeetup({ match }) {
         history.push('/');
     }
 
-    async function loadDetails() {
-        const response = await api.get('meetups');
+    useEffect(() => {
+        async function loadDetails() {
+            const response = await api.get('meetups');
 
-        const dataDetails = response.data.map(item => ({
-            id: detailId,
-            title: item.title,
-            description: item.description,
-        }));
+            const [dataDetails] = response.data.map(item => ({
+                id: detailId,
+                title: item.title,
+                description: item.description,
+            }));
 
-        setMeetupDetails(dataDetails);
-    }
-    // console.tron.log(meetupDetails);
-    loadDetails();
+            setMeetupEdit(dataDetails);
+        }
+        loadDetails();
+    }, [detailId]);
+
+    console.tron.log(meetupEdit);
 
     return (
         <>
-            {meetupDetails.map(item => (
-                <Container>
-                    <Form onSubmit={handleSubmit} initialData={meetupDetails}>
-                        <BannerInput name="image" />
+            {/* {meetupDetails.map(item => ())} */}
+            <Container>
+                <Form onSubmit={handleSubmit} initialData={meetupEdit}>
+                    <BannerInput name="image" />
 
-                        <Input
-                            name="title"
-                            value={meetupDetails}
-                            onChange={e => setMeetupDetails(e.target.value)}
-                        />
+                    <Input
+                        name="title"
+                        // value={meetupEdit}
+                        onChange={e => setMeetupEdit(e.target.value)}
+                    />
 
-                        <Input
-                            multiline
-                            name="description"
-                            class="description"
-                            rows={10}
-                            placeholder="Descrição completa"
-                            // value="description"
-                        />
+                    <Input
+                        multiline
+                        name="description"
+                        class="description"
+                        rows={10}
+                        placeholder="Descrição completa"
+                        // value="description"
+                    />
 
-                        <Input
-                            name="date"
-                            type="date"
-                            placeholder="Data do meetup"
-                        />
-                        <Input name="location" placeholder="Localização" />
+                    <Input
+                        name="date"
+                        type="date"
+                        placeholder="Data do meetup"
+                    />
+                    <Input name="location" placeholder="Localização" />
 
-                        <button type="submit">
-                            <IoIosAddCircleOutline size={19} color="#FFF" />
-                            <strong>Salvar o meetup</strong>
-                        </button>
-                    </Form>
-                </Container>
-            ))}
+                    <button type="submit">
+                        <IoIosAddCircleOutline size={19} color="#FFF" />
+                        <strong>Salvar o meetup</strong>
+                    </button>
+                </Form>
+            </Container>
         </>
     );
 }
