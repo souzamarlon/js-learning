@@ -63,14 +63,16 @@ class MeetupController {
   }
 
   async update(req, res) {
-    const { id, title, description, location, image, date } = req.body;
-    const meet_update = await Meetup.findByPk(id);
+    const { title, description, location, image, date } = req.body;
+
+    const meet_update = await Meetup.findByPk(req.params.id);
 
     if (meet_update.user_id !== req.userId) {
       return res.status(401).json({
         error: 'You do not have authorization to update this Meetup.',
       });
     }
+
     /** TODO - Actual date (It is not Brazilian time ) */
     // const actualDate = new Date();
     // console.log(actualDate);
