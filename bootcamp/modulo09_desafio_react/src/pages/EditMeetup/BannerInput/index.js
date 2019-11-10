@@ -35,14 +35,19 @@ export default function AvatarInput() {
         setPreview(url);
     }
 
-    const showBanner = !!preview ? true : false ;// eslint-disable-line
+    // async function previewBanner() {
+    //     // const response = await api.get('files', image);
 
+    //     // const { id, url } = response.data;
 
+    //     // setPreview(url);
+
+    // }
 
     return (
         <Container>
             <label htmlFor="banner">
-                <Banner preview={showBanner}>
+                <Banner preview={preview}>
                     <img src={preview} alt="" />
                 </Banner>
 

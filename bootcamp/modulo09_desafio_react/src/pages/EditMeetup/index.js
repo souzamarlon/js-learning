@@ -33,10 +33,11 @@ export default function NewMeetup({ match }) {
     //     console.tron.log(meetupEdit);
     // }
 
-    const handleSubmit = useCallback(() => {
-        api.put(`meetups/${id}`, meetupEdit.title);
-        // history.push('/dashboard');
-    }, [id, meetupEdit]);
+    function handleSubmit(data) {
+        api.put(`meetups/${id}`, data);
+        // history.push('/');
+        console.tron.log(data);
+    }
 
     useEffect(() => {
         async function loadDetails() {
@@ -56,28 +57,26 @@ export default function NewMeetup({ match }) {
         loadDetails();
     }, [id]);
 
-    console.tron.log(meetupEdit);
-
     return (
         <>
             {/* {meetupDetails.map(item => ())} */}
             <Container>
                 <Form onSubmit={handleSubmit} initialData={meetupEdit}>
-                    {/* <BannerInput name="image" /> */}
+                    <BannerInput name="image" />
 
-                    <Input name="title" onChange={setMeetupEdit} />
+                    <Input name="title" />
 
                     <Input
                         multiline
                         name="description"
                         className="description"
                         rows={10}
-                        placeholder="Descrição completa"
+
                         // value="description"
                     />
 
-                    <Input name="date" placeholder="Data do meetup" />
-                    <Input name="location" placeholder="Localização" />
+                    <Input name="date" />
+                    <Input name="location" />
 
                     <button type="submit">
                         <IoIosAddCircleOutline size={19} color="#FFF" />
