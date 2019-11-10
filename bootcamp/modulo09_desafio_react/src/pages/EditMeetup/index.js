@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { format, parseISO } from 'date-fns';
 
 import pt from 'date-fns/locale/pt';
@@ -16,28 +16,45 @@ import api from '~/services/api';
 export default function NewMeetup({ match }) {
     const [meetupEdit, setMeetupEdit] = useState([]);
 
-    const [detailId] = useState(match.params.id);
+    const [id] = useState(match.params.id);
 
-    async function handleSubmit(title, description, location, image, date) {
-        await api.put('meetups', title, description, location, image, date);
+    // async function handleSubmit(image, title, description, location, date) {
+    //     // image, title, description, location;
+    //     await api.put(
+    //         `meetups/${id}`,
+    //         id,
+    //         image,
+    //         title,
+    //         description,
+    //         location,
+    //         date
+    //     );
+    //     // history.push('/');
+    //     console.tron.log(meetupEdit);
+    // }
 
-        history.push('/');
-    }
+    const handleSubmit = useCallback(() => {
+        api.put(`meetups/${id}`, meetupEdit.title);
+        // history.push('/dashboard');
+    }, [id, meetupEdit]);
 
     useEffect(() => {
         async function loadDetails() {
             const response = await api.get('meetups');
 
             const [dataDetails] = response.data.map(item => ({
-                id: detailId,
+                user_id: item.user_id,
                 title: item.title,
                 description: item.description,
+                image: item.banner.id,
+                date: item.date,
+                location: item.location,
             }));
 
             setMeetupEdit(dataDetails);
         }
         loadDetails();
-    }, [detailId]);
+    }, [id]);
 
     console.tron.log(meetupEdit);
 
@@ -46,28 +63,20 @@ export default function NewMeetup({ match }) {
             {/* {meetupDetails.map(item => ())} */}
             <Container>
                 <Form onSubmit={handleSubmit} initialData={meetupEdit}>
-                    <BannerInput name="image" />
+                    {/* <BannerInput name="image" /> */}
 
-                    <Input
-                        name="title"
-                        // value={meetupEdit}
-                        onChange={e => setMeetupEdit(e.target.value)}
-                    />
+                    <Input name="title" onChange={setMeetupEdit} />
 
                     <Input
                         multiline
                         name="description"
-                        class="description"
+                        className="description"
                         rows={10}
                         placeholder="Descrição completa"
                         // value="description"
                     />
 
-                    <Input
-                        name="date"
-                        type="date"
-                        placeholder="Data do meetup"
-                    />
+                    <Input name="date" placeholder="Data do meetup" />
                     <Input name="location" placeholder="Localização" />
 
                     <button type="submit">

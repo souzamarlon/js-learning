@@ -103,6 +103,7 @@ export const Container = styled.div`
         font-size: 15px;
         line-height: 32px;
         color: #ffffff;
+        text-align: center;
     }
 
     h2 {
