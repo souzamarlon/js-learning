@@ -37,6 +37,7 @@ export default function Detail({ match }) {
                         locale: pt,
                     }
                 );
+
                 // eslint-disable-next-line
                 return item.id == meetupId;
             });

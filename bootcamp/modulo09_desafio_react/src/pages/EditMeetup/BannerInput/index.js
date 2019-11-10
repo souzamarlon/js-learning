@@ -5,14 +5,27 @@ import api from '~/services/api';
 
 import { Container, Banner } from './styles';
 
-export default function AvatarInput() {
-    const { defaultValue, registerField } = useField('avatar');
+export default function BannerInput() {
+    const { defaultValue, registerField } = useField('image');
 
     const [file, setFile] = useState(defaultValue && defaultValue.id);
 
     const [preview, setPreview] = useState(defaultValue && defaultValue.url);
 
     const ref = useRef();
+
+    useEffect(() => {
+        async function previewBanner() {
+            const id = defaultValue;
+            const response = await api.get(`files/${id}`);
+
+            const [image] = response.data;
+            console.tron.log(image.url);
+            setPreview(image.url);
+        }
+
+        previewBanner();
+    }, [defaultValue]);
 
     useEffect(() => {
         if (ref.current) {
@@ -34,15 +47,6 @@ export default function AvatarInput() {
         setFile(id);
         setPreview(url);
     }
-
-    // async function previewBanner() {
-    //     // const response = await api.get('files', image);
-
-    //     // const { id, url } = response.data;
-
-    //     // setPreview(url);
-
-    // }
 
     return (
         <Container>

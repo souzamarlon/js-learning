@@ -36,22 +36,18 @@ export default function NewMeetup({ match }) {
     function handleSubmit(data) {
         api.put(`meetups/${id}`, data);
         // history.push('/');
-        console.tron.log(data);
+        // console.tron.log(data);
     }
 
     useEffect(() => {
         async function loadDetails() {
             const response = await api.get('meetups');
 
-            const [dataDetails] = response.data.map(item => ({
-                user_id: item.user_id,
-                title: item.title,
-                description: item.description,
-                image: item.banner.id,
-                date: item.date,
-                location: item.location,
-            }));
+            const [dataDetails] = response.data.filter(item => {
+                return item.id == id;
+            });
 
+            // console.tron.log(dataDetails);
             setMeetupEdit(dataDetails);
         }
         loadDetails();
