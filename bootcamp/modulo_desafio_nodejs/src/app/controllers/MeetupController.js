@@ -11,7 +11,15 @@ class MeetupController {
       where: {
         user_id: req.userId,
       },
-      attributes: ['id', 'user_id', 'title', 'description', 'location', 'date'],
+      attributes: [
+        'id',
+        'user_id',
+        'title',
+        'description',
+        'location',
+        'image',
+        'date',
+      ],
       include: [
         {
           model: File,
