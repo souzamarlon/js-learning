@@ -1,10 +1,10 @@
 import Sequelize from 'sequelize';
 
-// import User from '../app/models/User';
+import User from '../app/models/User';
 
 import databaseConfig from '../config/database';
 
-// const models = [User];
+const models = [User];
 
 class Database {
   constructor() {
@@ -13,17 +13,17 @@ class Database {
     this.associate();
   }
 
-  // init() {
-  //   models.forEach(model => model.init(this.connection));
-  // }
+  init() {
+    models.forEach(model => model.init(this.connection));
+  }
 
-  // associate() {
-  //   models.forEach(model => {
-  //     if (model.associate) {
-  //       model.associate(this.connection.models);
-  //     }
-  //   });
-  // }
+  associate() {
+    models.forEach(model => {
+      if (model.associate) {
+        model.associate(this.connection.models);
+      }
+    });
+  }
 }
 
 export default new Database();
