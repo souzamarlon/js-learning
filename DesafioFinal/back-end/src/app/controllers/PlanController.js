@@ -19,8 +19,6 @@ class PlanController {
     });
   }
 
-  // TODO - I still need to improve
-
   async update(req, res) {
     const planDetails = await Plan.findByPk(req.params.id);
 

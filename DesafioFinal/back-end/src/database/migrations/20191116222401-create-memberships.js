@@ -1,16 +1,24 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('memberships', {
-      student_id: {
+      id: {
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
+      student_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'students', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false,
+      },
       plan_id: {
         type: Sequelize.INTEGER,
         references: { model: 'plans', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
         allowNull: false,
       },
       start_date: {
@@ -22,7 +30,7 @@ module.exports = {
         allowNull: false,
       },
       price: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
         allowNull: false,
       },
       created_at: {
