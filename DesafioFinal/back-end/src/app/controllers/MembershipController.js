@@ -6,6 +6,8 @@ import Membership from '../models/Membership';
 import Student from '../models/Student';
 import Plan from '../models/Plan';
 
+import Mail from '../../lib/Mail';
+
 class PlanController {
   async index(req, res) {
     const memberships = await Membership.findAll();
@@ -44,6 +46,13 @@ class PlanController {
       start_date,
       end_date,
       price,
+    });
+
+    await Mail.sendMail({
+      to: `${studentExist.name} <${studentExist.email}>`,
+      subject: 'Matrículado com sucesso',
+      text:
+        'Você está matrículado na melhor academia do mundo, seja bem-vindo para GymPoint!',
     });
 
     return res.json(members);
