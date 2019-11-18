@@ -22,6 +22,9 @@ routes.post('/plans', PlanController.store);
 routes.put('/plans/:id', PlanController.update);
 routes.delete('/plans/:id', PlanController.delete);
 
+routes.get('/memberships/', MembershipController.index);
 routes.post('/memberships/', MembershipController.store);
+routes.put('/memberships/:id', MembershipController.update);
+routes.delete('/memberships/:id', MembershipController.delete);
 
 export default routes;

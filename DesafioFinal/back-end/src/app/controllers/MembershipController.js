@@ -34,7 +34,6 @@ class PlanController {
     if (!planExist) {
       return res.status(400).json({ error: 'Plan does not exist!' });
     }
-    console.log(planExist.price);
 
     const price = planExist.price * planExist.duration;
     const end_date = addMonths(parseISO(start_date), planExist.duration);
@@ -50,25 +49,40 @@ class PlanController {
     return res.json(members);
   }
 
-  // async update(req, res) {
-  //   const planDetails = await Plan.findByPk(req.params.id);
+  async update(req, res) {
+    const student_id = req.params.id;
+    const { plan_id, start_date } = req.body;
+    const memberDetails = await Membership.findOne({
+      where: {
+        student_id,
+      },
+    });
 
-  //   const { id, title, duration, price } = await planDetails.update(req.body);
-  //   return res.json({
-  //     id,
-  //     title,
-  //     duration,
-  //     price,
-  //   });
-  // }
+    const { price, duration } = await Plan.findByPk(plan_id);
 
-  // async delete(req, res) {
-  //   const planRemove = await Plan.findByPk(req.params.id);
+    const totalPrice = price * duration;
+    const end_date = addMonths(parseISO(start_date), duration);
 
-  //   const plan = await planRemove.destroy();
+    const memberUpdate = await memberDetails.update({
+      plan_id,
+      start_date,
+      end_date,
+      price: totalPrice,
+    });
 
-  //   return res.json(plan);
-  // }
+    return res.json(memberUpdate);
+  }
+
+  async delete(req, res) {
+    const memberRemove = await Membership.findOne({
+      where: {
+        student_id: req.params.id,
+      },
+    });
+    const memberDeleted = await memberRemove.destroy();
+
+    return res.json(memberDeleted);
+  }
 }
 
 export default new PlanController();
