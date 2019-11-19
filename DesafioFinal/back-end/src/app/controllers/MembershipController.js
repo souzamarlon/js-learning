@@ -48,6 +48,8 @@ class PlanController {
       price,
     });
 
+    // TODO - I will improve the email with the template
+
     await Mail.sendMail({
       to: `${studentExist.name} <${studentExist.email}>`,
       subject: 'Matrículado com sucesso',
