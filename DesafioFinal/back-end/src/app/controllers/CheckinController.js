@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import { max, parseISO } from 'date-fns';
+import { closestTo, parseISO } from 'date-fns';
 
 import Checkin from '../models/Checkin';
 
@@ -26,18 +26,28 @@ class CheckinController {
 
     const date = new Date();
 
-    const dates = max(createdAt[0]);
+    const check = closestTo(date, [createdAt[0], createdAt[1]]);
 
-    // for (let c = 0; c <= 5; c++) {}
+    // for (let c = 7; c >= 0; c++) {
 
-    console.log(dates);
+    // if(createdAt)
+    //   for (var i= 0; i <=)
+    //   const dates = max(createdAt[0]);
+
+    // }
+
+    // TODO
+    // Reduzir a data para 7 dias e começar a contagem a partir desssa data e fazer um contador
+    // Para validar se ele já tem 5 checkins nos ultimos 7 dias.
+
+    console.log(check);
     console.log(createdAt.length);
 
     // const checkins = await Checkin.create({
     //   student_id: id,
     // });
 
-    return res.json(dates);
+    return res.json(check);
   }
 
   // TODO - I still need to improve
