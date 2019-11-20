@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import { closestTo, getDate } from 'date-fns';
+import { max, parseISO } from 'date-fns';
 
 import Checkin from '../models/Checkin';
 
@@ -17,23 +17,27 @@ class CheckinController {
   async store(req, res) {
     const { id } = req.params;
 
-    const listCheckins = await Checkin.findAll({
+    const createdAt = await Checkin.findAll({
       where: {
         student_id: id,
       },
+      attributes: ['createdAt'],
     });
 
-    const date = new Date(getDate());
+    const date = new Date();
 
-    const dates = closestTo(date, listCheckins);
+    const dates = max(createdAt[0]);
+
+    // for (let c = 0; c <= 5; c++) {}
 
     console.log(dates);
+    console.log(createdAt.length);
 
     // const checkins = await Checkin.create({
     //   student_id: id,
     // });
 
-    return res.json(listCheckins);
+    return res.json(dates);
   }
 
   // TODO - I still need to improve
