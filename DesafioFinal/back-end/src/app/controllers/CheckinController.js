@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import { closestTo, parseISO } from 'date-fns';
+import { closestTo, parseISO, format } from 'date-fns';
 
 import Checkin from '../models/Checkin';
 
@@ -17,16 +17,16 @@ class CheckinController {
   async store(req, res) {
     const { id } = req.params;
 
-    const createdAt = await Checkin.findAll({
+    const { createdAt } = await Checkin.findAll({
       where: {
         student_id: id,
       },
       attributes: ['createdAt'],
     });
 
-    const date = new Date();
+    const date = createdAt;
 
-    const check = closestTo(date, [createdAt[0], createdAt[1]]);
+    const check = format(date, 'd');
 
     // for (let c = 7; c >= 0; c++) {
 
