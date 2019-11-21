@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
-import { closestTo, parseISO, format } from 'date-fns';
+import { startOfDay, endOfDay, parseISO, format, subDays } from 'date-fns';
+import { Op } from 'sequelize';
 
 import Checkin from '../models/Checkin';
 
@@ -17,37 +18,36 @@ class CheckinController {
   async store(req, res) {
     const { id } = req.params;
 
-    const { createdAt } = await Checkin.findAll({
+    // Actual date
+    const date = new Date();
+
+    // Reducing 7 days from actual date
+    const less7days = subDays(date, 7);
+    console.log(date);
+    console.log(less7days);
+
+    const createdAt = await Checkin.findAll({
       where: {
         student_id: id,
+        createdAt: {
+          [Op.between]: [startOfDay(date), endOfDay(less7days)],
+        },
       },
-      attributes: ['createdAt'],
+      // attributes: ['id', 'createdAt'],
     });
-
-    const date = createdAt;
-
-    const check = format(date, 'd');
-
-    // for (let c = 7; c >= 0; c++) {
-
-    // if(createdAt)
-    //   for (var i= 0; i <=)
-    //   const dates = max(createdAt[0]);
-
-    // }
 
     // TODO
     // Reduzir a data para 7 dias e começar a contagem a partir desssa data e fazer um contador
     // Para validar se ele já tem 5 checkins nos ultimos 7 dias.
+    console.log(createdAt);
 
-    console.log(check);
-    console.log(createdAt.length);
+    // console.log(createdAt.length);
 
     // const checkins = await Checkin.create({
     //   student_id: id,
     // });
 
-    return res.json(check);
+    return res.json(createdAt);
   }
 
   // TODO - I still need to improve
