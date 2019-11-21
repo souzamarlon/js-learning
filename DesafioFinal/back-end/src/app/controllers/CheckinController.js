@@ -18,11 +18,14 @@ class CheckinController {
   async store(req, res) {
     const { id } = req.params;
 
-    // Actual date
-    const date = new Date();
+    // Actual date format(value, "yyyy-MM-dd'T'HH:mm:ssxxx")
+    const date = parseISO(2019 - 11 - 21);
+    const actualDate = new Date();
 
     // Reducing 7 days from actual date
-    const less7days = subDays(date, 7);
+    // const less7days = subDays(actualDate, 7);
+    const less7days = subDays(actualDate, 7);
+
     console.log(date);
     console.log(less7days);
 
@@ -30,7 +33,7 @@ class CheckinController {
       where: {
         student_id: id,
         createdAt: {
-          [Op.between]: [startOfDay(date), endOfDay(less7days)],
+          [Op.between]: [startOfDay(date), endOfDay(actualDate)],
         },
       },
       // attributes: ['id', 'createdAt'],
