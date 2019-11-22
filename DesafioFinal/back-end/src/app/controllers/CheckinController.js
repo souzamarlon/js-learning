@@ -22,15 +22,16 @@ class CheckinController {
     // Reduzir a data para 7 dias e começar a contagem a partir desssa data e fazer um contador
     // Para validar se ele já tem 5 checkins nos ultimos 7 dias.
 
-    // Actual date format(value, "yyyy-MM-dd'T'HH:mm:ssxxx")
+    // Actual date
     const actualDate = new Date();
+    const weekDay = actualDate.getDay();
 
     // Reducing 7 days from actual date
     // const less7days = subDays(actualDate, 7);
-    const less7days = subDays(actualDate, 7);
 
-    console.log(actualDate);
-    console.log(less7days);
+    const less7days = subDays(actualDate, weekDay);
+
+    console.log(weekDay);
 
     const createdAt = await Checkin.findAll({
       where: {
@@ -41,8 +42,6 @@ class CheckinController {
       },
       attributes: ['id', 'createdAt'],
     });
-
-    console.log(createdAt.length);
 
     if (createdAt.length >= 5) {
       return res
@@ -56,10 +55,6 @@ class CheckinController {
 
     return res.json(checkins);
   }
-
-  // TODO - I still need to improve
-
-  // async update(req, res) {}
 }
 
 export default new CheckinController();
