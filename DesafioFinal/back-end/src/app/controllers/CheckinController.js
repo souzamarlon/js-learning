@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
 
-import { startOfDay, endOfDay, subDays } from 'date-fns';
+import { startOfDay, endOfDay, subDays, format, parseISO } from 'date-fns';
+import { zonedTimeToUtc, getTimeZoneValue } from 'date-fns-tz';
+import pt from 'date-fns/locale/pt';
 import { Op } from 'sequelize';
 
 import Checkin from '../models/Checkin';
@@ -23,7 +25,10 @@ class CheckinController {
     // Para validar se ele já tem 5 checkins nos ultimos 7 dias.
 
     // Actual date
+
     const actualDate = new Date();
+
+    const teste = zonedTimeToUtc(actualDate);
     const weekDay = actualDate.getDay();
 
     // Reducing 7 days from actual date
@@ -31,7 +36,7 @@ class CheckinController {
 
     const less7days = subDays(actualDate, weekDay);
 
-    console.log(weekDay);
+    console.log(teste);
 
     const createdAt = await Checkin.findAll({
       where: {
