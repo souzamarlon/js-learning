@@ -44,9 +44,9 @@ class CheckinController {
     });
 
     if (createdAt.length >= 5) {
-      return res
-        .status(400)
-        .json({ error: 'Você já realizou 5 checkins em um período de 7 dias' });
+      return res.status(400).json({
+        error: 'Você já realizou 5 checkins dentro de um período de 7 dias',
+      });
     }
 
     const checkins = await Checkin.create({
