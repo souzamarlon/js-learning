@@ -28,21 +28,21 @@ class CheckinController {
 
     const actualDate = new Date();
     // const timeZone = 'America/Brasília'; //  'Europe/Paris';
-    const teste = zonedTimeToUtc(actualDate, 'America/Brasília');
-    const weekDay = actualDate.getDay();
+    const dateTimeUTC = zonedTimeToUtc(actualDate, 'America/Brasília');
+    const weekDay = dateTimeUTC.getDay();
 
     // Reducing 7 days from actual date
     // const less7days = subDays(actualDate, 7);
 
-    const less7days = subDays(actualDate, weekDay);
+    const less7days = subDays(dateTimeUTC, weekDay);
 
-    console.log(teste);
+    console.log(dateTimeUTC);
 
     const createdAt = await Checkin.findAll({
       where: {
         student_id: id,
         createdAt: {
-          [Op.between]: [startOfDay(less7days), endOfDay(actualDate)],
+          [Op.between]: [startOfDay(less7days), endOfDay(dateTimeUTC)],
         },
       },
       attributes: ['id', 'createdAt'],
