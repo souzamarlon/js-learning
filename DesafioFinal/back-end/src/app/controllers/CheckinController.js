@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 import { startOfDay, endOfDay, subDays, format, parseISO } from 'date-fns';
-import { zonedTimeToUtc, getTimeZoneValue } from 'date-fns-tz';
+import { zonedTimeToUtc } from 'date-fns-tz';
 import pt from 'date-fns/locale/pt';
 import { Op } from 'sequelize';
 
@@ -27,8 +27,8 @@ class CheckinController {
     // Actual date
 
     const actualDate = new Date();
-
-    const teste = zonedTimeToUtc(actualDate);
+    // const timeZone = 'America/Brasília'; //  'Europe/Paris';
+    const teste = zonedTimeToUtc(actualDate, 'America/Brasília');
     const weekDay = actualDate.getDay();
 
     // Reducing 7 days from actual date
