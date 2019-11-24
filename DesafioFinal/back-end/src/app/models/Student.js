@@ -7,8 +7,8 @@ class Student extends Model {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
         idade: Sequelize.INTEGER,
-        peso: Sequelize.FLOAT,
-        altura: Sequelize.FLOAT,
+        peso: Sequelize.INTEGER,
+        altura: Sequelize.DECIMAL(3, 2),
       },
       {
         sequelize,

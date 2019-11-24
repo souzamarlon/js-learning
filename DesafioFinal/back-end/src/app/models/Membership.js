@@ -7,7 +7,7 @@ class Membership extends Model {
         plan_id: Sequelize.INTEGER,
         start_date: Sequelize.DATE,
         end_date: Sequelize.DATE,
-        price: Sequelize.DECIMAL,
+        price: Sequelize.DECIMAL(7, 2),
       },
       {
         sequelize,

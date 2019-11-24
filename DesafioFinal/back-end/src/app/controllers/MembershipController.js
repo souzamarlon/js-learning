@@ -61,8 +61,8 @@ class PlanController {
 
     await Queue.add(EnrollmentMail.key, {
       members,
-      studentExist,
-      planExist,
+      student: studentExist,
+      plan: planExist,
     });
 
     return res.json(members);

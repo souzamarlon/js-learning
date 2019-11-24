@@ -8,20 +8,20 @@ class EnrollmentMail {
   }
 
   async handle({ data }) {
-    const { members, studentExist, planExist } = data;
+    const { members, student, plan } = data;
 
     console.log('A fila executou!');
     await Mail.sendMail({
-      to: `${studentExist.name} <${studentExist.email}>`,
+      to: `${student.name} <${student.email}>`,
       subject: 'Matrículado com sucesso!',
       template: 'enrollment',
       context: {
-        name: studentExist.name,
-        title: planExist.title,
+        name: student.name,
+        title: plan.title,
         price: members.price,
         end_date: format(
           parseISO(members.end_date),
-          "'dia' dd 'de' MMMM', às' H:mm'h'",
+          "'dia' dd 'de' MMMM 'de' yyyy', às' H:mm'h'",
           {
             locale: pt,
           }
