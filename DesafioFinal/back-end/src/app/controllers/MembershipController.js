@@ -6,7 +6,9 @@ import Membership from '../models/Membership';
 import Student from '../models/Student';
 import Plan from '../models/Plan';
 
-import Mail from '../../lib/Mail';
+import EnrollmentMail from '../jobs/EnrollmentMail';
+
+import Queue from '../../lib/Queue';
 
 class PlanController {
   async index(req, res) {
@@ -50,11 +52,17 @@ class PlanController {
 
     // TODO - I will improve the email with the template
 
-    await Mail.sendMail({
-      to: `${studentExist.name} <${studentExist.email}>`,
-      subject: 'Matrículado com sucesso',
-      text:
-        'Você está matrículado na melhor academia do mundo, seja bem-vindo para GymPoint!',
+    // await Mail.sendMail({
+    //   to: `${studentExist.name} <${studentExist.email}>`,
+    //   subject: 'Matrículado com sucesso',
+    //   text:
+    //     'Você está matrículado na melhor academia do mundo, seja bem-vindo para GymPoint!',
+    // });
+
+    await Queue.add(EnrollmentMail.key, {
+      members,
+      studentExist,
+      planExist,
     });
 
     return res.json(members);
