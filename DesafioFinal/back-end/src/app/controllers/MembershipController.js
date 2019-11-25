@@ -1,6 +1,7 @@
 // import * as Yup from 'yup';
 
-import { addMonths, parseISO } from 'date-fns';
+import { addMonths, parseISO, isBefore } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 import Membership from '../models/Membership';
 import Student from '../models/Student';
@@ -10,7 +11,7 @@ import EnrollmentMail from '../jobs/EnrollmentMail';
 
 import Queue from '../../lib/Queue';
 
-class PlanController {
+class MembershipController {
   async index(req, res) {
     const memberships = await Membership.findAll();
     return res.json(memberships);
@@ -26,6 +27,15 @@ class PlanController {
         student_id,
       },
     });
+
+    // TODO Validar se a data não é antes da data de hoje
+    const actualDate = new Date();
+    // const timeZone = 'America/Brasília'; //  'Europe/Paris';
+    const dateTimeUTC = zonedTimeToUtc(actualDate, 'America/Brasília');
+
+    if (isBefore(parseISO(start_date), dateTimeUTC)) {
+      return res.status(400).json({ error: 'Insert actual date!' });
+    }
 
     if (!studentExist) {
       return res.status(400).json({ error: 'Student does not exist!' });
@@ -48,6 +58,7 @@ class PlanController {
       start_date,
       end_date,
       price,
+      createdAt: dateTimeUTC,
     });
 
     // TODO - I will improve the email with the template
@@ -77,6 +88,14 @@ class PlanController {
       },
     });
 
+    const actualDate = new Date();
+    // const timeZone = 'America/Brasília'; //  'Europe/Paris';
+    const dateTimeUTC = zonedTimeToUtc(actualDate, 'America/Brasília');
+
+    if (isBefore(parseISO(start_date), dateTimeUTC)) {
+      return res.status(400).json({ error: 'Insert actual date!' });
+    }
+
     const { price, duration } = await Plan.findByPk(plan_id);
 
     const totalPrice = price * duration;
@@ -104,4 +123,4 @@ class PlanController {
   }
 }
 
-export default new PlanController();
+export default new MembershipController();

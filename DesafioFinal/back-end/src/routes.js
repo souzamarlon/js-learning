@@ -6,6 +6,7 @@ import SessionController from './app/controllers/SessionController';
 import PlanController from './app/controllers/PlanController';
 import MembershipController from './app/controllers/MembershipController';
 import CheckinController from './app/controllers/CheckinController';
+import Help_orderController from './app/controllers/Help_orderController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -30,5 +31,7 @@ routes.delete('/memberships/:id', MembershipController.delete);
 
 routes.get('/students/:id/checkins', CheckinController.index);
 routes.post('/students/:id/checkins', CheckinController.store);
+
+routes.post('/students/:id/help-orders', Help_orderController.store);
 
 export default routes;

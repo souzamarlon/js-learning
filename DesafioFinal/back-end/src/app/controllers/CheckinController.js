@@ -1,8 +1,6 @@
-import * as Yup from 'yup';
-
-import { startOfDay, endOfDay, subDays, format, parseISO } from 'date-fns';
+import { startOfDay, endOfDay, subDays } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
-import pt from 'date-fns/locale/pt';
+
 import { Op } from 'sequelize';
 
 import Checkin from '../models/Checkin';
@@ -56,6 +54,7 @@ class CheckinController {
 
     const checkins = await Checkin.create({
       student_id: id,
+      createdAt: dateTimeUTC,
     });
 
     return res.json(checkins);
