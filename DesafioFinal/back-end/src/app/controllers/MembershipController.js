@@ -61,15 +61,6 @@ class MembershipController {
       createdAt: dateTimeUTC,
     });
 
-    // TODO - I will improve the email with the template
-
-    // await Mail.sendMail({
-    //   to: `${studentExist.name} <${studentExist.email}>`,
-    //   subject: 'Matrículado com sucesso',
-    //   text:
-    //     'Você está matrículado na melhor academia do mundo, seja bem-vindo para GymPoint!',
-    // });
-
     await Queue.add(EnrollmentMail.key, {
       members,
       student: studentExist,
