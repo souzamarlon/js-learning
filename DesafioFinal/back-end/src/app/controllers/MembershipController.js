@@ -7,13 +7,15 @@ import Membership from '../models/Membership';
 import Student from '../models/Student';
 import Plan from '../models/Plan';
 
-import EnrollmentMail from '../jobs/EnrollmentMail';
+import MembershipMail from '../jobs/MembershipMail';
 
 import Queue from '../../lib/Queue';
 
 class MembershipController {
   async index(req, res) {
-    const memberships = await Membership.findAll();
+    const memberships = await Membership.findAll({
+      attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+    });
     return res.json(memberships);
   }
 
@@ -61,7 +63,7 @@ class MembershipController {
       createdAt: dateTimeUTC,
     });
 
-    await Queue.add(EnrollmentMail.key, {
+    await Queue.add(MembershipMail.key, {
       members,
       student: studentExist,
       plan: planExist,

@@ -14,7 +14,7 @@ class EnrollmentMail {
     await Mail.sendMail({
       to: `${student.name} <${student.email}>`,
       subject: 'Matrículado com sucesso!',
-      template: 'enrollment',
+      template: 'membership',
       context: {
         name: student.name,
         title: plan.title,
