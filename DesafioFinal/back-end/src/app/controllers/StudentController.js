@@ -1,11 +1,15 @@
-import * as Yup from 'yup';
-
 import { Op } from 'sequelize';
 import Student from '../models/Student';
 
 class StudentController {
   async index(req, res) {
     const searchName = req.query.q;
+
+    if (searchName === null || searchName === undefined) {
+      const name = await Student.findAll();
+      return res.json(name);
+    }
+
     const name = await Student.findAll({
       where: {
         name: {
