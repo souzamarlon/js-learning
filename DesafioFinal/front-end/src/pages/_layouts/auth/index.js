@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Content } from './styles';
+import { Wrapper, Content, Box } from './styles';
 
 export default function AuthLayout({ children }) {
     return (
         <Wrapper>
-            <Content>{children}</Content>
+            <Box>
+                <Content>{children}</Content>
+            </Box>
         </Wrapper>
     );
 }

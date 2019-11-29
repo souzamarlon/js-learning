@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 
 // import { signInRequest } from '~/store/modules/auth/actions';
 
-// import logo from '~/assets/logo.svg';
+import logo from '~/assets/logo.png';
 
 // import { Container } from './styles';
 
@@ -27,19 +27,25 @@ export default function SignIn() {
     }
     return (
         <>
-            {/* <img src={logo} alt="Meetup" /> */}
+            <img src={logo} alt="Gympoint" />
+
             <Form schema={schema} onSubmit={handleSubmit}>
-                <Input name="email" type="email" placeholder="Seu e-mail" />
+                <p>SEU E-MAIL</p>
+                <Input
+                    name="email"
+                    type="email"
+                    placeholder="exemplo@email.com"
+                />
+                <p>SUA SENHA</p>
                 <Input
                     name="password"
                     type="password"
-                    placeholder="Sua senha super secreta"
+                    placeholder="**********"
                 />
 
                 <button type="submit">
                     {/* {loading ? 'Carregando... ' : 'Acessar'} */}
                 </button>
-                <Link to="/register">Criar conta gratuita</Link>
             </Form>
         </>
     );
