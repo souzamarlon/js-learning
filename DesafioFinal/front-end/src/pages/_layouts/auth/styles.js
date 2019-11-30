@@ -30,9 +30,10 @@ export const Content = styled.div`
         display: flex;
         flex-direction: column;
         margin-top: 30px;
+
         input {
             background: #ffffff;
-            border: 0.1;
+            border: 0.5px solid;
             border-radius: 4px;
             height: 44px;
             padding: 0 15px;
