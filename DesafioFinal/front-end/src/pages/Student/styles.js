@@ -69,12 +69,12 @@ export const Button = styled.button`
     }
 `;
 
-export const Content = styled.li`
+export const Content = styled.div`
     width: 100%;
     max-width: 1225px;
     height: 448px;
     margin: 50px auto;
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
     background: #ffff;
     padding: 0 30px;
@@ -82,6 +82,74 @@ export const Content = styled.li`
     border: 0;
     border-radius: 4px;
 
-    ul {
+    > header {
+        padding: 30px;
+        display: flex;
+        /* flex: 1; */
+
+        span.name {
+            flex: 1;
+        }
+        span.email {
+            flex: 1;
+        }
+        span.idade {
+            flex: 1;
+        }
     }
+`;
+
+export const List = styled.li`
+    justify-content: space-between;
+    display: flex;
+    /* flex-direction: row; */
+    list-style: none;
+    /* height: 50px; */
+    /* display: flex; */
+    margin-top: 20px;
+    align-items: center;
+    background: white;
+    /* box-sizing: border-box #000; */
+    line-height: 20px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+
+    > strong {
+        flex: 1;
+        /* display: flex; */
+        font-size: 18px;
+        line-height: 21px;
+        /* margin: 0px 150px 0px 15px; */
+    }
+    > h1 {
+        /* text-align: center; */
+        /* align-items: center; */
+        display: flex;
+        font-size: 18px;
+        line-height: 21px;
+        /* margin: 0px 150px 0px 15px; */
+        flex: 1;
+    }
+    > span {
+        font-size: 16px;
+        line-height: 19px;
+        /* margin-top: 5px; */
+        /* margin: 0px 15px 0 0%; */
+        opacity: 0.5;
+        flex: 1;
+    }
+    > div.divider {
+        width: 100%;
+        height: 1px;
+        display: flex;
+        flex: 1;
+        background: #000;
+    }
+    /* > button {
+        margin-top: 5px;
+        margin-left: auto;
+        padding: 15px;
+        align-items: center;
+        background: none;
+        border: 0;
+    } */
 `;
