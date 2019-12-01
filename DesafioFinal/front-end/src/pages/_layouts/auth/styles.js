@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
 `;
-export const Box = styled.div`
+export const Container = styled.div`
     background: #ffffff;
 
     width: 360px;
@@ -34,6 +34,7 @@ export const Content = styled.div`
         input {
             background: #ffffff;
             border: 0.5px solid;
+            /* box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); */
             border-radius: 4px;
             height: 44px;
             padding: 0 15px;
