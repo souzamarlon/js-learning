@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 
 // import { IoIosAddCircleOutline } from 'react-icons/io';
-import { Container, Title, Button } from './styles';
+import { Container, Title, Button, Content } from './styles';
 import api from '~/services/api';
 
 export default function Student() {
@@ -37,6 +37,9 @@ export default function Student() {
                     </Form>
                 </Button>
             </Container>
+            <Content>
+                <ul />
+            </Content>
         </>
     );
 }

@@ -7,6 +7,7 @@ export const Container = styled.div`
     max-width: 1225px;
     margin: 50px auto;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     /* align-items: center; */
 `;
@@ -65,5 +66,22 @@ export const Button = styled.button`
         &::placeholder {
             color: #999999;
         }
+    }
+`;
+
+export const Content = styled.li`
+    width: 100%;
+    max-width: 1225px;
+    height: 448px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-between;
+    background: #ffff;
+    padding: 0 30px;
+    box-shadow: 0px 0 20px rgba(0, 0, 0, 0.2);
+    border: 0;
+    border-radius: 4px;
+
+    ul {
     }
 `;
