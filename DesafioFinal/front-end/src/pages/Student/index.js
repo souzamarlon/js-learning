@@ -30,7 +30,9 @@ export default function Student({ match }) {
     }, []);
 
     async function handleDelete() {
-        const {id} = match.params;
+        const { id } = match.params;
+        console.tron.log(id);
+
         if (window.confirm('Você realmente quer deletar?')) {
             await api.delete(`students/${id}`);
             history.push('/student');
