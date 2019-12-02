@@ -3,12 +3,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 
-// import { IoIosAddCircleOutline } from 'react-icons/io';
 import { Container, Title, Button, Content, List } from './styles';
 import api from '~/services/api';
+import history from '~/services/history';
 
-export default function Student() {
+export default function Student({ match }) {
     const [student, setStudent] = useState([]);
+    // const studentId = match.params.id;
 
     // async function searchStudents({ search }) {
     //     const searchName = search;
@@ -28,10 +29,13 @@ export default function Student() {
         searchTool();
     }, []);
 
-    // const handleDelete = useCallback(() => {
-    //     api.delete(`meetups/${meetupId}`);
-    //     history.push('/dashboard');
-    // }, []);
+    async function handleDelete() {
+        const {id} = match.params;
+        if (window.confirm('Você realmente quer deletar?')) {
+            await api.delete(`students/${id}`);
+            history.push('/student');
+        }
+    }
 
     useEffect(() => {
         async function listStudents() {
@@ -85,20 +89,14 @@ export default function Student() {
                                 <button
                                     type="button"
                                     className="delete"
-                                    onClick={() => {}}
+                                    onClick={handleDelete}
                                 >
-                                    <Link
-                                        className="delete"
-                                        to={`/detail/${item.id}`}
-                                    >
+                                    <Link to={`/student/${item.id}`}>
                                         apagar
                                     </Link>
                                 </button>
-                                <button type="button" classn onClick={() => {}}>
-                                    <Link to={`/edit/${item.id}`}>
-                                        {' '}
-                                        editar{' '}
-                                    </Link>
+                                <button type="button" onClick={() => {}}>
+                                    <Link to={`/edit/${item.id}`}>editar</Link>
                                 </button>
                             </ul>
                             <div className="divider" />
