@@ -16,6 +16,7 @@ export default function Student() {
 
     //     console.tron.log(response.data);
     // }
+
     const searchStudents = useCallback(({ search }) => {
         async function searchTool() {
             const response = await api.get(`students?q=${search}`);
