@@ -10,14 +10,26 @@ import api from '~/services/api';
 export default function Student() {
     const [student, setStudent] = useState([]);
 
-    async function searchStudents({ search }) {
-        const searchName = search;
-        const response = api.get(`students?q=${searchName}`);
+    // async function searchStudents({ search }) {
+    //     const searchName = search;
+    //     const response = await api.get(`students?q=${searchName}`);
 
-        console.tron.log(response.data);
-    }
-    // const searchStudents = useCallback(search => {
+    //     console.tron.log(response.data);
+    // }
+    const searchStudents = useCallback(({ search }) => {
+        async function searchTool() {
+            const response = await api.get(`students?q=${search}`);
 
+            console.tron.log(response.data);
+
+            setStudent(response.data);
+        }
+        searchTool();
+    }, []);
+
+    // const handleDelete = useCallback(() => {
+    //     api.delete(`meetups/${meetupId}`);
+    //     history.push('/dashboard');
     // }, []);
 
     useEffect(() => {
@@ -64,28 +76,32 @@ export default function Student() {
 
                 <List>
                     {student.map(item => (
-                        <ul>
-                            <span className="name">{item.name}</span>
-                            <span className="email">{item.email}</span>
-                            <span className="idade">{item.idade}</span>
-                            <button
-                                type="button"
-                                className="delete"
-                                onClick={() => {}}
-                            >
-                                <Link
+                        <>
+                            <ul>
+                                <span className="name">{item.name}</span>
+                                <span className="email">{item.email}</span>
+                                <span className="idade">{item.idade}</span>
+                                <button
+                                    type="button"
                                     className="delete"
-                                    to={`/detail/${item.id}`}
+                                    onClick={() => {}}
                                 >
-                                    apagar
-                                </Link>
-                            </button>
-                            <button type="button" classn onClick={() => {}}>
-                                <Link to={`/edit/${item.id}`}> editar </Link>
-                            </button>
-
+                                    <Link
+                                        className="delete"
+                                        to={`/detail/${item.id}`}
+                                    >
+                                        apagar
+                                    </Link>
+                                </button>
+                                <button type="button" classn onClick={() => {}}>
+                                    <Link to={`/edit/${item.id}`}>
+                                        {' '}
+                                        editar{' '}
+                                    </Link>
+                                </button>
+                            </ul>
                             <div className="divider" />
-                        </ul>
+                        </>
                     ))}
                 </List>
             </Content>

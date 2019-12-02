@@ -72,18 +72,20 @@ export const Button = styled.button`
 export const Content = styled.div`
     width: 100%;
     max-width: 1225px;
-    height: 448px;
-    margin: 50px auto;
+    /* height: 448px; */
+    margin: 20px auto;
+    padding: 0 20px;
+    align-content: center;
     /* display: flex; */
-    justify-content: space-between;
+    /* justify-content: space-between; */
     background: #ffff;
-    padding: 0 30px;
+    /* padding: 0 30px; */
     box-shadow: 0px 0 20px rgba(0, 0, 0, 0.2);
     border: 0;
     border-radius: 4px;
 
     > header {
-        padding: 30px;
+        padding: 20px;
         display: flex;
         /* flex: 1; */
 
@@ -100,12 +102,16 @@ export const Content = styled.div`
 `;
 
 export const List = styled.li`
+    margin: 20px auto;
+    padding: 0 20px;
+    align-content: center;
     list-style: none;
     width: 100%;
     max-width: 1225px;
-    display: row;
+    /* display: row; */
+    background: white;
     /* grid-template-columns: repeat(1, 1fr); */
-    grid-gap: 12px;
+    /* grid-gap: 12px; */
 
     /* justify-content: space-between; */
     /* display: flex; */
@@ -115,16 +121,20 @@ export const List = styled.li`
     /* height: 50px; */
     /* margin-top: 20px; */
     /* align-items: center; */
-    background: white;
+
     /* box-sizing: border-box #000; */
     /* line-height: 50px; */
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     ul {
+        margin: 20px auto;
+
         span.name {
+            /* left: 10px; */
             /* float: left; */
             font-size: 16px;
             line-height: 20px;
-            margin-right: 200px;
+            /* margin-right: 200px; */
+            margin-right: 0 auto;
 
             /* margin: 0px 200px 0px 15px; */
         }
@@ -132,16 +142,15 @@ export const List = styled.li`
             margin-right: 200px;
             font-size: 16px;
             line-height: 20px;
-            margin-right: 0 auto;
+            margin-left: 200px;
 
             /* margin: 0px 400px 0px 20px; */
         }
         span.idade {
-            float: flex;
-            margin-right: 0 auto;
+            margin-left: 150px;
             font-size: 16px;
             line-height: 20px;
-            margin-left: auto;
+            /* margin-left: auto; */
 
             /* margin-right: 50px; */
             /* line-height: 19px; */
@@ -169,10 +178,10 @@ export const List = styled.li`
         a.delete {
             color: #de3b3b;
         }
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: #eeeeee;
-        }
+    }
+    .divider {
+        width: 100%;
+        height: 1px;
+        background: #eeeeee;
     }
 `;
