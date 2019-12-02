@@ -56,6 +56,17 @@ class StudentController {
     });
   }
 
+  async delete(req, res) {
+    const memberRemove = await Student.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    const memberDeleted = await memberRemove.destroy();
+
+    return res.json(memberDeleted);
+  }
+
   // TODO - I still need to improve
 
   async update(req, res) {
