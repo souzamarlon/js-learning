@@ -100,56 +100,79 @@ export const Content = styled.div`
 `;
 
 export const List = styled.li`
-    justify-content: space-between;
-    display: flex;
-    /* flex-direction: row; */
     list-style: none;
-    /* height: 50px; */
+    width: 100%;
+    max-width: 1225px;
+    display: row;
+    /* grid-template-columns: repeat(1, 1fr); */
+    grid-gap: 12px;
+
+    /* justify-content: space-between; */
     /* display: flex; */
-    margin-top: 20px;
-    align-items: center;
+    /* flex-direction: row; */
+    /* text-align: center; */
+
+    /* height: 50px; */
+    /* margin-top: 20px; */
+    /* align-items: center; */
     background: white;
     /* box-sizing: border-box #000; */
-    line-height: 20px;
+    /* line-height: 50px; */
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    ul {
+        span.name {
+            /* float: left; */
+            font-size: 16px;
+            line-height: 20px;
+            margin-right: 200px;
 
-    > strong {
-        flex: 1;
-        /* display: flex; */
-        font-size: 18px;
-        line-height: 21px;
-        /* margin: 0px 150px 0px 15px; */
+            /* margin: 0px 200px 0px 15px; */
+        }
+        span.email {
+            margin-right: 200px;
+            font-size: 16px;
+            line-height: 20px;
+            margin-right: 0 auto;
+
+            /* margin: 0px 400px 0px 20px; */
+        }
+        span.idade {
+            float: flex;
+            margin-right: 0 auto;
+            font-size: 16px;
+            line-height: 20px;
+            margin-left: auto;
+
+            /* margin-right: 50px; */
+            /* line-height: 19px; */
+            /* opacity: 0.5; */
+        }
+        button.delete {
+            float: right;
+            /* margin-top: 5px; */
+            padding: 0 15px;
+            align-items: center;
+            background: none;
+            border: 0;
+        }
+
+        > button {
+            float: right;
+            /* margin-top: 5px; */
+            /* margin-left: 15px auto; */
+            padding: 0 15px;
+            align-items: center;
+            background: none;
+            border: 0;
+        }
+
+        a.delete {
+            color: #de3b3b;
+        }
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: #eeeeee;
+        }
     }
-    > h1 {
-        /* text-align: center; */
-        /* align-items: center; */
-        display: flex;
-        font-size: 18px;
-        line-height: 21px;
-        /* margin: 0px 150px 0px 15px; */
-        flex: 1;
-    }
-    > span {
-        font-size: 16px;
-        line-height: 19px;
-        /* margin-top: 5px; */
-        /* margin: 0px 15px 0 0%; */
-        opacity: 0.5;
-        flex: 1;
-    }
-    > div.divider {
-        width: 100%;
-        height: 1px;
-        display: flex;
-        flex: 1;
-        background: #000;
-    }
-    /* > button {
-        margin-top: 5px;
-        margin-left: auto;
-        padding: 15px;
-        align-items: center;
-        background: none;
-        border: 0;
-    } */
 `;

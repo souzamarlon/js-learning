@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
@@ -9,6 +9,16 @@ import api from '~/services/api';
 
 export default function Student() {
     const [student, setStudent] = useState([]);
+
+    async function searchStudents({ search }) {
+        const searchName = search;
+        const response = api.get(`students?q=${searchName}`);
+
+        console.tron.log(response.data);
+    }
+    // const searchStudents = useCallback(search => {
+
+    // }, []);
 
     useEffect(() => {
         async function listStudents() {
@@ -35,12 +45,13 @@ export default function Student() {
                             </button>
                         </Link>
                     </div>
-                    <Form onSubmit={() => {}}>
+                    <Form onSubmit={searchStudents}>
                         <Input
                             name="search"
                             type="search"
                             placeholder="Buscar aluno"
                         />
+                        {/* <button type="submit" /> */}
                     </Form>
                 </Button>
             </Container>
@@ -51,17 +62,32 @@ export default function Student() {
                     <span className="idade">IDADE</span>
                 </header>
 
-                {student.map(item => (
-                    <List>
-                        <div className="divider" />
-                        <strong>{item.name}</strong>
-                        <h1>{item.email}</h1>
-                        <span>{item.idade}</span>
-                        {/* <button type="button" onClick={() => {}}>
-                                <Link to={`/detail/${item.id}`} />
-                            </button> */}
-                    </List>
-                ))}
+                <List>
+                    {student.map(item => (
+                        <ul>
+                            <span className="name">{item.name}</span>
+                            <span className="email">{item.email}</span>
+                            <span className="idade">{item.idade}</span>
+                            <button
+                                type="button"
+                                className="delete"
+                                onClick={() => {}}
+                            >
+                                <Link
+                                    className="delete"
+                                    to={`/detail/${item.id}`}
+                                >
+                                    apagar
+                                </Link>
+                            </button>
+                            <button type="button" classn onClick={() => {}}>
+                                <Link to={`/edit/${item.id}`}> editar </Link>
+                            </button>
+
+                            <div className="divider" />
+                        </ul>
+                    ))}
+                </List>
             </Content>
         </>
     );
