@@ -6,7 +6,7 @@ import Route from './Route';
 
 import SignIn from '../pages/SignIn';
 import Student from '../pages/Student';
-import EditStudent from '../pages/EditStudent';
+import EditStudent from '../pages/Student/EditStudent';
 
 import Plan from '../pages/Plan';
 import MemberShip from '../pages/MemberShip';

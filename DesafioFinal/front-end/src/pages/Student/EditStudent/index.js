@@ -7,7 +7,7 @@ import history from '~/services/history';
 
 import api from '~/services/api';
 
-import { Container, Title, Button, Content, List } from './styles';
+import { Container, Title, Button, Content, Table } from './styles';
 
 export default function EditStudent({ match }) {
     const [studentEdit, setStudentEdit] = useState([]);
@@ -58,14 +58,14 @@ export default function EditStudent({ match }) {
                     <Input name="name" className="name" />
                     <p>ENDEREÇO DE E-MAIL</p>
                     <Input name="email" className="name" />
-                    {/* <p>PESO (em kg)</p>
-                    <p>Altura</p> */}
-                    <div>
-                        <p>IDADE</p>
+                    <Table>
+                        <h1>IDADE</h1>
+                        <h1>PESO (em kg)</h1>
+                        <h1>Altura</h1>
                         <Input name="idade" className="idade" />
                         <Input name="peso" className="peso" />
                         <Input name="altura" className="altura" />
-                    </div>
+                    </Table>
 
                     <button type="submit">
                         <strong>Salvar o meetup</strong>
