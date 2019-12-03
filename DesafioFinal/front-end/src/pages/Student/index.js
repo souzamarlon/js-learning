@@ -7,7 +7,7 @@ import { Container, Title, Button, Content, List } from './styles';
 import api from '~/services/api';
 import history from '~/services/history';
 
-export default function Student({ match }) {
+export default function Student() {
     const [student, setStudent] = useState([]);
     // const studentId = match.params.id;
 
@@ -29,8 +29,7 @@ export default function Student({ match }) {
         searchTool();
     }, []);
 
-    async function handleDelete() {
-        const { id } = match.params;
+    async function handleDelete(id) {
         console.tron.log(id);
 
         if (window.confirm('Você realmente quer deletar?')) {
@@ -91,14 +90,14 @@ export default function Student({ match }) {
                                 <button
                                     type="button"
                                     className="delete"
-                                    onClick={handleDelete}
+                                    onClick={() => handleDelete(item.id)}
                                 >
-                                    <Link to={`/student/${item.id}`}>
-                                        apagar
-                                    </Link>
+                                    apagar
                                 </button>
                                 <button type="button" onClick={() => {}}>
-                                    <Link to={`/edit/${item.id}`}>editar</Link>
+                                    <Link to={`/editstudent/${item.id}`}>
+                                        editar
+                                    </Link>
                                 </button>
                             </ul>
                             <div className="divider" />
