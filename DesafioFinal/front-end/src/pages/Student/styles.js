@@ -108,75 +108,49 @@ export const List = styled.li`
     list-style: none;
     width: 100%;
     max-width: 1225px;
-    /* display: row; */
+
     background: white;
-    /* grid-template-columns: repeat(1, 1fr); */
-    /* grid-gap: 12px; */
 
-    /* justify-content: space-between; */
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* text-align: center; */
-
-    /* height: 50px; */
-    /* margin-top: 20px; */
-    /* align-items: center; */
-
-    /* box-sizing: border-box #000; */
-    /* line-height: 50px; */
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     ul {
         margin: 20px auto;
 
         span.name {
-            /* left: 10px; */
-            /* float: left; */
             font-size: 16px;
             line-height: 20px;
-            /* margin-right: 200px; */
-            margin-right: 0 auto;
 
-            /* margin: 0px 200px 0px 15px; */
+            margin-right: 0 auto;
         }
         span.email {
             margin-right: 200px;
             font-size: 16px;
             line-height: 20px;
             margin-left: 200px;
-
-            /* margin: 0px 400px 0px 20px; */
         }
         span.idade {
             margin-left: 150px;
             font-size: 16px;
             line-height: 20px;
-            /* margin-left: auto; */
-
-            /* margin-right: 50px; */
-            /* line-height: 19px; */
-            /* opacity: 0.5; */
         }
         button.delete {
             float: right;
-            /* margin-top: 5px; */
             padding: 0 15px;
             align-items: center;
             background: none;
             border: 0;
-        }
-
-        > button {
-            float: right;
-            /* margin-top: 5px; */
-            /* margin-left: 15px auto; */
-            padding: 0 15px;
-            align-items: center;
-            background: none;
-            border: 0;
-        }
-
-        a.delete {
             color: #de3b3b;
+        }
+
+        button {
+            float: right;
+
+            padding: 0 15px;
+            align-items: center;
+            background: none;
+            border: 0;
+            /* color: #4d85ee; */
+        }
+        a {
+            color: #4d85ee;
         }
     }
     .divider {
