@@ -9,12 +9,10 @@ import api from '~/services/api';
 
 import { Container, Title, Button, Content, Table } from './styles';
 
-export default function NewStudent() {
-    // TODO Criar um validador para mostrar se o email já existe!
-
+export default function NewPlan() {
     function handleSubmit(data) {
-        api.post('students/', data);
-        history.push('/');
+        api.post('plans', data);
+        history.push('/plans');
         console.tron.log(data);
     }
 
@@ -23,11 +21,11 @@ export default function NewStudent() {
             <Form onSubmit={handleSubmit}>
                 <Container>
                     <Title>
-                        <h1>Cadastro de aluno</h1>
+                        <h1>Cadastro de plano</h1>
                     </Title>
                     <Button>
                         <div>
-                            <Link to="/">
+                            <Link to="/plans">
                                 <button type="button" onClick={() => {}}>
                                     <strong>VOLTAR</strong>
                                 </button>
@@ -40,17 +38,15 @@ export default function NewStudent() {
                     </Button>
                 </Container>
                 <Content>
-                    <p>NOME COMPLETO</p>
-                    <Input name="name" className="name" />
-                    <p>ENDEREÇO DE E-MAIL</p>
-                    <Input name="email" className="name" />
+                    <p>TÍTULO DO PLANO</p>
+                    <Input name="title" className="title" />
                     <Table>
-                        <h1>IDADE</h1>
-                        <h1>PESO (em kg)</h1>
-                        <h1>Altura</h1>
-                        <Input name="idade" className="idade" />
-                        <Input name="peso" className="peso" />
-                        <Input name="altura" className="altura" />
+                        <h1>DURAÇÃO (em meses)</h1>
+                        <h1>PREÇO MENSAL</h1>
+                        <h1>PREÇO TOTAL</h1>
+                        <Input name="duration" className="duration" />
+                        <Input name="price" className="priceMonthly" />
+                        <Input name="totalPrice" className="totalPrice" />
                     </Table>
                 </Content>
             </Form>
