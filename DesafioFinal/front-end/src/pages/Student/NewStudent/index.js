@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
@@ -9,34 +9,18 @@ import api from '~/services/api';
 
 import { Container, Title, Button, Content, Table } from './styles';
 
-export default function EditStudent({ match }) {
-    const [studentEdit, setStudentEdit] = useState([]);
-
-    const [id] = useState(match.params.id);
+export default function NewStudent() {
+    // TODO Criar um validador para mostrar se o email já existe!
 
     function handleSubmit(data) {
-        api.put(`students/${id}`, data);
-        // history.push('/');
+        api.post('students/', data);
+        history.push('/');
         console.tron.log(data);
     }
 
-    useEffect(() => {
-        async function loadDetails() {
-            const response = await api.get('students');
-
-            const [dataDetails] = response.data.filter(item => {
-                return item.id == id;
-            });
-
-            // console.tron.log(dataDetails);
-            setStudentEdit(dataDetails);
-        }
-        loadDetails();
-    }, [id]);
-
     return (
         <>
-            <Form initialData={studentEdit} onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <Container>
                     <Title>
                         <h1>Edição de aluno</h1>
@@ -68,9 +52,6 @@ export default function EditStudent({ match }) {
                         <Input name="peso" className="peso" />
                         <Input name="altura" className="altura" />
                     </Table>
-                    {/* <button type="submit" className="submit">
-                        <strong>SALVAR</strong>
-                    </button> */}
                 </Content>
             </Form>
         </>

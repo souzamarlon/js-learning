@@ -9,14 +9,6 @@ import history from '~/services/history';
 
 export default function Student() {
     const [student, setStudent] = useState([]);
-    // const studentId = match.params.id;
-
-    // async function searchStudents({ search }) {
-    //     const searchName = search;
-    //     const response = await api.get(`students?q=${searchName}`);
-
-    //     console.tron.log(response.data);
-    // }
 
     const searchStudents = useCallback(({ search }) => {
         async function searchTool() {
@@ -47,7 +39,7 @@ export default function Student() {
         }
 
         listStudents();
-    }, []);
+    }, [student]);
 
     return (
         <>
@@ -57,7 +49,7 @@ export default function Student() {
                 </Title>
                 <Button>
                     <div>
-                        <Link to="/">
+                        <Link to="/newstudent">
                             <button type="button" onClick={() => {}}>
                                 <strong>CADASTRAR</strong>
                             </button>

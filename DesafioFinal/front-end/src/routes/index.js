@@ -7,6 +7,7 @@ import Route from './Route';
 import SignIn from '../pages/SignIn';
 import Student from '../pages/Student';
 import EditStudent from '../pages/Student/EditStudent';
+import NewStudent from '../pages/Student/NewStudent';
 
 import Plan from '../pages/Plan';
 import MemberShip from '../pages/MemberShip';
@@ -18,7 +19,7 @@ export default function Routes() {
             <Route path="/" exact component={SignIn} />
 
             <Route path="/student/" component={Student} isPrivate />
-
+            <Route path="/newstudent/" component={NewStudent} isPrivate />
             <Route path="/editstudent/:id" component={EditStudent} isPrivate />
 
             <Route path="/plan" component={Plan} isPrivate />
