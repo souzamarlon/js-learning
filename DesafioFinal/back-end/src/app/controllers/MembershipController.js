@@ -21,6 +21,11 @@ class MembershipController {
           as: 'student',
           attributes: ['id', 'name'],
         },
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['id', 'title'],
+        },
       ],
     });
     return res.json(memberships);
