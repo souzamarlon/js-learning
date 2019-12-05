@@ -15,6 +15,13 @@ class MembershipController {
   async index(req, res) {
     const memberships = await Membership.findAll({
       attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name'],
+        },
+      ],
     });
     return res.json(memberships);
   }
