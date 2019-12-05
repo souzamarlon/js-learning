@@ -49,8 +49,10 @@ export default function MemberShip() {
             <Content>
                 <header>
                     <span className="name">ALUNO</span>
-                    <span className="email">PLANO</span>
-                    <span className="idade">INICIO</span>
+                    <span className="plan">PLANO</span>
+                    <span className="start_date">INICIO</span>
+                    <span className="end_date">TÉRMINO</span>
+                    <span className="active">ATIVA</span>
                 </header>
 
                 <List>
@@ -60,8 +62,17 @@ export default function MemberShip() {
                                 <span className="name">
                                     {item.student.name}
                                 </span>
-                                <span className="email">{item.plan.title}</span>
-                                <span className="idade">{item.idade}</span>
+                                <span className="title">{item.plan.title}</span>
+                                <span className="start_date" type="date">
+                                    {item.start_date}
+                                </span>
+                                <span className="end_date" type="date">
+                                    {item.end_date}
+                                </span>
+                                <span className="active" type="boolean">
+                                    {item.active}
+                                </span>
+
                                 <button
                                     type="button"
                                     className="delete"

@@ -21,7 +21,7 @@ export const Title = styled.div`
         font-size: 24px;
         line-height: 37px;
         font-weight: bold;
-        width: 223px;
+        width: ;
         height: 38px;
         /* margin-right: 590px; */
         top: 144px;
@@ -58,7 +58,7 @@ export const Content = styled.div`
     max-width: 1225px;
     /* height: 448px; */
     margin: 20px auto;
-    padding: 0 20px;
+    /* padding: 0 20px; */
     align-content: center;
     /* display: flex; */
     /* justify-content: space-between; */
@@ -68,18 +68,24 @@ export const Content = styled.div`
     border: 0;
     border-radius: 4px;
 
-    > header {
+    header {
         padding: 20px;
-        display: flex;
+        /* display: flex; */
         /* flex: 1; */
 
         span.name {
             flex: 1;
         }
-        span.email {
+        span.plan {
             flex: 1;
         }
-        span.idade {
+        span.start_date {
+            flex: 1;
+        }
+        span.end_date {
+            flex: 1;
+        }
+        span.active {
             flex: 1;
         }
     }
@@ -104,13 +110,23 @@ export const List = styled.li`
 
             margin-right: 0 auto;
         }
-        span.email {
+        span.title {
             margin-right: 200px;
             font-size: 16px;
             line-height: 20px;
             margin-left: 200px;
         }
-        span.idade {
+        span.start_date {
+            margin-left: 150px;
+            font-size: 16px;
+            line-height: 20px;
+        }
+        span.end_date {
+            margin-left: 150px;
+            font-size: 16px;
+            line-height: 20px;
+        }
+        span.active {
             margin-left: 150px;
             font-size: 16px;
             line-height: 20px;
