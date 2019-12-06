@@ -58,7 +58,7 @@ export default function MemberShip() {
                 <List>
                     {membership.map(item => (
                         <>
-                            <ul>
+                            <ul key={item.id}>
                                 <span className="name">
                                     {item.student.name}
                                 </span>
@@ -69,8 +69,8 @@ export default function MemberShip() {
                                 <span className="end_date" type="date">
                                     {item.end_date}
                                 </span>
-                                <span className="active" type="boolean">
-                                    {item.active}
+                                <span className="active">
+                                    {item.active.toString()}
                                 </span>
 
                                 <button
