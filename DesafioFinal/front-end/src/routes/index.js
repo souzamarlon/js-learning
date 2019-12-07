@@ -14,6 +14,8 @@ import NewPlan from '../pages/Plan/NewPlan';
 import EditPlan from '../pages/Plan/EditPlan';
 
 import MemberShip from '../pages/MemberShip';
+import NewMemberShip from '../pages/MemberShip/NewMemberShip';
+
 import HelpOrder from '../pages/HelpOrder';
 
 export default function Routes() {
@@ -30,6 +32,7 @@ export default function Routes() {
             <Route path="/editplan/:id" component={EditPlan} isPrivate />
 
             <Route path="/membership" component={MemberShip} isPrivate />
+            <Route path="/newmembership" component={NewMemberShip} isPrivate />
 
             <Route path="/help-order" component={HelpOrder} isPrivate />
         </Switch>
