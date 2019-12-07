@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
+import AsyncSelect from 'react-select/async';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 
@@ -11,6 +12,27 @@ import { Container, Title, Button, Content, Table } from './styles';
 
 export default function NewStudent() {
     // TODO Criar um validador para mostrar se o email já existe!
+
+    const [student, setStudent] = useState([]);
+
+    // const name = student;
+    console.tron.log(student);
+
+    useEffect(() => {
+        async function listStudents() {
+            const response = await api.get('students');
+
+            const name = response.data.map(item => ({
+                name: item.name,
+            }));
+
+            setStudent(name);
+
+            console.tron.log(name);
+        }
+
+        listStudents();
+    }, []);
 
     function handleSubmit(data) {
         api.post('memberships/', data);
@@ -41,6 +63,12 @@ export default function NewStudent() {
                 </Container>
                 <Content>
                     <p>ALUNO</p>
+
+                    <AsyncSelect
+                        cacheOptions
+                        defaultOptions
+                        loadOptions={student}
+                    />
                     <Input name="name" className="name" />
                     <Table>
                         <h1>PLANO</h1>
