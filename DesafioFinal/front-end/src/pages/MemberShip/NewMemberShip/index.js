@@ -22,39 +22,37 @@ export default function NewStudent() {
 
             const name = response.data.map(item => ({
                 student_id: item.id,
-                label: item.id,
+                label: item.name,
 
                 // value: item.name.toLowerCase(),
                 // label: item.name.toLowerCase(),
             }));
 
             setStudent(name);
-
-            // console.tron.log(name);
         }
 
         listStudents();
     }, []);
 
-    const filterColors = () => {
-        return student.filter(i =>
-            i.label.toLowerCase().includes(inputValue.toLowerCase())
-        );
-    };
-    const promiseOptions = () =>
-        new Promise(resolve => {
-            setTimeout(() => {
-                resolve(filterColors(inputValue));
-            }, 1000);
-        });
+    // const filterColors = () => {
+    //     return student.filter(i =>
+    //         i.label.toLowerCase().includes(inputValue.toLowerCase())
+    //     );
+    // };
+    // const promiseOptions = () =>
+    //     new Promise(resolve => {
+    //         setTimeout(() => {
+    //             resolve(filterColors(inputValue));
+    //         }, 1000);
+    //     });
+
+    async function handleSubmit(data) {
+        await api.post('memberships', data);
+        // history.push('/');
+        // console.tron.log(data);
+    }
 
     console.tron.log(student);
-
-    function handleSubmit(data) {
-        api.post('memberships', data);
-        // history.push('/');
-        console.tron.log(data);
-    }
 
     return (
         <>
@@ -84,7 +82,8 @@ export default function NewStudent() {
                         name="student_id"
                         cacheOptions
                         defaultOptions={student}
-                        loadOptions={promiseOptions}
+                        // defaultOptions
+                        loadOptions={() => {}}
                     />
 
                     {/* <Input name="name" className="name" /> */}
