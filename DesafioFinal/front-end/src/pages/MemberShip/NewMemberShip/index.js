@@ -14,7 +14,7 @@ export default function NewStudent() {
     // TODO Criar um validador para mostrar se o email já existe!
 
     const [student, setStudent] = useState([]);
-    const [inputValue, setInputValue] = useState(['']);
+    const [inputValue, setInputValue] = useState([]);
 
     useEffect(() => {
         async function listStudents() {
@@ -45,6 +45,12 @@ export default function NewStudent() {
     //             resolve(filterColors(inputValue));
     //         }, 1000);
     //     });
+
+    const handleInputChange = newValue => {
+        setInputValue(newValue);
+        return newValue;
+    };
+    console.tron.log(inputValue);
 
     async function handleSubmit(data) {
         await api.post('memberships', data);
@@ -84,6 +90,7 @@ export default function NewStudent() {
                         defaultOptions={student}
                         // defaultOptions
                         loadOptions={() => {}}
+                        onInputChange={handleInputChange}
                     />
 
                     {/* <Input name="name" className="name" /> */}
