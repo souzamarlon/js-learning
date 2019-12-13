@@ -14,51 +14,67 @@ export default function NewStudent() {
     // TODO Criar um validador para mostrar se o email já existe!
 
     const [student, setStudent] = useState([]);
-    const [inputValue, setInputValue] = useState([]);
+    const [inputValue, setInputValue] = useState(['']);
 
     useEffect(() => {
         async function listStudents() {
             const response = await api.get('students');
 
             const name = response.data.map(item => ({
+                name: item.name,
                 student_id: item.id,
                 label: item.name,
 
                 // value: item.name.toLowerCase(),
                 // label: item.name.toLowerCase(),
             }));
-
-            setStudent(name);
+            setStudent(response.data);
+            setInputValue(name);
         }
 
         listStudents();
     }, []);
 
-    // const filterColors = () => {
-    //     return student.filter(i =>
-    //         i.label.toLowerCase().includes(inputValue.toLowerCase())
-    //     );
-    // };
-    // const promiseOptions = () =>
-    //     new Promise(resolve => {
-    //         setTimeout(() => {
-    //             resolve(filterColors(inputValue));
-    //         }, 1000);
-    //     });
-
-    const handleInputChange = newValue => {
-        setInputValue(newValue);
-        return newValue;
+    const searchTool = () => {
+        return student.filter(i =>
+            i.label.toLowerCase().includes(inputValue.toLowerCase())
+        );
     };
-    console.tron.log(inputValue);
+    const promiseOptions = () =>
+        new Promise(resolve => {
+            setTimeout(() => {
+                resolve(searchTool(inputValue));
+            }, 1000);
+        });
 
-    async function handleSubmit(data) {
-        await api.post('memberships', data);
+    async function handleSubmit(data, student_id) {
+        const { plan_id } = data;
+        await api.post('memberships', student_id, plan_id);
         // history.push('/');
-        // console.tron.log(data);
+        // console.tron.log(student_id);
     }
 
-    console.tron.log(student);
+    console.tron.log(inputValue);
+
+    // const searchStudents = useCallback(({ search }) => {
+    //     async function searchTool() {
+    //         const response = await api.get(`students?q=${search}`);
+
+    //         const name = response.data.map(item => ({
+    //             name: item.name,
+    //             student_id: item.id,
+    //             label: item.name,
+
+    //             // value: item.name.toLowerCase(),
+    //             // label: item.name.toLowerCase(),
+    //         }));
+
+    //         // console.tron.log(response.data);
+
+    //         setInputValue(response.data);
+    //     }
+    //     searchTool();
+    // }, []);
 
     return (
         <>
@@ -85,12 +101,10 @@ export default function NewStudent() {
                     <p>ALUNO</p>
 
                     <AsyncSelect
-                        name="student_id"
                         cacheOptions
-                        defaultOptions={student}
+                        defaultOptions
                         // defaultOptions
-                        loadOptions={() => {}}
-                        onInputChange={handleInputChange}
+                        loadOptions={() => promiseOptions(inputValue)}
                     />
 
                     {/* <Input name="name" className="name" /> */}
