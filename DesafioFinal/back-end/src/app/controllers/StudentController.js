@@ -15,7 +15,7 @@ class StudentController {
     const name = await Student.findAll({
       where: {
         name: {
-          [Op.like]: `${searchName}%`,
+          [Op.iLike]: `${searchName}%`,
         },
       },
     });
