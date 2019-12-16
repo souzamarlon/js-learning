@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 
+import { toast } from 'react-toastify';
 import { Container, Title, Button, Content, List } from './styles';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -12,7 +13,9 @@ export default function Student() {
 
     const searchStudents = useCallback(({ search }) => {
         async function searchTool() {
-            const response = await api.get(`students?q=${search}`);
+            const response = await api.get(`students`, {
+                params: { q: search },
+            });
 
             console.tron.log(response.data);
 
@@ -23,10 +26,15 @@ export default function Student() {
 
     async function handleDelete(id) {
         console.tron.log(id);
+        try {
+            if (window.confirm('Você realmente quer deletar?')) {
+                await api.delete(`students/${id}`);
 
-        if (window.confirm('Você realmente quer deletar?')) {
-            await api.delete(`students/${id}`);
-            history.push('/student');
+                toast.success('Sucesso ao deletar os dados!');
+                history.push('/');
+            }
+        } catch (err) {
+            toast.error('Erro ao deletar os dados!');
         }
     }
 
@@ -39,7 +47,7 @@ export default function Student() {
         }
 
         listStudents();
-    }, [student]);
+    }, []);
 
     return (
         <>

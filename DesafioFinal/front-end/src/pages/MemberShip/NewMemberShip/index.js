@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import AsyncSelect from 'react-select/async';
+// import AsyncSelect from 'react-select/async';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
+import SelectAsync from './SelectAsync';
 
 import history from '~/services/history';
 
@@ -14,7 +15,6 @@ export default function NewStudent() {
     // TODO Criar um validador para mostrar se o email já existe!
 
     const [student, setStudent] = useState([]);
-    const [inputValue, setInputValue] = useState(['']);
 
     useEffect(() => {
         async function listStudents() {
@@ -29,18 +29,17 @@ export default function NewStudent() {
                 // label: item.name.toLowerCase(),
             }));
             setStudent(response.data);
-            setInputValue(name);
         }
 
         listStudents();
     }, []);
 
-    const searchTool = () => {
+    const searchTool = inputValue => {
         return student.filter(i =>
             i.label.toLowerCase().includes(inputValue.toLowerCase())
         );
     };
-    const promiseOptions = () =>
+    const promiseOptions = inputValue =>
         new Promise(resolve => {
             setTimeout(() => {
                 resolve(searchTool(inputValue));
@@ -53,8 +52,6 @@ export default function NewStudent() {
         // history.push('/');
         // console.tron.log(student_id);
     }
-
-    console.tron.log(inputValue);
 
     // const searchStudents = useCallback(({ search }) => {
     //     async function searchTool() {
@@ -100,11 +97,12 @@ export default function NewStudent() {
                 <Content>
                     <p>ALUNO</p>
 
-                    <AsyncSelect
+                    <SelectAsync
+                        name="student_id"
                         cacheOptions
                         defaultOptions
                         // defaultOptions
-                        loadOptions={() => promiseOptions(inputValue)}
+                        loadOptions={() => {}}
                     />
 
                     {/* <Input name="name" className="name" /> */}
