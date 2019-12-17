@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 // import AsyncSelect from 'react-select/async';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
+import AsyncSelect from 'react-select/async';
 import SelectAsync from './SelectAsync';
 
 import history from '~/services/history';
@@ -11,67 +12,42 @@ import api from '~/services/api';
 
 import { Container, Title, Button, Content, Table } from './styles';
 
-export default function NewStudent() {
-    // TODO Criar um validador para mostrar se o email já existe!
-
+export default function NewMemberShip() {
     const [student, setStudent] = useState([]);
 
-    useEffect(() => {
+    const searchTool = inputValue => {
         async function listStudents() {
-            const response = await api.get('students');
+            const response = await api.get(`students`, {
+                params: { q: inputValue },
+            });
 
-            const name = response.data.map(item => ({
-                name: item.name,
-                student_id: item.id,
-                label: item.name,
-
-                // value: item.name.toLowerCase(),
-                // label: item.name.toLowerCase(),
-            }));
-            setStudent(response.data);
+            return response.data;
+            // setStudent(response.data);
         }
 
-        listStudents();
-    }, []);
-
-    const searchTool = inputValue => {
-        return student.filter(i =>
-            i.label.toLowerCase().includes(inputValue.toLowerCase())
-        );
+        return listStudents();
     };
-    const promiseOptions = inputValue =>
-        new Promise(resolve => {
+    // -- Testing another way
+    const loadOptions = inputValue =>
+        new Promise(callback => {
             setTimeout(() => {
-                resolve(searchTool(inputValue));
-            }, 1000);
+                callback(searchTool(inputValue));
+            }, 100);
         });
 
-    async function handleSubmit(data, student_id) {
-        const { plan_id } = data;
-        await api.post('memberships', student_id, plan_id);
+    // --Its working:
+    // const promiseOptions = inputValue =>
+    //     new Promise(resolve => {
+    //         setTimeout(() => {
+    //             resolve(searchTool(inputValue));
+    //         }, 100);
+    //     });
+
+    async function handleSubmit(data, id) {
+        await api.post('memberships', data);
+
         // history.push('/');
-        // console.tron.log(student_id);
     }
-
-    // const searchStudents = useCallback(({ search }) => {
-    //     async function searchTool() {
-    //         const response = await api.get(`students?q=${search}`);
-
-    //         const name = response.data.map(item => ({
-    //             name: item.name,
-    //             student_id: item.id,
-    //             label: item.name,
-
-    //             // value: item.name.toLowerCase(),
-    //             // label: item.name.toLowerCase(),
-    //         }));
-
-    //         // console.tron.log(response.data);
-
-    //         setInputValue(response.data);
-    //     }
-    //     searchTool();
-    // }, []);
 
     return (
         <>
@@ -97,15 +73,28 @@ export default function NewStudent() {
                 <Content>
                     <p>ALUNO</p>
 
-                    <SelectAsync
+                    {/* -- Trying another away */}
+                    <AsyncSelect
                         name="student_id"
                         cacheOptions
                         defaultOptions
-                        // defaultOptions
-                        loadOptions={() => {}}
+                        // aria-label={option => option.name}
+                        loadOptions={loadOptions}
+                        // isMulti={multiple}
+                        // ref={ref}
+                        getOptionValue={option => option.id}
+                        getOptionLabel={option => option.name}
                     />
 
-                    {/* <Input name="name" className="name" /> */}
+                    {/* -- Its working: */}
+
+                    {/* <SelectAsync
+                        name="student_id"
+                        // cacheOptions
+                        defaultOptions
+                        options={promiseOptions}
+                    /> */}
+
                     <Table>
                         <h1>PLANO</h1>
                         <h1>DATA DE INÍCIO</h1>
