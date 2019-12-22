@@ -1,10 +1,11 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
-// import AsyncSelect from 'react-select/async';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
-import AsyncSelect from 'react-select/async';
-import SelectAsync from './SelectAsync';
+import { toast } from 'react-toastify';
+
+import SelectStudent from './SelectStudent';
+import SelectPlan from './SelectPlan';
 
 import history from '~/services/history';
 
@@ -13,39 +14,57 @@ import api from '~/services/api';
 import { Container, Title, Button, Content, Table } from './styles';
 
 export default function NewMemberShip() {
-    const [student, setStudent] = useState([]);
-
-    const searchTool = inputValue => {
+    //
+    // Loading the plans in SelectStudent
+    //
+    const searchStudent = inputValue => {
         async function listStudents() {
             const response = await api.get(`students`, {
                 params: { q: inputValue },
             });
 
             return response.data;
-            // setStudent(response.data);
         }
 
         return listStudents();
     };
-    // -- Testing another way
-    const loadOptions = inputValue =>
+
+    const loadStudents = inputValue =>
         new Promise(callback => {
             setTimeout(() => {
-                callback(searchTool(inputValue));
+                callback(searchStudent(inputValue));
             }, 100);
         });
 
-    // --Its working:
-    // const promiseOptions = inputValue =>
-    //     new Promise(resolve => {
-    //         setTimeout(() => {
-    //             resolve(searchTool(inputValue));
-    //         }, 100);
-    //     });
+    //
+    // Loading the plans in SelectPlan
+    //
+    const searchPlan = () => {
+        async function listPlans() {
+            const response = await api.get('plans');
 
-    async function handleSubmit(data, id) {
-        await api.post('memberships', data);
+            return response.data;
+        }
 
+        return listPlans();
+    };
+
+    const loadPlans = inputValue =>
+        new Promise(callback => {
+            setTimeout(() => {
+                callback(searchPlan(inputValue));
+            }, 100);
+        });
+
+    async function handleSubmit(data) {
+        try {
+            await api.post('memberships', data);
+
+            toast.success('Sucesso ao criar o cadastro!');
+            // history.push('/');
+        } catch (err) {
+            toast.error('Erro ao criar o cadastro!');
+        }
         // history.push('/');
     }
 
@@ -58,7 +77,7 @@ export default function NewMemberShip() {
                     </Title>
                     <Button>
                         <div>
-                            <Link to="/">
+                            <Link to="/membership">
                                 <button type="button" onClick={() => {}}>
                                     <strong>VOLTAR</strong>
                                 </button>
@@ -74,26 +93,13 @@ export default function NewMemberShip() {
                     <p>ALUNO</p>
 
                     {/* -- Trying another away */}
-                    <AsyncSelect
-                        name="student_id"
-                        cacheOptions
-                        defaultOptions
-                        // aria-label={option => option.name}
-                        loadOptions={loadOptions}
-                        // isMulti={multiple}
-                        // ref={ref}
-                        getOptionValue={option => option.id}
-                        getOptionLabel={option => option.name}
-                    />
 
-                    {/* -- Its working: */}
-
-                    {/* <SelectAsync
+                    <SelectStudent
                         name="student_id"
                         // cacheOptions
                         defaultOptions
-                        options={promiseOptions}
-                    /> */}
+                        options={loadStudents}
+                    />
 
                     <Table>
                         <h1>PLANO</h1>
@@ -101,7 +107,14 @@ export default function NewMemberShip() {
                         <h1>DATA DE TÉRMINO</h1>
                         <h1>VALOR FINAL</h1>
 
-                        <Input name="plan_id" className="plano" />
+                        {/* <Input name="plan_id" className="plano" /> */}
+                        <SelectPlan
+                            name="plan_id"
+                            // cacheOptions
+                            defaultOptions
+                            className="plano"
+                            options={loadPlans}
+                        />
                         <Input name="start_date" className="start_date" />
                         <Input name="end_date" className="end_date" />
                         <Input name="final_price" className="final_price" />
