@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 import SelectStudent from './SelectStudent';
 import SelectPlan from './SelectPlan';
+import DatePicker from './DatePicker';
 
 import history from '~/services/history';
 
@@ -64,6 +65,7 @@ export default function NewMemberShip() {
             // history.push('/');
         } catch (err) {
             toast.error('Erro ao criar o cadastro!');
+            console.log(data);
         }
         // history.push('/');
     }
@@ -115,8 +117,10 @@ export default function NewMemberShip() {
                             className="plano"
                             options={loadPlans}
                         />
-                        <Input name="start_date" className="start_date" />
+                        {/* <Input name="start_date" className="start_date" /> */}
+                        <DatePicker name="start_date" className="start_date" />
                         <Input name="end_date" className="end_date" />
+
                         <Input name="final_price" className="final_price" />
                     </Table>
                 </Content>
