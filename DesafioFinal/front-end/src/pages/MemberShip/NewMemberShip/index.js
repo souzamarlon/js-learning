@@ -16,7 +16,7 @@ import api from '~/services/api';
 import { Container, Title, Button, Content, Table } from './styles';
 
 export default function NewMemberShip() {
-    const [startDate, setStartDate] = useState({});
+    const [membership, setMembership] = useState({});
     const [plans, setPlans] = useState([]);
 
     //
@@ -63,34 +63,40 @@ export default function NewMemberShip() {
             }, 100);
         });
 
-    async function handleSubmit(data) {
-        try {
-            await api.post('memberships', data);
-
-            toast.success('Sucesso ao criar o cadastro!');
-            // history.push('/');
-        } catch (err) {
-            toast.error('Erro ao criar o cadastro!');
-            // console.log(data);
-        }
-        // history.push('/');
-    }
-
-    async function calcDate(date, plan_id) {
-        setStartDate({
-            ...startDate,
+    async function showDateAndValue(date) {
+        setMembership({
+            ...membership,
             start_date: date,
-            // end_date: plan_id,
-            // end_date: addMonths(parseISO(date), planExist.duration),
+            end_date: addMonths(date, plans.duration),
+            final_price: plans.price * plans.duration,
         });
 
         // const end_date = ;
     }
+
+    async function definePlan(plan_id) {
+        setPlans(plan_id);
+    }
     console.tron.log(plans);
+
+    async function handleSubmit(data) {
+        try {
+            const response = await api.post('memberships', data);
+
+            toast.success('Sucesso ao criar o cadastro!');
+            // history.push('/');
+
+            console.tron.log(response.data);
+        } catch (err) {
+            toast.error('Erro ao criar o cadastro!');
+            console.tron.log(err);
+        }
+        // history.push('/');
+    }
 
     return (
         <>
-            <Form initialData={startDate} onSubmit={handleSubmit}>
+            <Form initialData={membership} onSubmit={handleSubmit}>
                 <Container>
                     <Title>
                         <h1>Cadastro de matrícula</h1>
@@ -134,15 +140,19 @@ export default function NewMemberShip() {
                             defaultOptions
                             className="plano"
                             options={loadPlans}
-                            onChange={calcDate}
+                            onChange={definePlan}
                         />
                         {/* <Input name="start_date" className="start_date" /> */}
 
                         <DatePicker
                             name="start_date"
                             className="start_date"
-                            selected={startDate.start_date}
-                            onChange={calcDate}
+                            selected={
+                                membership.start_date
+                                    ? membership.start_date
+                                    : new Date()
+                            }
+                            onChange={showDateAndValue}
 
                             // onClick={start_date => calcPlan(start_date)}
                         />
