@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 
 import history from '~/services/history';
+import { formatPrice } from '~/util/format';
 
 import api from '~/services/api';
 
 import { Container, Title, Button, Content, Table } from './styles';
 
 export default function EditPlan({ match }) {
-    const [plan, setPlan] = useState([]);
+    const [plan, setPlan] = useState([{ totalPrice: formatPrice(0) }]);
 
     const [id] = useState(match.params.id);
 
@@ -28,19 +29,17 @@ export default function EditPlan({ match }) {
                 return item.id == id;
             });
 
-            // TODO Criar um campo virtual no back end para retornar o valor total.
-            const { price, duration } = dataDetails;
-
-            const totalPrice = price * duration;
-
-            const dataPlan = [dataDetails, totalPrice];
-
             // console.tron.log(dataPlan);
 
-            setPlan(dataDetails);
+            setPlan({
+                ...dataDetails,
+                totalPrice: formatPrice(
+                    dataDetails.duration * dataDetails.price
+                ),
+            });
         }
         loadDetails();
-    }, [id]);
+    }, [id, plan]);
 
     console.tron.log(plan);
 

@@ -8,17 +8,38 @@ import history from '~/services/history';
 import api from '~/services/api';
 
 import { Container, Title, Button, Content, Table } from './styles';
+import { formatPrice } from '~/util/format';
 
 export default function NewPlan() {
-    function handleSubmit(data) {
-        api.post('plans', data);
+    const [planDetail, setPlanDetail] = useState([
+        { duration: '', price: formatPrice(0), totalPrice: formatPrice(0) },
+    ]);
+
+    async function handleSubmit(data) {
+        await api.post('plans', data);
         history.push('/plans');
         console.tron.log(data);
     }
+    async function addDuration(duration) {
+        setPlanDetail({
+            ...planDetail,
+            duration,
+        });
+    }
+    async function showTotal(price) {
+        setPlanDetail({
+            ...planDetail,
+            price: formatPrice(price),
+            totalPrice: formatPrice(planDetail.duration * price),
+        });
+        // setPlanDetail({ ...planDetail, totalPrice: price * duration });
+    }
+
+    console.tron.log(addDuration);
 
     return (
         <>
-            <Form onSubmit={handleSubmit}>
+            <Form initialData={planDetail} onSubmit={handleSubmit}>
                 <Container>
                     <Title>
                         <h1>Cadastro de plano</h1>
@@ -44,9 +65,22 @@ export default function NewPlan() {
                         <h1>DURAÇÃO (em meses)</h1>
                         <h1>PREÇO MENSAL</h1>
                         <h1>PREÇO TOTAL</h1>
-                        <Input name="duration" className="duration" />
-                        <Input name="price" className="priceMonthly" />
-                        <Input name="totalPrice" className="totalPrice" />
+                        <Input
+                            name="duration"
+                            className="duration"
+                            onChange={e => addDuration(e.target.value)}
+                        />
+                        <Input
+                            name="price"
+                            className="priceMonthly"
+                            onChange={e => showTotal(e.target.value)}
+                            // disabled={false}
+                        />
+                        <Input
+                            name="totalPrice"
+                            className="totalPrice"
+                            disabled
+                        />
                     </Table>
                 </Content>
             </Form>

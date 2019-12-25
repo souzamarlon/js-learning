@@ -17,7 +17,7 @@ import api from '~/services/api';
 
 import { Container, Title, Button, Content, Table } from './styles';
 
-export default function NewMemberShip() {
+export default function EditMemberShip() {
     const [membership, setMembership] = useState({});
     const [plans, setPlans] = useState([]);
 
