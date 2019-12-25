@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { addMonths, parseISO, isBefore } from 'date-fns';
 
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
@@ -15,6 +16,9 @@ import api from '~/services/api';
 import { Container, Title, Button, Content, Table } from './styles';
 
 export default function NewMemberShip() {
+    const [startDate, setStartDate] = useState({});
+    const [plans, setPlans] = useState([]);
+
     //
     // Loading the plans in SelectStudent
     //
@@ -44,6 +48,8 @@ export default function NewMemberShip() {
         async function listPlans() {
             const response = await api.get('plans');
 
+            setPlans(response.data);
+
             return response.data;
         }
 
@@ -65,14 +71,26 @@ export default function NewMemberShip() {
             // history.push('/');
         } catch (err) {
             toast.error('Erro ao criar o cadastro!');
-            console.log(data);
+            // console.log(data);
         }
         // history.push('/');
     }
 
+    async function calcDate(date, plan_id) {
+        setStartDate({
+            ...startDate,
+            start_date: date,
+            // end_date: plan_id,
+            // end_date: addMonths(parseISO(date), planExist.duration),
+        });
+
+        // const end_date = ;
+    }
+    console.tron.log(plans);
+
     return (
         <>
-            <Form onSubmit={handleSubmit}>
+            <Form initialData={startDate} onSubmit={handleSubmit}>
                 <Container>
                     <Title>
                         <h1>Cadastro de matrícula</h1>
@@ -116,12 +134,25 @@ export default function NewMemberShip() {
                             defaultOptions
                             className="plano"
                             options={loadPlans}
+                            onChange={calcDate}
                         />
                         {/* <Input name="start_date" className="start_date" /> */}
-                        <DatePicker name="start_date" className="start_date" />
-                        <Input name="end_date" className="end_date" />
 
-                        <Input name="final_price" className="final_price" />
+                        <DatePicker
+                            name="start_date"
+                            className="start_date"
+                            selected={startDate.start_date}
+                            onChange={calcDate}
+
+                            // onClick={start_date => calcPlan(start_date)}
+                        />
+                        <Input name="end_date" disabled className="end_date" />
+
+                        <Input
+                            name="final_price"
+                            disabled
+                            className="final_price"
+                        />
                     </Table>
                 </Content>
             </Form>

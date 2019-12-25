@@ -12,7 +12,7 @@ export default function ReactSelect({ name, label, options, ...rest }) {
     function parseSelectValue(selectRef) {
         const selectValue = selectRef.select.state.value;
 
-        console.tron.log(selectValue);
+        // console.tron.log(selectValue);
 
         return selectValue ? selectValue.id : '';
     }
