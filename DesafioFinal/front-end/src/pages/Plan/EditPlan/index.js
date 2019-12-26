@@ -73,7 +73,11 @@ export default function EditPlan({ match }) {
                         <h1>PREÇO TOTAL</h1>
                         <Input name="duration" className="duration" />
                         <Input name="price" className="priceMonthly" />
-                        <Input name="totalPrice" className="totalPrice" />
+                        <Input
+                            name="totalPrice"
+                            className="totalPrice"
+                            disabled
+                        />
                     </Table>
                 </Content>
             </Form>

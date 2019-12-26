@@ -194,7 +194,7 @@ export const Table = styled.div`
         align-items: center;
         /* display: block; */
         /* flex: 1; */
-        background: #ffffff;
+        background: #dddd;
         border: 0.5px solid #eee;
         /* box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); */
         border-radius: 4px;

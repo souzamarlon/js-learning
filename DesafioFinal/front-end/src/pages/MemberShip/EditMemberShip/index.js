@@ -17,32 +17,33 @@ import api from '~/services/api';
 
 import { Container, Title, Button, Content, Table } from './styles';
 
-export default function EditMemberShip() {
-    const [membership, setMembership] = useState({});
+export default function EditMemberShip({ match }) {
+    const [membership, setMembership] = useState([]);
     const [plans, setPlans] = useState([]);
 
-    //
-    // Loading the plans in SelectStudent
-    //
-    const searchStudent = inputValue => {
-        async function listStudents() {
-            const response = await api.get(`students`, {
-                params: { q: inputValue },
+    const [id] = useState(match.params.id);
+
+    useEffect(() => {
+        async function loadDetails() {
+            const response = await api.get('memberships');
+
+            const [dataDetails] = response.data.filter(item => {
+                return item.student_id == id;
             });
 
-            return response.data;
+            console.tron.log(response.data);
+
+            // setMembership({
+            //     ...dataDetails,
+            //     totalPrice: formatPrice(
+            //         dataDetails.duration * dataDetails.price
+            //     ),
+            // });
+
+            setMembership(response.data);
         }
-
-        return listStudents();
-    };
-
-    const loadStudents = inputValue =>
-        new Promise(callback => {
-            setTimeout(() => {
-                callback(searchStudent(inputValue));
-            }, 100);
-        });
-
+        loadDetails();
+    }, [id]);
     //
     // Loading the plans in SelectPlan
     //
@@ -68,15 +69,15 @@ export default function EditMemberShip() {
     async function showDateAndValue(date) {
         setMembership({
             ...membership,
-            start_date: date,
-            end_date: format(
-                addMonths(date, plans.duration),
-                "d 'de' MMMM 'de' yyyy",
-                {
-                    locale: pt,
-                }
-            ),
-            final_price: formatPrice(plans.price * plans.duration),
+            // start_date: date,
+            // end_date: format(
+            //     addMonths(date, plans.duration),
+            //     "d 'de' MMMM 'de' yyyy",
+            //     {
+            //         locale: pt,
+            //     }
+            // ),
+            // final_price: formatPrice(plans.price * plans.duration),
         });
     }
 
@@ -98,12 +99,14 @@ export default function EditMemberShip() {
         }
     }
 
+    console.tron.log(membership);
+
     return (
         <>
             <Form initialData={membership} onSubmit={handleSubmit}>
                 <Container>
                     <Title>
-                        <h1>Cadastro de matrícula</h1>
+                        <h1>Edição de matrícula</h1>
                     </Title>
                     <Button>
                         <div>
@@ -122,12 +125,7 @@ export default function EditMemberShip() {
                 <Content>
                     <p>ALUNO</p>
 
-                    <SelectStudent
-                        name="student_id"
-                        // cacheOptions
-                        defaultOptions
-                        options={loadStudents}
-                    />
+                    <Input name="student_id" className="student_id" />
 
                     <Table>
                         <h1>PLANO</h1>
@@ -147,7 +145,7 @@ export default function EditMemberShip() {
                         <DatePicker
                             name="start_date"
                             className="start_date"
-                            selected={membership.start_date}
+                            // selected={membership.start_date}
                             onChange={showDateAndValue}
                             disabled={plans.id ? false : true} // eslint-disable-line
                         />

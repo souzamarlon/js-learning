@@ -81,7 +81,9 @@ export default function MemberShip() {
                                     apagar
                                 </button>
                                 <button type="button" onClick={() => {}}>
-                                    <Link to={`/EditMemberShip/${item.id}`}>
+                                    <Link
+                                        to={`/EditMemberShip/${item.student.id}`}
+                                    >
                                         editar
                                     </Link>
                                 </button>
