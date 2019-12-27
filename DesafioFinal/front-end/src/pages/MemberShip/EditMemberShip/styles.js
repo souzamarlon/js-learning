@@ -91,6 +91,24 @@ export const Content = styled.div`
 
         font-weight: bold;
     }
+
+    input.name {
+        width: 840px;
+        display: flex;
+        flex: 1;
+        background: #ffffff;
+        border: 0.5px solid #eee;
+        /* box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); */
+        border-radius: 4px;
+        height: 44px;
+        padding: 0 15px;
+        color: #999999;
+        margin: 5px 0 10px;
+
+        &::placeholder {
+            color: #999999;
+        }
+    }
 `;
 
 export const Table = styled.div`
@@ -131,7 +149,7 @@ export const Table = styled.div`
         color: #999999;
         margin: 0 0 0 15px;
     }
-    input.final_price {
+    input.price {
         width: 198px;
         align-content: center;
         background: #dddddd;

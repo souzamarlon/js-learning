@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
 
 import history from '~/services/history';
 
@@ -15,9 +16,16 @@ export default function EditStudent({ match }) {
     const [id] = useState(match.params.id);
 
     function handleSubmit(data) {
-        api.put(`students/${id}`, data);
-        // history.push('/');
-        console.tron.log(data);
+        try {
+            api.put(`students/${id}`, data);
+
+            toast.success('Sucesso ao criar o cadastro!');
+
+            history.push('/');
+        } catch (err) {
+            toast.error('Erro ao criar o cadastro!');
+            console.tron.log(err);
+        }
     }
 
     useEffect(() => {

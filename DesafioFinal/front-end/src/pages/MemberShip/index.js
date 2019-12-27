@@ -28,7 +28,7 @@ export default function MemberShip() {
         }
 
         listStudents();
-    }, []);
+    }, [membership]);
 
     return (
         <>

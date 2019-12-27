@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addMonths, format } from 'date-fns';
+import { addMonths, format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import { Link } from 'react-router-dom';
@@ -7,7 +7,6 @@ import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import { formatPrice } from '~/util/format';
 
-import SelectStudent from '../../../components/SelectStudent';
 import SelectPlan from '../../../components/SelectPlan';
 import DatePicker from '../../../components/DatePicker';
 
@@ -21,37 +20,41 @@ export default function EditMemberShip({ match }) {
     const [membership, setMembership] = useState([]);
     const [plans, setPlans] = useState([]);
 
-    const [id] = useState(match.params.id);
+    const [student_id] = useState(match.params.id);
 
     useEffect(() => {
         async function loadDetails() {
             const response = await api.get('memberships');
 
             const [dataDetails] = response.data.filter(item => {
-                return item.student_id == id;
+                return item.student.id == student_id;
             });
 
-            console.tron.log(response.data);
+            console.tron.log(dataDetails.start_date);
 
-            // setMembership({
-            //     ...dataDetails,
-            //     totalPrice: formatPrice(
-            //         dataDetails.duration * dataDetails.price
-            //     ),
-            // });
-
-            setMembership(response.data);
+            setMembership({
+                ...dataDetails,
+                start_date: parseISO(dataDetails.start_date),
+                end_date: format(
+                    parseISO(dataDetails.end_date),
+                    "d 'de' MMMM 'de' yyyy",
+                    {
+                        locale: pt,
+                    }
+                ),
+                price: formatPrice(dataDetails.price),
+            });
         }
         loadDetails();
-    }, [id]);
-    //
-    // Loading the plans in SelectPlan
-    //
+    }, [plans, student_id]);
+
+    // Loading the plans in SelectPlan:
     const searchPlan = () => {
         async function listPlans() {
             const response = await api.get('plans');
 
             setPlans(response.data);
+            // console.tron.log(response.data);
 
             return response.data;
         }
@@ -66,28 +69,27 @@ export default function EditMemberShip({ match }) {
             }, 100);
         });
 
+    async function definePlan(plan_id) {
+        setPlans(plan_id);
+    }
     async function showDateAndValue(date) {
         setMembership({
             ...membership,
-            // start_date: date,
-            // end_date: format(
-            //     addMonths(date, plans.duration),
-            //     "d 'de' MMMM 'de' yyyy",
-            //     {
-            //         locale: pt,
-            //     }
-            // ),
-            // final_price: formatPrice(plans.price * plans.duration),
+            start_date: date,
+            end_date: format(
+                addMonths(date, plans.duration),
+                "d 'de' MMMM 'de' yyyy",
+                {
+                    locale: pt,
+                }
+            ),
+            price: formatPrice(plans.price * plans.duration),
         });
-    }
-
-    async function definePlan(plan_id) {
-        setPlans(plan_id);
     }
 
     async function handleSubmit(data) {
         try {
-            const response = await api.post('memberships', data);
+            const response = await api.put(`memberships/${student_id}`, data);
 
             toast.success('Sucesso ao criar o cadastro!');
             history.push('/membership');
@@ -125,7 +127,7 @@ export default function EditMemberShip({ match }) {
                 <Content>
                     <p>ALUNO</p>
 
-                    <Input name="student_id" className="student_id" />
+                    <Input name="student.name" className="name" disabled />
 
                     <Table>
                         <h1>PLANO</h1>
@@ -135,7 +137,7 @@ export default function EditMemberShip({ match }) {
 
                         <SelectPlan
                             name="plan_id"
-                            // cacheOptions
+                            cacheOptions
                             defaultOptions
                             className="plano"
                             options={loadPlans}
@@ -145,17 +147,13 @@ export default function EditMemberShip({ match }) {
                         <DatePicker
                             name="start_date"
                             className="start_date"
-                            // selected={membership.start_date}
+                            selected={membership.start_date}
                             onChange={showDateAndValue}
                             disabled={plans.id ? false : true} // eslint-disable-line
                         />
                         <Input name="end_date" disabled className="end_date" />
 
-                        <Input
-                            name="final_price"
-                            disabled
-                            className="final_price"
-                        />
+                        <Input name="price" disabled className="price" />
                     </Table>
                 </Content>
             </Form>
