@@ -7,12 +7,12 @@ import { Container } from './styles';
 export default function ReactSelect({ name, label, options, ...rest }) {
     const ref = useRef(null);
 
-    const { registerField, error } = useField('plan_id');
+    const { registerField, defaultValue, error } = useField('plan_id');
 
     function parseSelectValue(selectRef) {
         const selectValue = selectRef.select.state.value;
 
-        // console.tron.log(selectValue);
+        console.tron.log(selectValue);
 
         return selectValue ? selectValue.id : '';
     }
@@ -31,6 +31,13 @@ export default function ReactSelect({ name, label, options, ...rest }) {
         }
     }, [ref]); // eslint-disable-line
 
+    function getDefaultValue() {
+        if (!defaultValue) return null;
+
+        // eslint-disable-next-line react/prop-types
+        return options.find(option => option.id === defaultValue);
+    }
+
     return (
         <Container>
             {label && <label htmlFor="plan_id">{label}</label>}
@@ -40,6 +47,7 @@ export default function ReactSelect({ name, label, options, ...rest }) {
                 cacheOptions
                 aria-label="plan_id"
                 loadOptions={options}
+                defaultValue={getDefaultValue()}
                 isMulti={false}
                 ref={ref}
                 getOptionValue={option => option.id}

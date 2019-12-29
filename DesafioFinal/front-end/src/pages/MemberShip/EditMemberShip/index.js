@@ -30,7 +30,7 @@ export default function EditMemberShip({ match }) {
                 return item.student.id == student_id;
             });
 
-            console.tron.log(dataDetails.start_date);
+            // console.tron.log(dataDetails.start_date);
 
             setMembership({
                 ...dataDetails,
@@ -44,22 +44,26 @@ export default function EditMemberShip({ match }) {
                 ),
                 price: formatPrice(dataDetails.price),
             });
+            setPlans(dataDetails.plan.id);
         }
+
         loadDetails();
-    }, [plans, student_id]);
+    }, [student_id]);
 
     // Loading the plans in SelectPlan:
-    const searchPlan = () => {
-        async function listPlans() {
-            const response = await api.get('plans');
+    const searchPlan = inputValue => {
+        if (inputValue) {
+            async function listPlans() {
+                const response = await api.get('plans');
 
-            setPlans(response.data);
-            // console.tron.log(response.data);
+                setPlans(response.data);
+                // console.tron.log(response.data);
 
-            return response.data;
+                return response.data;
+            }
+
+            return listPlans();
         }
-
-        return listPlans();
     };
 
     const loadPlans = inputValue =>
@@ -69,9 +73,10 @@ export default function EditMemberShip({ match }) {
             }, 100);
         });
 
-    async function definePlan(plan_id) {
+    function definePlan(plan_id) {
         setPlans(plan_id);
     }
+
     async function showDateAndValue(date) {
         setMembership({
             ...membership,
@@ -101,7 +106,7 @@ export default function EditMemberShip({ match }) {
         }
     }
 
-    console.tron.log(membership);
+    console.tron.log(plans);
 
     return (
         <>
@@ -137,9 +142,12 @@ export default function EditMemberShip({ match }) {
 
                         <SelectPlan
                             name="plan_id"
-                            cacheOptions
+                            // cacheOptions
                             defaultOptions
                             className="plano"
+                            // value={plans.filter(
+                            //     ({ id }) => id === membership.plan.id
+                            // )}
                             options={loadPlans}
                             onChange={definePlan}
                         />
