@@ -2,7 +2,10 @@ import React, { useRef, useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 
 import { useField } from '@rocketseat/unform';
+import PropTypes from 'prop-types';
 import { Container } from './styles';
+
+import api from '~/services/api';
 
 export default function ReactSelect({
     name,
@@ -44,11 +47,11 @@ export default function ReactSelect({
     function getDefaultValue() {
         if (!defaultValue) return null;
 
-        const defaultPlan = options.map(option => option.id === defaultValue);
+        const defaultPlan = options.find(option => option.id === defaultValue);
 
-        setPlan(defaultPlan);
+        console.tron.log(defaultPlan);
 
-        return defaultPlan ? defaultPlan.id : null;
+        return defaultPlan;
     }
 
     return (
@@ -60,7 +63,7 @@ export default function ReactSelect({
                 cacheOptions
                 aria-label={fieldName}
                 loadOptions={options}
-                defaultValue={getDefaultValue()}
+                defaultValue={defaultValue}
                 isMulti={false}
                 ref={ref}
                 getOptionValue={option => option.id}
@@ -72,3 +75,6 @@ export default function ReactSelect({
         </Container>
     );
 }
+ReactSelect.propTypes = {
+    options: PropTypes.element.isRequired,
+};

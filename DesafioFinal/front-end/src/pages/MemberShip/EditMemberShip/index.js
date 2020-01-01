@@ -139,8 +139,9 @@ export default function EditMemberShip({ match }) {
 
                         <SelectPlan
                             name="plan.id"
-                            // cacheOptions
+                            cacheOptions
                             defaultOptions
+                            defaultValue="plan.id"
                             className="plano"
                             options={loadPlans}
                             onChange={definePlan}
