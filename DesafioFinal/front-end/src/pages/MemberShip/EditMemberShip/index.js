@@ -44,7 +44,6 @@ export default function EditMemberShip({ match }) {
                 ),
                 price: formatPrice(dataDetails.price),
             });
-            setPlans(dataDetails.plan.id);
         }
 
         loadDetails();
@@ -52,18 +51,16 @@ export default function EditMemberShip({ match }) {
 
     // Loading the plans in SelectPlan:
     const searchPlan = inputValue => {
-        if (inputValue) {
-            async function listPlans() {
-                const response = await api.get('plans');
+        async function listPlans() {
+            const response = await api.get('plans');
 
-                setPlans(response.data);
-                // console.tron.log(response.data);
+            setPlans(response.data);
+            // console.tron.log(response.data);
 
-                return response.data;
-            }
-
-            return listPlans();
+            return response.data;
         }
+
+        return listPlans();
     };
 
     const loadPlans = inputValue =>
@@ -106,7 +103,7 @@ export default function EditMemberShip({ match }) {
         }
     }
 
-    console.tron.log(plans);
+    // console.tron.log(plans);
 
     return (
         <>
@@ -141,13 +138,10 @@ export default function EditMemberShip({ match }) {
                         <h1>VALOR FINAL</h1>
 
                         <SelectPlan
-                            name="plan_id"
+                            name="plan.id"
                             // cacheOptions
                             defaultOptions
                             className="plano"
-                            // value={plans.filter(
-                            //     ({ id }) => id === membership.plan.id
-                            // )}
                             options={loadPlans}
                             onChange={definePlan}
                         />

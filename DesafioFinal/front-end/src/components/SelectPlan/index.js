@@ -4,10 +4,18 @@ import AsyncSelect from 'react-select/async';
 import { useField } from '@rocketseat/unform';
 import { Container } from './styles';
 
-export default function ReactSelect({ name, label, options, ...rest }) {
+export default function ReactSelect({
+    name,
+    label,
+    options,
+    multiple,
+    ...rest
+}) {
     const ref = useRef(null);
 
-    const { registerField, defaultValue, error } = useField('plan_id');
+    const { fieldName, registerField, defaultValue, error } = useField(name);
+
+    const [plan, setPlan] = useState(defaultValue);
 
     function parseSelectValue(selectRef) {
         const selectValue = selectRef.select.state.value;
@@ -20,7 +28,7 @@ export default function ReactSelect({ name, label, options, ...rest }) {
     useEffect(() => {
         if (ref.current) {
             registerField({
-                name: 'plan_id',
+                name: fieldName,
                 ref: ref.current,
                 path: 'state.value',
                 parseValue: parseSelectValue,
@@ -29,23 +37,28 @@ export default function ReactSelect({ name, label, options, ...rest }) {
                 },
             });
         }
-    }, [ref]); // eslint-disable-line
+    }, [ref.current, fieldName]); // eslint-disable-line
+
+    console.tron.log(defaultValue);
 
     function getDefaultValue() {
         if (!defaultValue) return null;
 
-        // eslint-disable-next-line react/prop-types
-        return options.find(option => option.id === defaultValue);
+        const defaultPlan = options.map(option => option.id === defaultValue);
+
+        setPlan(defaultPlan);
+
+        return defaultPlan ? defaultPlan.id : null;
     }
 
     return (
         <Container>
-            {label && <label htmlFor="plan_id">{label}</label>}
+            {label && <label htmlFor={fieldName}>{label}</label>}
 
             <AsyncSelect
-                name="student_id"
+                name={fieldName}
                 cacheOptions
-                aria-label="plan_id"
+                aria-label={fieldName}
                 loadOptions={options}
                 defaultValue={getDefaultValue()}
                 isMulti={false}
