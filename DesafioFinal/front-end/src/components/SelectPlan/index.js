@@ -18,7 +18,7 @@ export default function ReactSelect({
 
     const { fieldName, registerField, defaultValue, error } = useField(name);
 
-    const [plan, setPlan] = useState(defaultValue);
+    // const [plan, setPlan] = useState(defaultValue);
 
     function parseSelectValue(selectRef) {
         const selectValue = selectRef.select.state.value;
@@ -42,17 +42,18 @@ export default function ReactSelect({
         }
     }, [ref.current, fieldName]); // eslint-disable-line
 
-    console.tron.log(defaultValue);
+    // async function getDefaultValue() {
+    //     if (!defaultValue) return null;
 
-    function getDefaultValue() {
-        if (!defaultValue) return null;
+    //     const defaultPlan = await options.find(
+    //         option => option.id === defaultValue
+    //     );
 
-        const defaultPlan = options.find(option => option.id === defaultValue);
+    //     setPlan(defaultPlan);
 
-        console.tron.log(defaultPlan);
-
-        return defaultPlan;
-    }
+    //     return defaultPlan;
+    // }
+    // getDefaultValue();
 
     return (
         <Container>
@@ -63,7 +64,7 @@ export default function ReactSelect({
                 cacheOptions
                 aria-label={fieldName}
                 loadOptions={options}
-                defaultValue={defaultValue}
+                defaultValue
                 isMulti={false}
                 ref={ref}
                 getOptionValue={option => option.id}
@@ -76,5 +77,5 @@ export default function ReactSelect({
     );
 }
 ReactSelect.propTypes = {
-    options: PropTypes.element.isRequired,
+    options: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

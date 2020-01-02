@@ -34,6 +34,7 @@ export default function EditMemberShip({ match }) {
 
             setMembership({
                 ...dataDetails,
+                value: dataDetails.plan.id,
                 start_date: parseISO(dataDetails.start_date),
                 end_date: format(
                     parseISO(dataDetails.end_date),
@@ -50,14 +51,20 @@ export default function EditMemberShip({ match }) {
     }, [student_id]);
 
     // Loading the plans in SelectPlan:
-    const searchPlan = inputValue => {
+    const searchPlan = () => {
         async function listPlans() {
             const response = await api.get('plans');
 
-            setPlans(response.data);
+            const planDetails = response.data.map(item => ({
+                label: item.title,
+                value: item.id,
+                ...item,
+            }));
+
+            setPlans(planDetails);
             // console.tron.log(response.data);
 
-            return response.data;
+            return planDetails;
         }
 
         return listPlans();
@@ -71,7 +78,8 @@ export default function EditMemberShip({ match }) {
         });
 
     function definePlan(plan_id) {
-        setPlans(plan_id);
+        setMembership({ ...membership, value: plan_id.id });
+        // setPlans(plan_id);
     }
 
     async function showDateAndValue(date) {
@@ -103,7 +111,7 @@ export default function EditMemberShip({ match }) {
         }
     }
 
-    // console.tron.log(plans);
+    console.tron.log(membership);
 
     return (
         <>
@@ -141,7 +149,9 @@ export default function EditMemberShip({ match }) {
                             name="plan.id"
                             cacheOptions
                             defaultOptions
-                            defaultValue="plan.id"
+                            value={plans.find(
+                                ({ value }) => value === membership.value
+                            )}
                             className="plano"
                             options={loadPlans}
                             onChange={definePlan}
@@ -152,7 +162,7 @@ export default function EditMemberShip({ match }) {
                             className="start_date"
                             selected={membership.start_date}
                             onChange={showDateAndValue}
-                            disabled={plans.id ? false : true} // eslint-disable-line
+                            disabled={membership.value ? false : true} // eslint-disable-line
                         />
                         <Input name="end_date" disabled className="end_date" />
 
