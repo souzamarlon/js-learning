@@ -30,11 +30,8 @@ export default function EditMemberShip({ match }) {
                 return item.student.id == student_id;
             });
 
-            // console.tron.log(dataDetails.start_date);
-
             setMembership({
                 ...dataDetails,
-                value: dataDetails.plan.id,
                 start_date: parseISO(dataDetails.start_date),
                 end_date: format(
                     parseISO(dataDetails.end_date),
@@ -55,16 +52,9 @@ export default function EditMemberShip({ match }) {
         async function listPlans() {
             const response = await api.get('plans');
 
-            const planDetails = response.data.map(item => ({
-                label: item.title,
-                value: item.id,
-                ...item,
-            }));
+            setPlans(response.data);
 
-            setPlans(planDetails);
-            // console.tron.log(response.data);
-
-            return planDetails;
+            return response.data;
         }
 
         return listPlans();
@@ -78,8 +68,7 @@ export default function EditMemberShip({ match }) {
         });
 
     function definePlan(plan_id) {
-        setMembership({ ...membership, value: plan_id.id });
-        // setPlans(plan_id);
+        setMembership({ ...membership, plan: plan_id });
     }
 
     async function showDateAndValue(date) {
@@ -87,13 +76,15 @@ export default function EditMemberShip({ match }) {
             ...membership,
             start_date: date,
             end_date: format(
-                addMonths(date, plans.duration),
+                addMonths(date, membership.plan.duration),
                 "d 'de' MMMM 'de' yyyy",
                 {
                     locale: pt,
                 }
             ),
-            price: formatPrice(plans.price * plans.duration),
+            price: formatPrice(
+                membership.plan.price * membership.plan.duration
+            ),
         });
     }
 
@@ -110,8 +101,6 @@ export default function EditMemberShip({ match }) {
             console.tron.log(err);
         }
     }
-
-    console.tron.log(membership);
 
     return (
         <>
@@ -146,11 +135,11 @@ export default function EditMemberShip({ match }) {
                         <h1>VALOR FINAL</h1>
 
                         <SelectPlan
-                            name="plan.id"
+                            name="plan_id"
                             cacheOptions
                             defaultOptions
                             value={plans.find(
-                                ({ value }) => value === membership.value
+                                ({ id }) => id === membership.plan.id
                             )}
                             className="plano"
                             options={loadPlans}
@@ -162,7 +151,7 @@ export default function EditMemberShip({ match }) {
                             className="start_date"
                             selected={membership.start_date}
                             onChange={showDateAndValue}
-                            disabled={membership.value ? false : true} // eslint-disable-line
+                            disabled={membership.plan ? false : true} // eslint-disable-line
                         />
                         <Input name="end_date" disabled className="end_date" />
 

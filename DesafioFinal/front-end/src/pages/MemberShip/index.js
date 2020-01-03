@@ -11,8 +11,6 @@ export default function MemberShip() {
     const [membership, setMembership] = useState([]);
 
     async function handleDelete(id) {
-        console.tron.log(id);
-
         if (window.confirm('Você realmente quer deletar?')) {
             await api.delete(`memberships/${id}`);
             history.push('/student');
@@ -22,7 +20,6 @@ export default function MemberShip() {
     useEffect(() => {
         async function listStudents() {
             const response = await api.get('memberships');
-            console.tron.log(response.data);
 
             setMembership(response.data);
         }

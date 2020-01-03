@@ -78,6 +78,8 @@ export default function NewMemberShip() {
             ),
             final_price: formatPrice(plans.price * plans.duration),
         });
+
+        console.tron.log(date);
     }
 
     async function definePlan(plan_id) {
@@ -95,6 +97,7 @@ export default function NewMemberShip() {
         } catch (err) {
             toast.error('Erro ao criar o cadastro!');
             console.tron.log(err);
+            console.tron.log(data);
         }
     }
 
