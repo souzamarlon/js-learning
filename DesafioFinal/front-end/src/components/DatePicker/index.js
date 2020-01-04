@@ -28,11 +28,11 @@ export default function DatePicker({ name, ...rest }) {
                 selected={selected}
                 onChange={date => setSelected(date)}
                 ref={ref}
-                // locale="pt-BR"
+                locale="pt-BR"
                 showTimeSelect
-                timeFormat="p"
+                // timeFormat="p"
                 timeIntervals={15}
-                dateFormat="Pp"
+                // dateFormat="Pp"
                 placeholderText="Select the plan before choose the date..."
                 {...rest}
             />
