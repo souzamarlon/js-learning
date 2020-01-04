@@ -79,7 +79,7 @@ export default function NewMemberShip() {
             final_price: formatPrice(plans.price * plans.duration),
         });
 
-        console.tron.log(date);
+        // console.tron.log(date);
     }
 
     async function definePlan(plan_id) {
@@ -153,6 +153,7 @@ export default function NewMemberShip() {
                             selected={membership.start_date}
                             onChange={showDateAndValue}
                             disabled={plans.id ? false : true} // eslint-disable-line
+                            locale="pt"
                         />
                         <Input name="end_date" disabled className="end_date" />
 
