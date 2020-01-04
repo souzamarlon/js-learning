@@ -119,7 +119,7 @@ class MembershipController {
   async delete(req, res) {
     const memberRemove = await Membership.findOne({
       where: {
-        student_id: req.params.id,
+        id: req.params.id,
       },
     });
     const memberDeleted = await memberRemove.destroy();
