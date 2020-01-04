@@ -1,33 +1,14 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
-import ReactDatePicker, {
-    registerLocale,
-    setDefaultLocale,
-} from 'react-datepicker';
-
-import { format } from 'date-fns';
+import React, { useRef, useEffect, useState } from 'react';
+import ReactDatePicker from 'react-datepicker';
 
 import { useField } from '@rocketseat/unform';
 
-import pt from 'date-fns/locale/pt';
-
 import 'react-datepicker/dist/react-datepicker.css';
-
-registerLocale('pt', pt);
 
 export default function DatePicker({ name, ...rest }) {
     const ref = useRef(null);
     const { fieldName, registerField, defaultValue, error } = useField(name);
     const [selected, setSelected] = useState(defaultValue);
-
-    console.tron.log(defaultValue);
-
-    // useEffect(() => {
-    //     const dateFormatted = format(defaultValue, 'dd/MM/YYYY HH:mm', {
-    //         locale: pt,
-    //     });
-
-    //     setSelected(dateFormatted);
-    // }, [defaultValue, selected]);
 
     useEffect(() => {
         registerField({
@@ -47,7 +28,12 @@ export default function DatePicker({ name, ...rest }) {
                 selected={selected}
                 onChange={date => setSelected(date)}
                 ref={ref}
-                locale="pt"
+                // locale="pt-BR"
+                showTimeSelect
+                timeFormat="p"
+                timeIntervals={15}
+                dateFormat="Pp"
+                placeholderText="Select the plan before choose the date..."
                 {...rest}
             />
             {error && <span>{error}</span>}

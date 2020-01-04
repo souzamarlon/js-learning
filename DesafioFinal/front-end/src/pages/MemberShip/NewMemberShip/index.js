@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { addMonths, format } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+import pt from 'date-fns/locale/pt-BR';
+
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
@@ -66,12 +68,15 @@ export default function NewMemberShip() {
         });
 
     async function showDateAndValue(date) {
+        // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const dateTimeUTC = zonedTimeToUtc(date, 'America/Brasília');
+
         setMembership({
             ...membership,
-            start_date: date,
+            start_date: dateTimeUTC,
             end_date: format(
-                addMonths(date, plans.duration),
-                "d 'de' MMMM 'de' yyyy",
+                addMonths(dateTimeUTC, plans.duration),
+                "d 'de' MMMM 'de' yyyy'T'HH:mm:ss",
                 {
                     locale: pt,
                 }
@@ -79,7 +84,7 @@ export default function NewMemberShip() {
             final_price: formatPrice(plans.price * plans.duration),
         });
 
-        // console.tron.log(date);
+        console.tron.log(dateTimeUTC);
     }
 
     async function definePlan(plan_id) {
@@ -100,7 +105,7 @@ export default function NewMemberShip() {
             console.tron.log(data);
         }
     }
-
+    console.tron.log(membership);
     return (
         <>
             <Form initialData={membership} onSubmit={handleSubmit}>
