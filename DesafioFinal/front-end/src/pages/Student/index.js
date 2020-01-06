@@ -47,7 +47,7 @@ export default function Student() {
         }
 
         listStudents();
-    }, []);
+    }, [student]);
 
     return (
         <>
@@ -74,13 +74,51 @@ export default function Student() {
                 </Button>
             </Container>
             <Content>
-                <header>
+                {/* <header>
                     <span className="name">NOME</span>
                     <span className="email">E-MAIL</span>
                     <span className="idade">IDADE</span>
-                </header>
+                </header> */}
 
-                <List>
+                <thead>
+                    <tr>
+                        <th>NOME</th>
+                        <th>E-MAIL</th>
+                        <th>IDADE</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {student.map(item => (
+                        <tr>
+                            <td>
+                                <span className="name">{item.name}</span>
+                            </td>
+                            <td>
+                                <span className="email">{item.email}</span>
+                            </td>
+                            <td>
+                                <span className="idade">{item.idade}</span>
+                            </td>
+                            <td>
+                                <button type="button" onClick={() => {}}>
+                                    <Link to={`/editstudent/${item.id}`}>
+                                        editar
+                                    </Link>
+                                </button>
+                                <button
+                                    type="button"
+                                    className="delete"
+                                    onClick={() => handleDelete(item.id)}
+                                >
+                                    apagar
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+
+                {/* <List>
                     {student.map(item => (
                         <>
                             <ul>
@@ -103,7 +141,7 @@ export default function Student() {
                             <div className="divider" />
                         </>
                     ))}
-                </List>
+                </List> */}
             </Content>
         </>
     );
