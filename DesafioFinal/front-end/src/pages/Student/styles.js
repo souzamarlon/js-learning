@@ -74,9 +74,6 @@ export const Content = styled.div`
     max-width: 1225px;
     margin: 20px auto;
 
-    /* align-content: center; */
-    /* display: flex; */
-    /* justify-content: space-between; */
     background: #ffff;
     padding: 0 30px;
     box-shadow: 0px 0 20px rgba(0, 0, 0, 0.2);
@@ -122,62 +119,3 @@ export const Content = styled.div`
         color: #de3b3b;
     }
 `;
-
-// export const List = styled.li`
-//     margin: 20px auto;
-//     padding: 0 20px;
-//     align-content: center;
-//     list-style: none;
-//     width: 100%;
-//     max-width: 1225px;
-
-//     background: white;
-
-//     ul {
-//         margin: 20px auto;
-
-//         span.name {
-//             font-size: 16px;
-//             line-height: 20px;
-
-//             margin-right: 0 auto;
-//         }
-//         span.email {
-//             margin-right: 200px;
-//             font-size: 16px;
-//             line-height: 20px;
-//             margin-left: 200px;
-//         }
-//         span.idade {
-//             margin-left: 150px;
-//             font-size: 16px;
-//             line-height: 20px;
-//         }
-//         button.delete {
-//             float: right;
-//             padding: 0 15px;
-//             align-items: center;
-//             background: none;
-//             border: 0;
-//             color: #de3b3b;
-//         }
-
-//         button {
-//             float: right;
-
-//             padding: 0 15px;
-//             align-items: center;
-//             background: none;
-//             border: 0;
-//             /* color: #4d85ee; */
-//         }
-//         a {
-//             color: #4d85ee;
-//         }
-//     }
-//     .divider {
-//         width: 100%;
-//         height: 1px;
-//         background: #eeeeee;
-//     }
-// `;

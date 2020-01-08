@@ -46,21 +46,34 @@ export default function Plan() {
                 </Button>
             </Container>
             <Content>
-                <header>
-                    <span className="title">TÍTULO</span>
-                    <span className="duration">DURAÇÃO</span>
-                    <span className="price">VALOR p/ MÊS</span>
-                </header>
+                <thead>
+                    <tr>
+                        <th>TÍTULO</th>
+                        <th>DURAÇÃO</th>
+                        <th>VALOR p/ MÊS</th>
+                    </tr>
+                </thead>
 
-                <List>
+                <tbody>
                     {plan.map(item => (
-                        <>
-                            <ul>
+                        <tr>
+                            <td>
                                 <span className="title">{item.title}</span>
+                            </td>
+                            <td>
                                 <span className="duration">
                                     {item.duration}
                                 </span>
+                            </td>
+                            <td>
                                 <span className="price">{item.price}</span>
+                            </td>
+                            <td>
+                                <button type="button" onClick={() => {}}>
+                                    <Link to={`/editplan/${item.id}`}>
+                                        editar
+                                    </Link>
+                                </button>
                                 <button
                                     type="button"
                                     className="delete"
@@ -68,16 +81,10 @@ export default function Plan() {
                                 >
                                     apagar
                                 </button>
-                                <button type="button" onClick={() => {}}>
-                                    <Link to={`/editplan/${item.id}`}>
-                                        editar
-                                    </Link>
-                                </button>
-                            </ul>
-                            <div className="divider" />
-                        </>
+                            </td>
+                        </tr>
                     ))}
-                </List>
+                </tbody>
             </Content>
         </>
     );

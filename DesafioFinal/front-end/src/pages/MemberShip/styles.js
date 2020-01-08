@@ -5,7 +5,7 @@ import { darken } from 'polished';
 export const Container = styled.div`
     height: 64px;
     max-width: 1225px;
-    margin: 50px auto;
+    margin: 20px auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,11 +21,10 @@ export const Title = styled.div`
         font-size: 24px;
         line-height: 37px;
         font-weight: bold;
-        width: ;
+
         height: 38px;
-        /* margin-right: 590px; */
+
         top: 144px;
-        /* margin: 0px 200px 0px 0px; */
     }
 `;
 
@@ -56,106 +55,121 @@ export const Button = styled.button`
 export const Content = styled.div`
     width: 100%;
     max-width: 1225px;
-    /* height: 448px; */
     margin: 20px auto;
-    /* padding: 0 20px; */
-    align-content: center;
-    /* display: flex; */
-    /* justify-content: space-between; */
+
     background: #ffff;
-    /* padding: 0 30px; */
+    padding: 0 30px;
     box-shadow: 0px 0 20px rgba(0, 0, 0, 0.2);
     border: 0;
     border-radius: 4px;
 
-    header {
-        padding: 20px;
-        /* display: flex; */
-        /* flex: 1; */
-
-        span.name {
-            flex: 1;
-        }
-        span.plan {
-            flex: 1;
-        }
-        span.start_date {
-            flex: 1;
-        }
-        span.end_date {
-            flex: 1;
-        }
-        span.active {
-            flex: 1;
-        }
+    thead th {
+        color: #000;
+        text-align: left;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: bold;
+        padding: 12px;
+        padding-top: 30px;
+        padding-right: 140px;
     }
-`;
 
-export const List = styled.li`
-    margin: 20px auto;
-    padding: 0 20px;
-    align-content: center;
-    list-style: none;
-    width: 100%;
-    max-width: 1225px;
+    tbody td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+    }
 
-    background: white;
+    span {
+        display: block;
+        margin-top: 5px;
+        font-size: 16px;
+        line-height: 20px;
+    }
 
-    ul {
-        margin: 20px auto;
+    button {
+        background: none;
+        border: 0;
+        padding: 4px;
 
-        span.name {
-            font-size: 16px;
-            line-height: 20px;
-
-            margin-right: 0 auto;
-        }
-        span.title {
-            margin-right: 200px;
-            font-size: 16px;
-            line-height: 20px;
-            margin-left: 200px;
-        }
-        span.start_date {
-            margin-left: 150px;
-            font-size: 16px;
-            line-height: 20px;
-        }
-        span.end_date {
-            margin-left: 150px;
-            font-size: 16px;
-            line-height: 20px;
-        }
-        span.active {
-            margin-left: 150px;
-            font-size: 16px;
-            line-height: 20px;
-        }
-        button.delete {
-            float: right;
-            padding: 0 15px;
-            align-items: center;
-            background: none;
-            border: 0;
-            color: #de3b3b;
-        }
-
-        button {
-            float: right;
-
-            padding: 0 15px;
-            align-items: center;
-            background: none;
-            border: 0;
-            /* color: #4d85ee; */
-        }
         a {
             color: #4d85ee;
         }
     }
-    .divider {
-        width: 100%;
-        height: 1px;
-        background: #eeeeee;
+    button.delete {
+        border: 0;
+        padding: 4px;
+        align-items: center;
+        background: none;
+        border: 0;
+        color: #de3b3b;
     }
 `;
+
+// export const List = styled.li`
+//     margin: 20px auto;
+//     padding: 0 20px;
+//     align-content: center;
+//     list-style: none;
+//     width: 100%;
+//     max-width: 1225px;
+
+//     background: white;
+
+//     ul {
+//         margin: 20px auto;
+
+//         span.name {
+//             font-size: 16px;
+//             line-height: 20px;
+
+//             margin-right: 0 auto;
+//         }
+//         span.title {
+//             margin-right: 200px;
+//             font-size: 16px;
+//             line-height: 20px;
+//             margin-left: 200px;
+//         }
+//         span.start_date {
+//             margin-left: 150px;
+//             font-size: 16px;
+//             line-height: 20px;
+//         }
+//         span.end_date {
+//             margin-left: 150px;
+//             font-size: 16px;
+//             line-height: 20px;
+//         }
+//         span.active {
+//             margin-left: 150px;
+//             font-size: 16px;
+//             line-height: 20px;
+//         }
+//         button.delete {
+//             float: right;
+//             padding: 0 15px;
+//             align-items: center;
+//             background: none;
+//             border: 0;
+//             color: #de3b3b;
+//         }
+
+//         button {
+//             float: right;
+
+//             padding: 0 15px;
+//             align-items: center;
+//             background: none;
+//             border: 0;
+//             /* color: #4d85ee; */
+//         }
+//         a {
+//             color: #4d85ee;
+//         }
+//     }
+//     .divider {
+//         width: 100%;
+//         height: 1px;
+//         background: #eeeeee;
+//     }
+// `;

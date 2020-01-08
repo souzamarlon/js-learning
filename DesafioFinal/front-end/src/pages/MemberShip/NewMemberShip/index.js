@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { addMonths, format } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
 

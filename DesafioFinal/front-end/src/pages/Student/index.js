@@ -69,17 +69,10 @@ export default function Student() {
                             type="search"
                             placeholder="Buscar aluno"
                         />
-                        {/* <button type="submit" /> */}
                     </Form>
                 </Button>
             </Container>
             <Content>
-                {/* <header>
-                    <span className="name">NOME</span>
-                    <span className="email">E-MAIL</span>
-                    <span className="idade">IDADE</span>
-                </header> */}
-
                 <thead>
                     <tr>
                         <th>NOME</th>
@@ -117,31 +110,6 @@ export default function Student() {
                         </tr>
                     ))}
                 </tbody>
-
-                {/* <List>
-                    {student.map(item => (
-                        <>
-                            <ul>
-                                <span className="name">{item.name}</span>
-                                <span className="email">{item.email}</span>
-                                <span className="idade">{item.idade}</span>
-                                <button
-                                    type="button"
-                                    className="delete"
-                                    onClick={() => handleDelete(item.id)}
-                                >
-                                    apagar
-                                </button>
-                                <button type="button" onClick={() => {}}>
-                                    <Link to={`/editstudent/${item.id}`}>
-                                        editar
-                                    </Link>
-                                </button>
-                            </ul>
-                            <div className="divider" />
-                        </>
-                    ))}
-                </List> */}
             </Content>
         </>
     );

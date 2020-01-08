@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import { Link } from 'react-router-dom';
-import { Form, Input } from '@rocketseat/unform';
 
-import { Container, Title, Button, Content, List } from './styles';
+import { Container, Title, Button, Content } from './styles';
 import api from '~/services/api';
 import history from '~/services/history';
 
@@ -21,11 +22,31 @@ export default function MemberShip() {
         async function listStudents() {
             const response = await api.get('memberships');
 
-            setMembership(response.data);
+            const membershipList = response.data.map(item => ({
+                ...item,
+                start_date: format(
+                    parseISO(item.start_date),
+                    "d 'de' MMMM 'de' yyyy",
+                    {
+                        locale: pt,
+                    }
+                ),
+                end_date: format(
+                    parseISO(item.end_date),
+                    "d 'de' MMMM 'de' yyyy",
+                    {
+                        locale: pt,
+                    }
+                ),
+            }));
+
+            setMembership(membershipList);
         }
 
         listStudents();
     }, []);
+
+    // console.tron.log(membership);
 
     return (
         <>
@@ -44,39 +65,45 @@ export default function MemberShip() {
                 </Button>
             </Container>
             <Content>
-                <header>
-                    <span className="name">ALUNO</span>
-                    <span className="plan">PLANO</span>
-                    <span className="start_date">INICIO</span>
-                    <span className="end_date">TÉRMINO</span>
-                    <span className="active">ATIVA</span>
-                </header>
+                <thead>
+                    <tr>
+                        <th>ALUNO</th>
+                        <th>PLANO</th>
+                        <th>INICIO</th>
+                        <th>TÉRMINO</th>
+                        <th>ATIVA</th>
+                    </tr>
+                </thead>
 
-                <List>
+                <tbody>
                     {membership.map(item => (
-                        <>
-                            <ul key={item.id}>
+                        <tr>
+                            <td>
                                 <span className="name">
                                     {item.student.name}
                                 </span>
+                            </td>
+
+                            <td>
                                 <span className="title">{item.plan.title}</span>
+                            </td>
+
+                            <td>
                                 <span className="start_date" type="date">
                                     {item.start_date}
                                 </span>
+                            </td>
+                            <td>
                                 <span className="end_date" type="date">
                                     {item.end_date}
                                 </span>
+                            </td>
+                            <td>
                                 <span className="active">
                                     {item.active.toString()}
                                 </span>
-
-                                <button
-                                    type="button"
-                                    className="delete"
-                                    onClick={() => handleDelete(item.id)}
-                                >
-                                    apagar
-                                </button>
+                            </td>
+                            <td>
                                 <button type="button" onClick={() => {}}>
                                     <Link
                                         to={`/EditMemberShip/${item.student.id}`}
@@ -84,11 +111,17 @@ export default function MemberShip() {
                                         editar
                                     </Link>
                                 </button>
-                            </ul>
-                            <div className="divider" />
-                        </>
+                                <button
+                                    type="button"
+                                    className="delete"
+                                    onClick={() => handleDelete(item.id)}
+                                >
+                                    apagar
+                                </button>
+                            </td>
+                        </tr>
                     ))}
-                </List>
+                </tbody>
             </Content>
         </>
     );
