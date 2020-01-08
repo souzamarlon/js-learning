@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 import history from '~/services/history';
 
 import api from '~/services/api';
@@ -10,17 +12,45 @@ import api from '~/services/api';
 import { Container, Title, Button, Content, Table } from './styles';
 
 export default function NewStudent() {
+    const schema = Yup.object().shape({
+        name: Yup.string().required('O nome é obrigatório'),
+        email: Yup.string()
+            .email('Insira um e-mail válido')
+            .required('O e-mail é obrigatório'),
+        idade: Yup.number()
+            .nullable()
+            .typeError('Idade precisa ser um número')
+            .transform((cv, ov) => (ov === '' ? null : cv))
+            .positive(),
+        peso: Yup.number()
+            .nullable()
+            .typeError('Peso precisa ser um número')
+            .transform((cv, ov) => (ov === '' ? null : cv))
+            .positive(),
+        altura: Yup.number()
+            .nullable()
+            .typeError('Altura precisa ser um número')
+            .transform((cv, ov) => (ov === '' ? null : cv))
+            .positive(),
+    });
+
     // TODO Criar um validador para mostrar se o email já existe!
 
     function handleSubmit(data) {
-        api.post('students/', data);
-        history.push('/');
-        console.tron.log(data);
+        try {
+            api.post('students/', data);
+
+            toast.success('Sucesso ao criar o cadastro!');
+            history.push('/');
+            console.tron.log(data);
+        } catch (err) {
+            toast.error('Erro ao criar o cadastro!');
+        }
     }
 
     return (
         <>
-            <Form onSubmit={handleSubmit}>
+            <Form schema={schema} onSubmit={handleSubmit}>
                 <Container>
                     <Title>
                         <h1>Cadastro de aluno</h1>

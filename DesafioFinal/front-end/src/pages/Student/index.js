@@ -47,7 +47,7 @@ export default function Student() {
         }
 
         listStudents();
-    }, [student]);
+    }, []);
 
     return (
         <>
