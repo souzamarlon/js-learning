@@ -18,10 +18,9 @@ export default function NewStudent() {
             .email('Insira um e-mail válido')
             .required('O e-mail é obrigatório'),
         idade: Yup.number()
-            .nullable()
-            .typeError('Idade precisa ser um número')
-            .transform((cv, ov) => (ov === '' ? null : cv))
-            .positive(),
+            .required()
+            .positive()
+            .integer(),
         peso: Yup.number()
             .nullable()
             .typeError('Peso precisa ser um número')

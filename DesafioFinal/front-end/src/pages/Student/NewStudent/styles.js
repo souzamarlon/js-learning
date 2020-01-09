@@ -115,7 +115,7 @@ export const Content = styled.div`
 
     input.name {
         width: 840px;
-        display: flex;
+        /* display: flex; */
         flex: 1;
         background: #ffffff;
         border: 0.5px solid #eee;
@@ -154,7 +154,7 @@ export const Table = styled.div`
     input.idade {
         width: 269.33px;
         align-items: center;
-        /* display: block; */
+        display: flex;
         /* flex: 1; */
         background: #ffffff;
         border: 0.5px solid #eee;
@@ -173,7 +173,7 @@ export const Table = styled.div`
     input.peso {
         width: 269.33px;
         align-items: center;
-        /* display: block; */
+        display: flex;
         /* flex: 1; */
         background: #ffffff;
         border: 0.5px solid #eee;
@@ -192,7 +192,7 @@ export const Table = styled.div`
     input.altura {
         width: 269.33px;
         align-items: center;
-        /* display: block; */
+        display: flex;
         /* flex: 1; */
         background: #ffffff;
         border: 0.5px solid #eee;
