@@ -16,6 +16,13 @@ class Help_orderController {
         where: {
           answer: null,
         },
+        include: [
+          {
+            model: Student,
+            as: 'student',
+            attributes: ['name'],
+          },
+        ],
       });
       return res.json(name);
     }
