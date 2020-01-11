@@ -10,6 +10,16 @@ import Queue from '../../lib/Queue';
 class Help_orderController {
   async index(req, res) {
     const student_id = req.params.id;
+
+    if (student_id === null || student_id === undefined) {
+      const name = await Help_order.findAll({
+        where: {
+          answer: null,
+        },
+      });
+      return res.json(name);
+    }
+
     const helpOrderList = await Help_order.findAll({
       where: { student_id },
       attributes: ['question', 'answer'],
