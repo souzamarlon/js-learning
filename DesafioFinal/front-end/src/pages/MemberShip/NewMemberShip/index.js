@@ -84,7 +84,7 @@ export default function NewMemberShip() {
             final_price: formatPrice(plans.price * plans.duration),
         });
 
-        console.tron.log(dateTimeUTC);
+        // console.tron.log(dateTimeUTC);
     }
 
     async function definePlan(plan_id) {
