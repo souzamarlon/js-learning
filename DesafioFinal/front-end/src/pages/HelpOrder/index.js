@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
-
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -69,7 +67,54 @@ export default function HelpOrder() {
                                     {item.student.name}
                                 </span>
                             </td>
-                            <td />
+                            <td>
+                                <div>
+                                    <button
+                                        type="button"
+                                        variant="outlined"
+                                        color="primary"
+                                        onClick={() => handleClickOpen(item.id)}
+                                    >
+                                        responder
+                                    </button>
+                                    <Dialog
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="form-dialog-title"
+                                    >
+                                        <DialogTitle id="form-dialog-title">
+                                            PERGUNTA DO ALUNO
+                                        </DialogTitle>
+                                        <DialogContent>
+                                            <DialogContentText>
+                                                {item.question}
+                                            </DialogContentText>
+                                            <TextField
+                                                id="outlined-multiline-static"
+                                                label="Multiline"
+                                                multiline
+                                                rows="5"
+                                                defaultValue="Default Value"
+                                                variant="outlined"
+                                            />
+                                        </DialogContent>
+                                        <DialogActions>
+                                            <Button
+                                                onClick={handleClose}
+                                                color="primary"
+                                            >
+                                                Cancel
+                                            </Button>
+                                            <Button
+                                                onClick={handleClose}
+                                                color="primary"
+                                            >
+                                                Subscribe
+                                            </Button>
+                                        </DialogActions>
+                                    </Dialog>
+                                </div>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

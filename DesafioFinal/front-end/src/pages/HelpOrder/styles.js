@@ -64,9 +64,6 @@ export const Content = styled.div`
         background: none;
         border: 0;
         padding: 4px;
-
-        a {
-            color: #4d85ee;
-        }
+        color: #4d85ee;
     }
 `;
