@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { toast } from 'react-toastify';
 
-import { Container, Title, Content } from './styles';
+import Popup from 'reactjs-popup';
+import { Form, Input } from '@rocketseat/unform';
+import { Container, Title, Content, Answer } from './styles';
 import api from '~/services/api';
 import history from '~/services/history';
 
 export default function HelpOrder() {
     const [help, setHelp] = useState([]);
-    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         async function listHelpOrders() {
@@ -26,24 +21,20 @@ export default function HelpOrder() {
         listHelpOrders();
     }, []);
 
-    const handleClickOpen = id => {
-        const questionOpen = help.filter(item => {
-            return item.id === id;
-        });
-        console.tron.log(questionOpen);
-        setHelp(questionOpen);
-        setOpen(true);
-    };
+    async function handleSubmit(data, id) {
+        try {
+            const response = await api.post(`help-orders/${id}/answer`, data);
 
-    const handleClose = () => {
-        async function listHelpOrders() {
-            const response = await api.get('students/help-orders');
+            toast.success('Sucesso ao responder!');
 
-            setHelp(response.data);
+            console.tron.log(response.data);
+            history.push('/help-order');
+        } catch (err) {
+            toast.error('Erro ao responder!');
+            console.tron.log(err);
+            console.tron.log(data);
         }
-        listHelpOrders();
-        setOpen(false);
-    };
+    }
 
     return (
         <>
@@ -68,52 +59,60 @@ export default function HelpOrder() {
                                 </span>
                             </td>
                             <td>
-                                <div>
-                                    <button
-                                        type="button"
-                                        variant="outlined"
-                                        color="primary"
-                                        onClick={() => handleClickOpen(item.id)}
+                                <Answer>
+                                    <Form
+                                        onSubmit={data => {
+                                            handleSubmit(data, item.id);
+                                        }}
                                     >
-                                        responder
-                                    </button>
-                                    <Dialog
-                                        open={open}
-                                        onClose={handleClose}
-                                        aria-labelledby="form-dialog-title"
-                                    >
-                                        <DialogTitle id="form-dialog-title">
-                                            PERGUNTA DO ALUNO
-                                        </DialogTitle>
-                                        <DialogContent>
-                                            <DialogContentText>
-                                                {item.question}
-                                            </DialogContentText>
-                                            <TextField
-                                                id="outlined-multiline-static"
-                                                label="Multiline"
-                                                multiline
-                                                rows="5"
-                                                defaultValue="Default Value"
-                                                variant="outlined"
-                                            />
-                                        </DialogContent>
-                                        <DialogActions>
-                                            <Button
-                                                onClick={handleClose}
-                                                color="primary"
-                                            >
-                                                Cancel
-                                            </Button>
-                                            <Button
-                                                onClick={handleClose}
-                                                color="primary"
-                                            >
-                                                Subscribe
-                                            </Button>
-                                        </DialogActions>
-                                    </Dialog>
-                                </div>
+                                        <Popup
+                                            trigger={
+                                                <button
+                                                    type="button"
+                                                    className="button"
+                                                >
+                                                    responder
+                                                </button>
+                                            }
+                                            modal
+                                        >
+                                            {close => (
+                                                <div className="modal">
+                                                    <a
+                                                        className="close"
+                                                        onClick={close}
+                                                    >
+                                                        &times;
+                                                    </a>
+                                                    <div className="header">
+                                                        PERGUNTA DO ALUNO
+                                                    </div>
+                                                    <div className="content">
+                                                        {item.question}
+                                                    </div>
+                                                    <div className="resp">
+                                                        SUA RESPOSTA
+                                                    </div>
+                                                    <Input
+                                                        multiline
+                                                        name="answer"
+                                                        className="answer"
+                                                        rows={10}
+                                                    />
+
+                                                    <div className="actions">
+                                                        <button
+                                                            type="submit"
+                                                            className="submit"
+                                                        >
+                                                            Responder aluno
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </Popup>
+                                    </Form>
+                                </Answer>
                             </td>
                         </tr>
                     ))}
