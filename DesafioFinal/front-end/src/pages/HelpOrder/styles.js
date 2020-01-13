@@ -74,7 +74,6 @@ export const Answer = styled.div`
     div {
         border-radius: 4px;
         width: 100%;
-
         max-height: 1000px;
         max-width: 1000px;
         margin: auto;
