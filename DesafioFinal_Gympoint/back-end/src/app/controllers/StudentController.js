@@ -22,6 +22,14 @@ class StudentController {
     return res.json(name);
   }
 
+  async index_mobile(req, res) {
+    const { id } = req.params;
+
+    const student_id = await Student.findByPk(id);
+
+    return res.json(student_id);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
