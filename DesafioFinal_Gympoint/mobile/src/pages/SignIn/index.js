@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Container } from './styles';
+import { Container, Form, FormInput, SubmitButton } from './styles';
 import Background from '~/components/Background';
 
 import { signInRequest } from '~/store/modules/auth/actions';
@@ -24,6 +24,24 @@ export default function SignIn() {
     <Background>
       <Container>
         <Image source={logo} />
+
+        <Form>
+          <FormInput
+            icon="person-outline"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Informe seu ID de cadastro"
+            returnKeyType="send"
+            onSubmitEditing={handleSubmit}
+            // onSubmitEditing={() => passwordRef.current.focus()}
+            value={id}
+            onChangeText={setId}
+          />
+
+          <SubmitButton loading={loading} onPress={handleSubmit}>
+            Acessar
+          </SubmitButton>
+        </Form>
       </Container>
     </Background>
   );

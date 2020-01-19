@@ -7,9 +7,10 @@ import SignIn from './pages/SignIn';
 export default (isSigned = false) =>
   createAppContainer(
     createSwitchNavigator({
-      Sign: createSwitchNavigator({
-        SignIn,
-      }),
-      initialRouteName: isSigned ? null : 'Sign',
+      SignIn,
+      // Sign: createSwitchNavigator({
+      //   ,
+      // }),
+      initialRouteName: isSigned ? null : 'SignIn',
     })
   );
