@@ -15,10 +15,13 @@ const routes = new Router();
 
 routes.post('/sessions', SessionController.store);
 // routes.get('/users', UserController.index);
+routes.get('/students/:id', StudentController.index_mobile);
+
+routes.get('/students/:id/checkins', CheckinController.index);
+routes.post('/students/:id/checkins', CheckinController.store);
 
 routes.use(authMiddleware);
 routes.get('/students', StudentController.index);
-routes.get('/students/:id', StudentController.index_mobile);
 
 routes.post('/students', StudentController.store);
 routes.delete('/students/:id', StudentController.delete);
@@ -33,9 +36,6 @@ routes.get('/memberships/', MembershipController.index);
 routes.post('/memberships/', MembershipController.store);
 routes.put('/memberships/:id', MembershipController.update);
 routes.delete('/memberships/:id', MembershipController.delete);
-
-routes.get('/students/:id/checkins', CheckinController.index);
-routes.post('/students/:id/checkins', CheckinController.store);
 
 routes.get('/students/help-orders', Help_orderController.index);
 routes.get('/students/:id/help-orders', Help_orderController.index);
