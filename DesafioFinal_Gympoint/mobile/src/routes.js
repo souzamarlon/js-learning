@@ -11,6 +11,6 @@ export default (isSigned = false) =>
       // Sign: createSwitchNavigator({
       //   ,
       // }),
-      initialRouteName: isSigned ? null : 'SignIn',
+      initialRouteName: isSigned ? 'SignIn' : 'SignIn',
     })
   );

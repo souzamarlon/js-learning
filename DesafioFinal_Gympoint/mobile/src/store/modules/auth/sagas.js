@@ -18,11 +18,12 @@ export function* signIn({ payload }) {
 
     // yield delay(100000);
 
-    yield put(signInSuccess(name, email));
+    yield put(signInSuccess(id, name, email));
 
     // history.push('/dashboard');
   } catch (err) {
     Alert.alert('Falha na autenticação', 'Authentication failure!');
+    console.tron.log(err);
     yield put(signFailure());
   }
 }
