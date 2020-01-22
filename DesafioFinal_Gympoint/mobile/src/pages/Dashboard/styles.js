@@ -3,9 +3,13 @@ import Button from '~/components/Button';
 
 export const Container = styled.View`
   flex: 1;
+  background: transparent;
 `;
 
 export const SubmitButton = styled(Button)`
+  /* width: 200px; */
+
+  margin: 0 30px;
   margin-top: 5px;
 `;
 

@@ -23,15 +23,13 @@ export default function Dashboard() {
   }, [id]);
 
   return (
-    <Background>
-      <Container>
-        <SubmitButton onPress={() => {}}>Novo check-in</SubmitButton>
-        <List
-          data={checkin}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <Checkin onCancel={() => {}} data={item} />}
-        />
-      </Container>
-    </Background>
+    <Container>
+      <SubmitButton onPress={() => {}}>Novo check-in</SubmitButton>
+      <List
+        data={checkin}
+        keyExtractor={item => String(item.id)}
+        renderItem={({ item }) => <Checkin onCancel={() => {}} data={item} />}
+      />
+    </Container>
   );
 }
