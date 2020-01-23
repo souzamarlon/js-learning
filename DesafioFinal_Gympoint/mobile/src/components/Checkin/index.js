@@ -16,7 +16,7 @@ export default function Checkin({ data }) {
   // });
   const dateTimeUTC = zonedTimeToUtc(new Date(), 'America/Brasília');
 
-  const less7days = subDays(dateTimeUTC, weekDay);
+  // const less7days = subDays(dateTimeUTC, weekDay);
 
   const dateParsed = useMemo(() => {
     return formatDistance(parseISO(data.createdAt), dateTimeUTC, {
@@ -25,13 +25,15 @@ export default function Checkin({ data }) {
     });
   }, [data.createdAt, dateTimeUTC]);
 
+  console.tron.log(data);
+
   const weekDay = parseISO(data.createdAt).getDay();
-  console.tron.log(weekDay);
+  // console.tron.log(weekDay);
 
   return (
     <Container>
       <Info>
-        <Name>Check-in #{weekDay}</Name>
+        <Name>{`Check-in # ${data.index}`}</Name>
         <Time>{dateParsed}</Time>
       </Info>
     </Container>

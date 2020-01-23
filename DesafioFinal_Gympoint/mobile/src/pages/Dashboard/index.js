@@ -16,8 +16,14 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadCheckins() {
       const response = await api.get(`/students/${id}/checkins`);
-      // console.tron.log(response.data);
-      setCheckin(response.data);
+
+      const checkins = response.data.map(item => ({
+        ...item,
+        index: response.data.indexOf(item) + 1,
+      }));
+
+      // console.tron.log(checkins);
+      setCheckin(checkins);
     }
     loadCheckins();
   }, [id]);
