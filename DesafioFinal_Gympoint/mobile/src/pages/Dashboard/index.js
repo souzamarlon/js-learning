@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+
 import { useSelector } from 'react-redux';
 
 import Background from '~/components/Background';
@@ -28,9 +28,20 @@ export default function Dashboard() {
     loadCheckins();
   }, [id]);
 
+  async function handleAddCheckin() {
+    // TODO I need to do check how many checkins its done in the last 7 days. 5 checkins max.
+    try {
+      const response = await api.post(`students/${id}/checkins`);
+
+      console.tron.log(response.data);
+    } catch (err) {
+      console.tron.log(err);
+    }
+  }
+
   return (
     <Container>
-      <SubmitButton onPress={() => {}}>Novo check-in</SubmitButton>
+      <SubmitButton onPress={handleAddCheckin}>Novo check-in</SubmitButton>
       <List
         data={checkin}
         keyExtractor={item => String(item.id)}
