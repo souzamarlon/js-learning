@@ -7,22 +7,6 @@ import Dashboard from './pages/Dashboard';
 // export default createAppContainer(createSwitchNavigator({ SignIn }));
 
 export default (isSigned = false) =>
-  // createAppContainer(
-  //   createSwitchNavigator({
-  //     SignIn,
-  //     // Sign: createSwitchNavigator({
-  //     //   ,
-  //     // }),
-  //     App: createBottomTabNavigator({
-  //       Dashboard,
-  //       {
-  //         initialRouteName: isSigned ? 'App' : 'SignIn',
-  //       }
-  //     }),
-
-  //   })
-  // );
-
   createAppContainer(
     createSwitchNavigator(
       {

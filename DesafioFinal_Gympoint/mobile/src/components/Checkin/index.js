@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { parseISO, subDays, formatDistance } from 'date-fns';
+import { parseISO, subDays, formatDistance, isWithinInterval } from 'date-fns';
 import { useSelector } from 'react-redux';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
@@ -8,12 +8,6 @@ import pt from 'date-fns/locale/pt';
 import { Container, Info, Name, Time, Avatar } from './styles';
 
 export default function Checkin({ data }) {
-  const name = useSelector(state => state.auth.name);
-
-  // const timeDistance = formatDistance(parseISO(data.createdAt), new Date(), {
-  //   // addSuffix: true,
-  //   locale: pt,
-  // });
   const dateTimeUTC = zonedTimeToUtc(new Date(), 'America/Brasília');
 
   // const less7days = subDays(dateTimeUTC, weekDay);
@@ -25,16 +19,19 @@ export default function Checkin({ data }) {
     });
   }, [data.createdAt, dateTimeUTC]);
 
-  console.tron.log(data);
-
   const weekDay = parseISO(data.createdAt).getDay();
   // console.tron.log(weekDay);
 
+  const insideInterval = isWithinInterval(parseISO(data.createdAt), {
+    start: subDays(dateTimeUTC, 7),
+    end: dateTimeUTC,
+  });
+
   return (
     <Container>
-      <Info>
+      <Info key={data.index}>
         <Name>{`Check-in # ${data.index}`}</Name>
-        <Time>{dateParsed}</Time>
+        <Time insideInterval={insideInterval}>{dateParsed}</Time>
       </Info>
     </Container>
   );
