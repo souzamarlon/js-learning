@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Text, Image } from 'react-native';
 
-import logo from '~/assets/logo_header.svg';
+import logo from '~/assets/logo_h.png';
 
 import { StatusBar } from './styles';
 

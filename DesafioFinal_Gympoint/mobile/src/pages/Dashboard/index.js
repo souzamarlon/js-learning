@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Alert } from 'react-native';
 
 import Checkin from '~/components/Checkin';
+import Header from '~/components/Header';
 
 import { Container, SubmitButton, List } from './styles';
 
@@ -50,15 +51,18 @@ export default function Dashboard() {
   }
 
   return (
-    <Container>
-      <SubmitButton onPress={handleAddCheckin}>Novo check-in</SubmitButton>
-      <List
-        refreshing={refreshList}
-        onRefresh={loadPage}
-        data={checkin}
-        keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => <Checkin onCancel={() => {}} data={item} />}
-      />
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <SubmitButton onPress={handleAddCheckin}>Novo check-in</SubmitButton>
+        <List
+          refreshing={refreshList}
+          onRefresh={loadPage}
+          data={checkin}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item }) => <Checkin onCancel={() => {}} data={item} />}
+        />
+      </Container>
+    </>
   );
 }
