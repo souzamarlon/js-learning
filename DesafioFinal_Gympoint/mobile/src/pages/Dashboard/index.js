@@ -32,7 +32,7 @@ export default function Dashboard() {
       setRefreshList(false);
     }
     loadCheckins();
-  }, [checkin, id, refreshList]);
+  }, [id, refreshList]);
 
   async function handleAddCheckin() {
     try {
@@ -66,3 +66,6 @@ export default function Dashboard() {
     </>
   );
 }
+Dashboard.navigationOptions = {
+  tabBarLabel: 'Check-ins',
+};
