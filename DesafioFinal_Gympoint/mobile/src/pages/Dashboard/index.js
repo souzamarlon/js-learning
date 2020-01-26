@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
+import { Alert } from 'react-native';
 
-import Background from '~/components/Background';
 import Checkin from '~/components/Checkin';
 
 import { Container, SubmitButton, List } from './styles';
@@ -31,15 +31,16 @@ export default function Dashboard() {
       setRefreshList(false);
     }
     loadCheckins();
-  }, [id, refreshList]);
+  }, [checkin, id, refreshList]);
 
   async function handleAddCheckin() {
-    // TODO I need to do check how many checkins its done in the last 7 days. 5 checkins max.
     try {
       const response = await api.post(`students/${id}/checkins`);
+      Alert.alert('Sucesso!', 'Check-in realizado com sucesso!');
 
       console.tron.log(response.data);
     } catch (err) {
+      Alert.alert('Falha!', 'Você já realizou 5 checkins nos ultimos 7 dias.');
       console.tron.log(err);
     }
   }

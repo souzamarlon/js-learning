@@ -9,7 +9,8 @@ export const Container = styled.View`
   border-radius: 4px;
   background: #ffff;
   border: 1px solid #eee;
-  /* opacity: ${props => (props.past ? 0.6 : 1)}; */
+  background-color: ${props => (props.insideInterval ? '#FFF' : '#eee')};
+  opacity: ${props => (props.insideInterval ? 1 : 0.4)};
 `;
 
 export const Info = styled.View`
