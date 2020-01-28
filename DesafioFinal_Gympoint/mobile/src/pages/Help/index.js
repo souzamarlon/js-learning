@@ -19,7 +19,7 @@ export default function Help() {
 
   useEffect(() => {
     async function loadCheckins() {
-      const response = await api.get(`/students/${id}/checkins`);
+      const response = await api.get(`/students/${id}/help-orders`);
 
       const checkins = response.data.map(item => ({
         ...item,
@@ -42,7 +42,7 @@ export default function Help() {
     <>
       <Header />
       <Container>
-        <SubmitButton onPress={() => {}}>Novo check-in</SubmitButton>
+        <SubmitButton onPress={() => {}}>Novo pedido de auxílio</SubmitButton>
 
         <List
           refreshing={refreshList}
