@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Alert } from 'react-native';
 
-import Checkin from '~/components/Checkin';
+import HelpList from '~/components/HelpList';
 
 import Header from '~/components/Header';
 
@@ -38,6 +38,8 @@ export default function Help() {
     setRefreshList(true);
   }
 
+  console.tron.log(checkin);
+
   return (
     <>
       <Header />
@@ -49,7 +51,9 @@ export default function Help() {
           onRefresh={loadPage}
           data={checkin}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <Checkin onCancel={() => {}} data={item} />}
+          renderItem={({ item }) => (
+            <HelpList onCancel={() => {}} data={item} />
+          )}
         />
       </Container>
     </>
