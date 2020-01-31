@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 
-import { parseISO, subDays, formatDistance, isWithinInterval } from 'date-fns';
+import { parseISO, formatDistance } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 
 import pt from 'date-fns/locale/pt';
 
-import { Container, Info, Name, Time, Avatar } from './styles';
+import { Container, Info, Name, Time, Text } from './styles';
 
 export default function HelpList({ data }) {
   const dateTimeUTC = zonedTimeToUtc(new Date(), 'America/Brasília');
@@ -17,19 +17,15 @@ export default function HelpList({ data }) {
     });
   }, [data.created_at, dateTimeUTC]);
 
-  // const weekDay = parseISO(data.createdAt).getDay();
-
-  const insideInterval = isWithinInterval(parseISO(data.created_at), {
-    start: subDays(dateTimeUTC, 7),
-    end: dateTimeUTC,
-  });
+  console.tron.log(data);
 
   return (
-    <Container insideInterval={insideInterval}>
+    <Container>
       <Info>
-        <Name>{`Check-in # ${data.index}`}</Name>
+        <Name>{data.answer ? 'Respondido' : 'Sem resposta'}</Name>
         <Time>{dateParsed}</Time>
       </Info>
+      <Text>{data.question}</Text>
     </Container>
   );
 }

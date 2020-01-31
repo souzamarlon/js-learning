@@ -2,15 +2,15 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   margin-bottom: 8px;
-  height: 46px;
+  height: 150px;
   /* width: 100%; */
   max-width: 350px;
   /* padding: 10px; */
   border-radius: 4px;
   background: #ffff;
   border: 1px solid #eee;
-  background-color: ${props => (props.insideInterval ? '#FFF' : '#eee')};
-  opacity: ${props => (props.insideInterval ? 1 : 0.4)};
+  /* background-color: ${props => (props.insideInterval ? '#FFF' : '#eee')};
+  opacity: ${props => (props.insideInterval ? 1 : 0.4)}; */
 `;
 
 export const Info = styled.View`
@@ -35,4 +35,9 @@ export const Time = styled.Text`
   font-size: 13px;
   margin-top: 4px;
   margin-right: 15px;
+`;
+
+export const Text = styled.Text`
+  display: flex;
+  margin: 20px;
 `;
