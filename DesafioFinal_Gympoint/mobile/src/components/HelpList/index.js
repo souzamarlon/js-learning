@@ -22,7 +22,9 @@ export default function HelpList({ data }) {
   return (
     <Container>
       <Info>
-        <Name>{data.answer ? 'Respondido' : 'Sem resposta'}</Name>
+        <Name answer={data.answer}>
+          {data.answer ? 'Respondido' : 'Sem resposta'}
+        </Name>
         <Time>{dateParsed}</Time>
       </Info>
       <Text>{data.question}</Text>

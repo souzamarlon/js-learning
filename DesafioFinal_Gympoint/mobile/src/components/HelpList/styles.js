@@ -25,7 +25,9 @@ export const Info = styled.View`
 export const Name = styled.Text`
   font-weight: bold;
   font-size: 14px;
-  color: #000;
+  color: ${props => (props.answer ? '#42CB59' : '#999999')};
+  margin-left: 15px;
+  margin-top: 4px;
 `;
 export const Time = styled.Text`
   align-items: center;
@@ -40,4 +42,7 @@ export const Time = styled.Text`
 export const Text = styled.Text`
   display: flex;
   margin: 20px;
+  font-size: 14px;
+  line-height: 26px;
+  color: #666666;
 `;
