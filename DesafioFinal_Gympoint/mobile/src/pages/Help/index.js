@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import 'react-native-gesture-handler';
 
 import { useSelector } from 'react-redux';
 // import { Alert, TouchableOpacity } from 'react-native';
@@ -56,10 +57,10 @@ export default function Help({ navigation }) {
         keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <HelpList
+            data={item}
             onPress={() => {
               navigation.navigate('AnswerOrder', { item });
             }}
-            data={item}
           />
         )}
       />
