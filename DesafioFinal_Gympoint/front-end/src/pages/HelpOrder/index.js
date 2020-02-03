@@ -13,7 +13,7 @@ export default function HelpOrder() {
 
     useEffect(() => {
         async function listHelpOrders() {
-            const response = await api.get('students/help-orders');
+            const response = await api.get('/help-orders');
 
             setHelp(response.data);
         }
