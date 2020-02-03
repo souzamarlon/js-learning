@@ -60,7 +60,7 @@ export default function Dashboard() {
           onRefresh={loadPage}
           data={checkin}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <Checkin onCancel={() => {}} data={item} />}
+          renderItem={({ item }) => <Checkin data={item} />}
         />
       </Container>
     </>

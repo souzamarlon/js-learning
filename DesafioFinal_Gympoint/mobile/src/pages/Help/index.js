@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
-import { Alert } from 'react-native';
+// import { Alert, TouchableOpacity } from 'react-native';
+// import { withNavigationFocus } from 'react-navigation';
 
 import HelpList from '~/components/HelpList';
 
@@ -11,7 +12,8 @@ import { Container, SubmitButton, List } from './styles';
 
 import api from '~/services/api';
 
-export default function Help() {
+// eslint-disable-next-line react/prop-types
+export default function Help({ navigation }) {
   const id = useSelector(state => state.auth.id);
   const [question, setQuestion] = useState();
 
@@ -37,21 +39,30 @@ export default function Help() {
   }
 
   return (
-    <>
+    <Container>
       <Header />
-      <Container>
-        <SubmitButton onPress={() => {}}>Novo pedido de auxílio</SubmitButton>
+      <SubmitButton
+        onPress={() => {
+          navigation.navigate('AnswerOrder');
+        }}
+      >
+        Novo pedido de auxílio
+      </SubmitButton>
 
-        <List
-          refreshing={refreshList}
-          onRefresh={loadPage}
-          data={question}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => (
-            <HelpList onCancel={() => {}} data={item} />
-          )}
-        />
-      </Container>
-    </>
+      <List
+        data={question}
+        refreshing={refreshList}
+        onRefresh={loadPage}
+        keyExtractor={item => String(item.id)}
+        renderItem={({ item }) => (
+          <HelpList
+            onPress={() => {
+              navigation.navigate('AnswerOrder', { item });
+            }}
+            data={item}
+          />
+        )}
+      />
+    </Container>
   );
 }
