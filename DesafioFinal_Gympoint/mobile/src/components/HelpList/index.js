@@ -8,7 +8,7 @@ import pt from 'date-fns/locale/pt';
 
 import { Container, Info, Name, Time, Text } from './styles';
 
-export default function HelpList({ data }) {
+export default function HelpList({ data, onPress }) {
   const dateTimeUTC = zonedTimeToUtc(new Date(), 'America/Brasília');
 
   const dateParsed = useMemo(() => {
@@ -21,7 +21,7 @@ export default function HelpList({ data }) {
   console.tron.log(data);
 
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Info>
         <Name answer={data.answer}>
           {data.answer ? 'Respondido' : 'Sem resposta'}
