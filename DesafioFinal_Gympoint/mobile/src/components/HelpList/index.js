@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 
 import { parseISO, formatDistance } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
-import { TouchableOpacity } from 'react-native';
 
 import pt from 'date-fns/locale/pt';
 

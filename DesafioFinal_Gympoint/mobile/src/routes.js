@@ -1,11 +1,11 @@
-import React from 'react';
+// import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
 import Help from './pages/Help';
-import AnswerOrder from './pages/Help/Answer';
+import AnswerOrder from './pages/Help/AnswerOrder';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -23,8 +23,13 @@ export default (isSigned = false) =>
                 },
                 {
                   defaultNavigationOptions: {
+                    headerLayoutPreset: 'center',
+                    headerShown: false,
+                    // headerTitle: () => null,
                     headerTransparent: true,
-                    headerTintColor: '#FFF',
+                    headerLeftContainerStyle: {
+                      marginLeft: 20,
+                    },
                   },
                 }
               ),

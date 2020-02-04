@@ -55,11 +55,11 @@ export default function Help({ navigation }) {
         refreshing={refreshList}
         onRefresh={loadPage}
         keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => (
+        renderItem={({ item: data }) => (
           <HelpList
-            data={item}
+            data={data}
             onPress={() => {
-              navigation.navigate('AnswerOrder', { item });
+              navigation.navigate('AnswerOrder', { data });
             }}
           />
         )}
