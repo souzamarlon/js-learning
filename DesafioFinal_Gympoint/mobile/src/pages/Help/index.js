@@ -44,7 +44,7 @@ export default function Help({ navigation }) {
       <Header />
       <SubmitButton
         onPress={() => {
-          navigation.navigate('AnswerOrder');
+          navigation.navigate('NewOrder');
         }}
       >
         Novo pedido de auxílio

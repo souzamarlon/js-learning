@@ -6,6 +6,7 @@ import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
 import Help from './pages/Help';
 import AnswerOrder from './pages/Help/AnswerOrder';
+import NewOrder from './pages/Help/NewOrder';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -20,6 +21,7 @@ export default (isSigned = false) =>
                 {
                   Help,
                   AnswerOrder,
+                  NewOrder,
                 },
                 {
                   defaultNavigationOptions: {
