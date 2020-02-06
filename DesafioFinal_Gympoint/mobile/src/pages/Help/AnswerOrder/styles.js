@@ -15,20 +15,13 @@ export const Container = styled(RectButton)`
 
 export const Info = styled.View`
   margin-top: 10px;
-  margin-left: 15px;
+  margin-left: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
 
-export const Name = styled.Text`
-  font-weight: bold;
-  font-size: 14px;
-  color: ${props => (props.answer ? '#42CB59' : '#999999')};
-  margin-left: 15px;
-  margin-top: 4px;
-`;
 export const Time = styled.Text`
   align-items: center;
 
@@ -37,6 +30,24 @@ export const Time = styled.Text`
   font-size: 13px;
   margin-top: 4px;
   margin-right: 15px;
+`;
+
+export const QuestionText = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
+  color: #444444;
+  font-weight: bold;
+  /* margin-left: 15px; */
+  margin-top: 4px;
+`;
+
+export const AnswerText = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
+  color: #444444;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 4px;
 `;
 
 export const Text = styled.Text`
