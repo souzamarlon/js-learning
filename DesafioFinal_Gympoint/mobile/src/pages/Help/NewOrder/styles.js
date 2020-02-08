@@ -1,11 +1,10 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
 import Button from '~/components/Button';
 import Input from '~/components/Input';
 
-export const Container = styled(RectButton)`
+export const Container = styled.View`
   /* margin-top: 2px; */
-  height: 350px;
+  /* height: 350px; */
   /* width: 100%; */
   max-width: 335px;
   /* padding-top: 10px; */
@@ -15,7 +14,7 @@ export const Container = styled(RectButton)`
   margin: 20px;
 `;
 export const Form = styled.View`
-  align-self: stretch;
+  /* align-self: stretch; */
   /* margin-top: 50px; */
 `;
 
