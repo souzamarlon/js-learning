@@ -5,6 +5,7 @@ import Button from '~/components/Button';
 export const Container = styled.View`
   flex: 1;
   background: transparent;
+  margin: auto;
 `;
 
 export const SubmitButton = styled(Button)`
