@@ -11,7 +11,7 @@ export const Container = styled.View`
   border-radius: 4px;
   /* background: #ffff; */
   /* border: 1px solid #eee; */
-  margin: 20px;
+  margin: 15px;
 `;
 export const Form = styled.View`
   /* align-self: stretch; */
@@ -29,5 +29,5 @@ export const FormInput = styled(Input)`
 export const SubmitButton = styled(Button)`
   max-width: 335px;
   /* margin: 0 0px; */
-  margin-top: 10px;
+  margin-top: 2px;
 `;
