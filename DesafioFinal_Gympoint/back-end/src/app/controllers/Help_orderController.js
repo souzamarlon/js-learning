@@ -47,9 +47,18 @@ class Help_orderController {
       });
     }
 
+    // TODO Validar se a data não é antes da data de hoje
+    const actualDate = new Date();
+    // const timeZone = 'America/Brasília'; //  'Europe/Paris';
+    const dateTimeUTC = zonedTimeToUtc(actualDate, 'America/Brasília');
+
     const student_id = req.params.id;
     const { question } = req.body;
-    const helpOrder = Help_order.create({ student_id, question });
+    const helpOrder = Help_order.create({
+      student_id,
+      question,
+      createdAt: dateTimeUTC,
+    });
 
     return res.json(helpOrder);
   }
