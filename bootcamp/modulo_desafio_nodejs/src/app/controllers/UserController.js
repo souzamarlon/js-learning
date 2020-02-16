@@ -4,9 +4,7 @@ import User from '../models/User';
 
 class UserController {
   async index(req, res) {
-    const name = await User.findAll({
-      where: { id: 1 },
-    });
+    const name = await User.findAll();
     return res.json(name);
   }
 
@@ -40,7 +38,7 @@ class UserController {
   }
 
   async update(req, res) {
-    const schema = Yup.objetct().schape({
+    const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email(),
       oldPassword: Yup.string().min(6),
