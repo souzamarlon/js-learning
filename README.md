@@ -1,1 +1,1 @@
-Here will find some projects and lessons I am having in the Rocketseat bootcamp.
+Here you will find some projects and lessons which I learn in Rocketseat bootcamp.
